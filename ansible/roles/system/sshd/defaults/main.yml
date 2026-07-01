@@ -1,0 +1,6 @@
+---
+sshd_pacman_packages:
+  - openssh
+
+# Keys
+sshd_host_ed25519_private_key: "{{ vault_sshd_host_ed25519_private_key | default('') }}"

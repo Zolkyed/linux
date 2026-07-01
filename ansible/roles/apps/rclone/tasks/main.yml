@@ -1,0 +1,47 @@
+---
+- name: Rclone | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Rclone
+    install_pacman_packages: "{{ rclone_pacman_packages }}"
+
+- name: Rclone | Ensure config directory exists
+  ansible.builtin.file:
+    path: "{{ rclone_conf_dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+
+- name: Rclone | Deploy configuration
+  ansible.builtin.template:
+    src: rclone.conf.j2
+    dest: "{{ rclone_conf_dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+    force: false
+  no_log: true
+
+- name: Rclone | Ensure cache directory exists
+  ansible.builtin.file:
+    path: "{{ rclone_cache_dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+
+- name: Rclone | Deploy Google Drive mount service
+  ansible.builtin.template:
+    src: rclone-gdrive.service.j2
+    dest: /etc/systemd/system/rclone-gdrive.service
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Rclone | Enable and start Google Drive mount
+  ansible.builtin.systemd_service:
+    name: rclone-gdrive.service
+    enabled: true
+    state: started

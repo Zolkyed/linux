@@ -1,0 +1,12 @@
+---
+- name: Fonts | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Fonts
+    install_pacman_packages: "{{ fonts_pacman_packages }}"
+    install_aur_packages: "{{ fonts_aur_packages }}"
+
+- name: Fonts | Refresh fontconfig cache
+  ansible.builtin.command: fc-cache -f
+  changed_when: false

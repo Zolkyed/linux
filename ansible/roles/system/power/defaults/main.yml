@@ -1,0 +1,4 @@
+---
+power_pacman_packages:
+  - fwupd
+  - power-profiles-daemon

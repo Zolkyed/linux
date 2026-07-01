@@ -1,0 +1,17 @@
+---
+- name: GNOME | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: GNOME
+    install_pacman_packages: "{{ gnome_pacman_packages }}"
+    install_aur_packages: "{{ gnome_aur_packages }}"
+
+- name: GNOME | Configure settings
+  ansible.builtin.include_tasks: settings.yml
+
+- name: GNOME | Configure input
+  ansible.builtin.include_tasks: input.yml
+
+- name: GNOME | Configure applications
+  ansible.builtin.include_tasks: applications.yml

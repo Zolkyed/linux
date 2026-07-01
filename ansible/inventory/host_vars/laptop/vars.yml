@@ -1,0 +1,6 @@
+---
+enabled_features:
+  - fingerprint
+  - gaming
+  - labs
+  - vpn

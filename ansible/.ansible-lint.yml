@@ -1,0 +1,18 @@
+---
+profile: production
+
+warn_list:
+  - yaml[line-length]
+  - experimental
+
+exclude_paths:
+  - inventory/group_vars/vault.yml
+  - inventory/host_vars/*/vault.yml
+
+skip_list:
+  - partial-become
+  - role-name
+  - no-changed-when
+  - var-naming[no-role-prefix]
+
+use_default_rules: true

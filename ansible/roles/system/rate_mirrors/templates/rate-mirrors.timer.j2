@@ -1,0 +1,9 @@
+[Unit]
+Description=Refresh pacman mirrorlist with rate-mirrors
+
+[Timer]
+OnCalendar={{ rate_mirrors_schedule }}
+Persistent=true
+
+[Install]
+WantedBy=timers.target

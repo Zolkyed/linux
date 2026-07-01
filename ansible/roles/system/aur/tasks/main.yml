@@ -1,0 +1,32 @@
+---
+- name: AUR | Install paru
+  kewlfft.aur.aur:
+    name: paru
+    use: makepkg
+    state: present
+  become_user: "{{ user_name }}"
+  register: aur_result
+  until: aur_result is succeeded
+  retries: "{{ aur_retries }}"
+  delay: "{{ aur_retry_delay }}"
+
+- name: AUR | Configure paru
+  ansible.builtin.template:
+    src: paru.conf.j2
+    dest: /etc/paru.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: AUR | Configure makepkg
+  ansible.builtin.replace:
+    path: /etc/makepkg.conf
+    regexp: >-
+      (?m)^#?{{ item | regex_replace('=.*$', '') | regex_escape }}=[^\n]*(?:\n[ \t]+[^\n]*)*
+    replace: "{{ item }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "{{ makepkg_options }}"
+  loop_control:
+    label: "{{ item | regex_replace('=.*$', '') }}"

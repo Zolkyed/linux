@@ -1,0 +1,36 @@
+---
+- name: Snapshot | Check whether Snapper configuration exists
+  ansible.builtin.stat:
+    path: "/etc/snapper/configs/{{ snapshot_config }}"
+  register: snapshot_config_stat
+  when: snapshot_action == 'pre'
+
+- name: Snapshot | Create pre-snapshot
+  ansible.builtin.command:
+    cmd: >-
+      snapper -c {{ snapshot_config }} create --type pre
+      --cleanup-algorithm number --print-number
+      --description "{{ snapshot_description }}"
+  changed_when: false
+  register: snapshot_pre
+  when:
+    - snapshot_action == 'pre'
+    - snapshot_config_stat.stat.exists
+
+- name: Snapshot | Record pre-snapshot number
+  ansible.builtin.set_fact:
+    snapshot_pre_number: "{{ snapshot_pre.stdout }}"
+  when:
+    - snapshot_action == 'pre'
+    - snapshot_config_stat.stat.exists
+
+- name: Snapshot | Create post-snapshot
+  ansible.builtin.command:
+    cmd: >-
+      snapper -c {{ snapshot_config }} create --type post
+      --cleanup-algorithm number --pre-number {{ snapshot_pre_number }}
+      --description "{{ snapshot_description }}"
+  changed_when: false
+  when:
+    - snapshot_action == 'post'
+    - snapshot_pre_number is defined

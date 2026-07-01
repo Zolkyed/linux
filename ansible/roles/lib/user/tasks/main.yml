@@ -1,0 +1,10 @@
+---
+- name: User | Get UID for {{ user_name }}
+  ansible.builtin.command:
+    cmd: "id -u {{ user_name }}"
+  register: user_uid_result
+  changed_when: false
+
+- name: User | Set user UID fact
+  ansible.builtin.set_fact:
+    user_uid: "{{ user_uid_result.stdout }}"

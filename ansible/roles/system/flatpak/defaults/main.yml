@@ -1,0 +1,9 @@
+---
+flatpak_pacman_packages:
+  # dependency: community.general (flatpak module)
+  - flatpak
+
+# Remotes
+flatpak_remotes:
+  - name: flathub
+    url: https://dl.flathub.org/repo/flathub.flatpakrepo

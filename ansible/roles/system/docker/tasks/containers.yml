@@ -1,0 +1,77 @@
+---
+# Netdata: http://localhost:19999
+- name: Docker | Run Netdata
+  community.docker.docker_container:
+    name: netdata
+    image: "{{ docker_netdata_image }}"
+    hostname: "{{ inventory_hostname }}"
+    state: started
+    pull: missing
+    restart_policy: unless-stopped
+    pid_mode: host
+    network_mode: host
+    capabilities:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opts:
+      - apparmor=unconfined
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /:/host/root:ro,rslave
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/log:/host/var/log:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/dbus:/run/dbus:ro
+  register: docker_netdata_result
+  until: docker_netdata_result is succeeded
+  retries: "{{ docker_retries }}"
+  delay: "{{ docker_retry_delay }}"
+
+# PostgreSQL: postgresql://localhost:5432 (credentials: ~/.pgpass)
+- name: Docker | Run PostgreSQL
+  community.docker.docker_container:
+    name: postgres
+    image: "{{ docker_postgres_image }}"
+    state: started
+    pull: missing
+    restart_policy: unless-stopped
+    shm_size: 128M
+    published_ports:
+      - 127.0.0.1:5432:5432
+    env:
+      POSTGRES_USER: "{{ docker_postgres_user }}"
+      POSTGRES_PASSWORD: "{{ vault_postgres_password }}"
+      POSTGRES_DB: "{{ docker_postgres_database }}"
+      POSTGRES_INITDB_ARGS: --data-checksums
+    volumes:
+      - postgresdata:/var/lib/postgresql
+  no_log: true
+  register: docker_postgres_result
+  until: docker_postgres_result is succeeded
+  retries: "{{ docker_retries }}"
+  delay: "{{ docker_retry_delay }}"
+
+# Redis: redis://localhost:6379
+- name: Docker | Run Redis
+  community.docker.docker_container:
+    name: redis
+    image: "{{ docker_redis_image }}"
+    state: started
+    pull: missing
+    restart_policy: unless-stopped
+    published_ports:
+      - 127.0.0.1:6379:6379
+    command: redis-server --appendonly yes --save 60 1
+    volumes:
+      - redisdata:/data
+  register: docker_redis_result
+  until: docker_redis_result is succeeded
+  retries: "{{ docker_retries }}"
+  delay: "{{ docker_retry_delay }}"

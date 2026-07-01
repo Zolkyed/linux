@@ -1,0 +1,16 @@
+---
+mobile_pacman_packages:
+  # Android device rules
+  - android-udev
+
+mobile_aur_packages:
+  # Android IDE
+  - android-studio
+
+  # Android platform tools
+  - android-sdk-platform-tools
+
+  # Frida instrumentation
+  - python-frida-bin
+  - python-frida-tools
+  - frida-server-android-bin

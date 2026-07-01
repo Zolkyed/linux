@@ -1,0 +1,11 @@
+---
+yubikey_pacman_packages:
+  # Management
+  - yubikey-manager
+
+  # Authentication
+  - pam-u2f
+
+  # Smart cards
+  - ccid
+  - pcsclite

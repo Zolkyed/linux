@@ -1,0 +1,37 @@
+---
+- name: Plymouth | Remove from mkinitcpio HOOKS
+  ansible.builtin.replace:
+    path: /etc/mkinitcpio.conf
+    regexp: '\s*\bplymouth\b'
+    replace: ''
+  notify: Plymouth | Rebuild initramfs
+
+- name: Plymouth | Query installed Plymouth packages
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      pacman -Qq 2>/dev/null | grep -E 'plymouth'
+    executable: /bin/bash
+  register: plymouth_installed
+  changed_when: false
+  failed_when: false
+
+- name: Plymouth | Remove Plymouth packages
+  ansible.builtin.command:
+    cmd: pacman -Rns --noconfirm {{ plymouth_installed.stdout_lines | join(' ') }}
+  when: plymouth_installed.stdout_lines | length > 0
+  changed_when: true
+  notify: Plymouth | Rebuild initramfs
+
+- name: Plymouth | Check Limine configuration
+  ansible.builtin.stat:
+    path: /etc/default/limine
+  register: limine_config
+
+- name: Plymouth | Remove splash and quiet from Limine cmdline
+  ansible.builtin.replace:
+    path: /etc/default/limine
+    regexp: '\b(splash|quiet)\b\s*'
+    replace: ''
+  when: limine_config.stat.exists
+  notify: Plymouth | Update Limine

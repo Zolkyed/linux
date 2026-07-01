@@ -1,0 +1,12 @@
+---
+- name: GNOME | Configure dconf settings
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become_user: "{{ user_name }}"
+  loop: "{{ gnome_dconf_settings }}"
+  loop_control:
+    label: "{{ item.key }}"

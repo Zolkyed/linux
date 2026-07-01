@@ -1,0 +1,14 @@
+---
+- name: Gaming | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Gaming
+    install_pacman_packages: "{{ gaming_pacman_packages }}"
+    install_aur_packages: "{{ gaming_aur_packages }}"
+
+- name: Gaming | Enable Sunshine user service globally
+  ansible.builtin.systemd_service:
+    name: app-dev.lizardbyte.app.Sunshine.service
+    enabled: true
+    scope: global

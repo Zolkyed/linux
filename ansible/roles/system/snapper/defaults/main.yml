@@ -1,0 +1,53 @@
+---
+snapper_pacman_packages:
+  # Filesystem
+  - btrfs-progs
+
+  # Snapshots
+  - btrfs-assistant
+  - snapper
+  - snap-pac
+
+# Subvolumes
+snapper_subvolumes:
+  - path: /
+    config: root
+
+# Settings
+snapper_space_limit: "0.5"
+snapper_free_limit: "0.2"
+snapper_sync_acl: "no"
+snapper_background_comparison: "yes"
+
+# Number cleanup
+snapper_number_cleanup: "yes"
+snapper_number_min_age: "1800"
+snapper_number_limit: 50
+snapper_number_limit_important: 15
+
+# Timeline cleanup
+snapper_timeline_create: "no"
+snapper_timeline_cleanup: "yes"
+snapper_timeline_min_age: "1800"
+snapper_timeline_limit:
+  hourly: 5
+  daily: 7
+  weekly: 0
+  monthly: 0
+  yearly: 0
+
+# Empty pre/post cleanup
+snapper_empty_pre_post_cleanup: "yes"
+snapper_empty_pre_post_min_age: "1800"
+
+# Services
+snapper_services:
+  - name: snapper-timeline.timer
+    enabled: false
+    state: stopped
+  - name: snapper-cleanup.timer
+    enabled: true
+    state: started
+  - name: snapper-boot.timer
+    enabled: false
+    state: stopped

@@ -1,0 +1,16 @@
+style = "compact"
+inline_height = 20
+enter_accept = false
+filter_mode = "global"
+keymap_mode = "emacs"
+search_mode = "fulltext"
+show_preview = true
+show_numeric_shortcuts = false
+update_check = false
+word_jump_mode = "emacs"
+
+[keys]
+prefix = "x"
+
+[theme]
+name = "catppuccin-mocha-lavender"

@@ -1,0 +1,110 @@
+---
+browser_aur_packages:
+  - brave-origin-bin
+
+# Policy
+browser_policy_dir: /etc/brave/policies/managed
+browser_policy_file: zz-browser-policy.json
+
+# Local extensions
+browser_local_extensions_dir: "{{ user_home }}/.local/share/brave/extensions"
+browser_flags_file: "{{ user_home }}/.config/brave-origin-flags.conf"
+browser_local_extensions:
+  - name: hide_cursor
+    src: extensions/hide_cursor
+    path: "{{ browser_local_extensions_dir }}/hide_cursor"
+
+# Toolbar pin values:
+# - default_pinned: pinned by default; user can unpin
+# - force_pinned: pinned and user cannot unpin
+# - default_unpinned: hidden by default; user can pin
+browser_extensions:
+  - name: Bitwarden
+    id: nngceckbapebfimnlniiiahkandclblb
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: force_pinned
+  - name: Smooth Key Scroll
+    id: gphmhpfbknciemgfnfhjapilmcaecljh
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_unpinned
+  - name: Stylus
+    id: clngdbkpkpeebahjckkjfobafhncgmne
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_pinned
+  - name: Animouto
+    id: ilhjhegbgdghfkdgeahkpikkjgaaoklh
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_pinned
+  - name: Violentmonkey
+    id: jinjaccalgkegednnccohejagnlnfdag
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_pinned
+  - name: Image Downloader
+    id: cnpniohnfphhjihaiiggeabnkjhpaldj
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_unpinned
+  - name: FoxyProxy Standard
+    id: gcknhkkoolaabfmlnjonogaaifnjlfnp
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: force_pinned
+  - name: MyJDownloader
+    id: fbcohnmimjicjdomonkcbcpbpnhggkip
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_unpinned
+  - name: Catppuccin Chrome Theme - Mocha
+    id: bkkmolkhemgaeaeggcmfbghljjjoofoh
+    update_url: https://clients2.google.com/service/update2/crx
+
+browser_bookmarks:
+  - name: Dev
+    children:
+      - name: Arch Wiki
+        url: https://wiki.archlinux.org
+      - name: CachyOS Wiki
+        url: https://wiki.cachyos.org/
+      - name: Pacman
+        url: https://archlinux.org/packages
+      - name: AUR
+        url: https://aur.archlinux.org/packages
+      - name: CachyOS Packages
+        url: https://packages.cachyos.org/
+      - name: Flathub
+        url: https://flathub.org/en
+      - name: Ansible
+        url: https://docs.ansible.com
+      - name: Catppuccin
+        url: https://catppuccin.com
+  - name: Gaming
+    children:
+      - name: ProtonDB
+        url: https://www.protondb.com/explore
+  - name: Local
+    children:
+      - name: Netdata
+        url: http://localhost:19999
+      - name: Syncthing
+        url: http://localhost:8384
+
+# Policy reference: brave://policy/
+browser_extra_policies:
+  # Startup
+  RestoreOnStartup: 5
+
+  # Sign-in / sync
+  BrowserSignin: 0
+
+  # Search
+  DefaultSearchProviderEnabled: true
+  DefaultSearchProviderName: "Google"
+  DefaultSearchProviderSearchURL: "https://www.google.com/search?q={searchTerms}"
+  DefaultSearchProviderSuggestURL: "https://www.google.com/complete/search?output=chrome&q={searchTerms}"
+
+  # Autofill
+  AutofillAddressEnabled: false
+  AutofillCreditCardEnabled: false
+  PasswordManagerEnabled: false
+
+  # Misc
+  BackgroundModeEnabled: false
+  BookmarkBarEnabled: true
+  TranslateEnabled: false

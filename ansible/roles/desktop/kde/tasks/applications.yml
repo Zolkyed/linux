@@ -1,0 +1,31 @@
+---
+- name: KDE | Ensure local data directory exists
+  ansible.builtin.file:
+    path: "{{ kde_dolphin_places_file | dirname }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
+- name: KDE | Deploy Dolphin places
+  ansible.builtin.template:
+    src: user-places.xbel.j2
+    dest: "{{ kde_dolphin_places_file }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+    validate: xmllint --noout %s
+
+- name: KDE | Configure terminal preference
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/kdeglobals"
+    values:
+      - group: General
+        key: TerminalApplication
+        value: "{{ kde_terminal_command }}"
+      - group: General
+        key: TerminalService
+        value: "{{ kde_terminal_desktop }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

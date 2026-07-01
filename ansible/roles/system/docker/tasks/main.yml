@@ -1,0 +1,32 @@
+---
+- name: Docker | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Docker
+    install_pacman_packages: "{{ docker_pacman_packages }}"
+
+- name: Docker | Add user to docker group
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    groups:
+      - docker
+    append: true
+
+- name: Docker | Enable and start daemon
+  ansible.builtin.systemd_service:
+    name: docker.service
+    enabled: true
+    state: started
+
+- name: Docker | Configure containers
+  ansible.builtin.include_tasks: containers.yml
+
+- name: Docker | Configure local PostgreSQL credentials
+  ansible.builtin.template:
+    src: pgpass.j2
+    dest: "{{ user_home }}/.pgpass"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  no_log: true

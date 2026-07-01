@@ -1,0 +1,7 @@
+---
+- name: Emulation | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Emulation
+    install_aur_packages: "{{ emulation_aur_packages }}"

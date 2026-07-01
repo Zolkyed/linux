@@ -1,0 +1,18 @@
+---
+- name: Shell | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Shell
+    install_pacman_packages: "{{ shell_pacman_packages }}"
+    install_aur_packages: "{{ shell_aur_packages }}"
+
+- name: Shell | Set user shell
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    shell: "{{ user_shell }}"
+
+- name: Shell | Set root shell
+  ansible.builtin.user:
+    name: root
+    shell: "{{ root_shell }}"

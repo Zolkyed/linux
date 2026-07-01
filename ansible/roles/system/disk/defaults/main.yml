@@ -1,0 +1,3 @@
+---
+disk_pacman_packages:
+  - smartmontools

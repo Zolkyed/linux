@@ -1,0 +1,43 @@
+---
+cli_pacman_packages:
+  # Search and navigation
+  - bat
+  - bat-extras
+  - fd
+  - ripgrep
+  - sd
+  - tealdeer
+  - tree
+  - watchexec
+  - yazi
+
+  # Editors and terminal tools
+  - glow
+  - neovim
+  - tmux
+
+  # Files and archives
+  - dust
+  - eza
+  - ouch
+
+  # Monitoring
+  - btop
+  - cava
+  - duf
+  - fastfetch
+  - hyperfine
+  - procs
+
+  # Pipeline helpers
+  - choose
+  - jq
+  - yq
+  - pv
+  - wl-clipboard
+
+  # Fun
+  - cmatrix
+  - cowsay
+  - figlet
+  - lolcat

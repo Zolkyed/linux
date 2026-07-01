@@ -1,0 +1,80 @@
+---
+- name: Restic | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Restic
+    install_pacman_packages: "{{ restic_pacman_packages }}"
+
+- name: Restic | Ensure cache directory exists
+  ansible.builtin.file:
+    path: "{{ restic_cache_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Restic | Ensure config directory exists
+  ansible.builtin.file:
+    path: "{{ restic_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Restic | Deploy R2 environment file
+  ansible.builtin.template:
+    src: restic-r2.env.j2
+    dest: "{{ restic_env_file }}"
+    owner: root
+    group: root
+    mode: "0600"
+  no_log: true
+
+- name: Restic | Check if repository is initialized
+  ansible.builtin.command:
+    cmd: /usr/bin/restic cat config
+  environment:
+    RESTIC_REPOSITORY: "{{ restic_repository }}"
+    RESTIC_CACHE_DIR: "{{ restic_cache_dir }}"
+    AWS_ACCESS_KEY_ID: "{{ restic_r2_access_key_id }}"
+    AWS_SECRET_ACCESS_KEY: "{{ restic_r2_secret_access_key }}"
+    RESTIC_PASSWORD: "{{ restic_password }}"
+  register: restic_cat_config
+  failed_when: false
+  changed_when: false
+  no_log: true
+
+- name: Restic | Initialize repository
+  ansible.builtin.command:
+    cmd: /usr/bin/restic init
+  environment:
+    RESTIC_REPOSITORY: "{{ restic_repository }}"
+    RESTIC_CACHE_DIR: "{{ restic_cache_dir }}"
+    AWS_ACCESS_KEY_ID: "{{ restic_r2_access_key_id }}"
+    AWS_SECRET_ACCESS_KEY: "{{ restic_r2_secret_access_key }}"
+    RESTIC_PASSWORD: "{{ restic_password }}"
+  when: restic_cat_config.rc != 0
+  no_log: true
+
+- name: Restic | Deploy backup service
+  ansible.builtin.template:
+    src: restic-r2.service.j2
+    dest: /etc/systemd/system/restic-r2.service
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Restic | Deploy backup timer
+  ansible.builtin.template:
+    src: restic-r2.timer.j2
+    dest: /etc/systemd/system/restic-r2.timer
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Restic | Enable and start backup timer
+  ansible.builtin.systemd_service:
+    name: restic-r2.timer
+    enabled: true
+    state: started

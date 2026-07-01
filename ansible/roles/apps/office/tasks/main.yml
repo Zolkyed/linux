@@ -1,0 +1,8 @@
+---
+- name: Office | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Office
+    install_pacman_packages: "{{ office_pacman_packages }}"
+    install_aur_packages: "{{ office_aur_packages }}"

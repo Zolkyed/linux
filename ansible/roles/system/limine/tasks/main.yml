@@ -1,0 +1,50 @@
+---
+- name: Limine | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Limine
+    install_aur_packages: "{{ limine_aur_packages }}"
+
+- name: Limine | Configure limine-snapper-sync
+  ansible.builtin.lineinfile:
+    path: "{{ limine_snapper_config_path }}"
+    regexp: "^#?{{ item.key }}="
+    line: "{{ item.key }}={{ item.value }}"
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - key: LIMIT_USAGE_PERCENT
+      value: "{{ limine_snapper_limit_usage_percent }}"
+    - key: RESTORE_METHOD
+      value: "{{ limine_snapper_restore_method }}"
+    - key: SNAPSHOT_FORMAT_CHOICE
+      value: "{{ limine_snapper_snapshot_format_choice }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Limine | Enable and start limine-snapper-sync service
+  ansible.builtin.systemd_service:
+    name: limine-snapper-sync.service
+    enabled: true
+    state: started
+
+- name: Limine | Configure boot menu timeout
+  ansible.builtin.lineinfile:
+    path: "{{ limine_config_path }}"
+    regexp: '^timeout:'
+    line: 'timeout: {{ limine_timeout }}'
+  notify: Limine | Update configuration
+
+- name: Limine | Configure kernel boot order
+  ansible.builtin.lineinfile:
+    path: "{{ limine_defaults_path }}"
+    regexp: '^BOOT_ORDER='
+    line: 'BOOT_ORDER="{{ limine_boot_order }}"'
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Limine | Update configuration

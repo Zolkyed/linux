@@ -1,0 +1,15 @@
+---
+- name: Mobile | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Mobile
+    install_pacman_packages: "{{ mobile_pacman_packages }}"
+    install_aur_packages: "{{ mobile_aur_packages }}"
+
+- name: Mobile | Add user to adb group
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    groups:
+      - adbusers
+    append: true

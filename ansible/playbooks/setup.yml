@@ -1,0 +1,186 @@
+---
+- name: Full system setup
+  hosts: all
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Setup | Create pre-run snapshot
+      tags: always
+      ansible.builtin.import_role:
+        name: lib/snapshot
+      vars:
+        snapshot_action: pre
+        snapshot_description: "pre ansible: {{ ansible_run_tags | join(',') }}"
+
+    - name: Setup | Load shared secrets
+      tags: always
+      community.sops.load_vars:
+        file: "{{ playbook_dir }}/../inventory/group_vars/vault.yml"
+      become: false
+      no_log: true
+
+    - name: Setup | Load host secrets
+      tags: always
+      community.sops.load_vars:
+        file: "{{ playbook_dir }}/../inventory/host_vars/{{ inventory_hostname }}/vault.yml"
+      become: false
+      no_log: true
+
+    - name: Setup | Detect OS variant
+      tags: always
+      ansible.builtin.import_role:
+        name: lib/os
+
+    - name: Setup | Detect features
+      tags: always
+      ansible.builtin.import_role:
+        name: lib/detect
+
+    - name: Setup | Resolve user UID
+      tags: always
+      ansible.builtin.import_role:
+        name: lib/user
+
+    - name: Setup | Fully upgrade system packages
+      tags: always
+      community.general.pacman:
+        update_cache: true
+        upgrade: true
+
+  roles:
+    # System
+    - role: system/pacman
+      tags: pacman
+    - role: system/rate_mirrors
+      tags: rate_mirrors
+      when: os_is_arch
+    - role: system/cachyos_repo
+      tags: cachyos_repo
+      when: not os_is_cachyos
+    - role: system/aur
+      tags: aur
+    - role: system/flatpak
+      tags: flatpak
+    - role: system/base
+      tags: base
+    - role: system/logging
+      tags: logging
+    - role: system/keyboard
+      tags: keyboard
+    - role: system/fingerprint
+      tags: fingerprint
+      when: "'fingerprint' in enabled_features"
+    - role: system/yubikey
+      tags: yubikey
+    - role: system/disk
+      tags: disk
+    - role: system/power
+      tags: power
+    - role: system/networking
+      tags: networking
+    - role: system/avahi
+      tags: avahi
+    - role: system/printing
+      tags: printing
+    - role: system/smb
+      tags: smb
+    - role: system/fonts
+      tags: fonts
+    - role: system/sshd
+      tags: sshd
+    - role: system/firewall
+      tags: firewall
+    - role: system/fail2ban
+      tags: fail2ban
+    - role: system/plymouth
+      tags: plymouth
+    - role: system/snapper
+      tags: snapper
+    - role: system/limine
+      tags: limine
+    - role: system/restic
+      tags: restic
+      when: "'restic' in enabled_features"
+    - role: system/vpn
+      tags: vpn
+      when: "'vpn' in enabled_features"
+    - role: system/docker
+      tags: docker
+    - role: system/virtualization
+      tags: virtualization
+
+    # Desktop
+    - role: desktop/gnome
+      tags: gnome
+      when: "'gnome' in enabled_features"
+    - role: desktop/kde
+      tags: kde
+      when: "'kde' in enabled_features"
+
+    # Apps
+    - role: apps/mise
+      tags: mise
+    - role: apps/dev
+      tags: dev
+    - role: apps/ai
+      tags: ai
+    - role: apps/browser
+      tags: browser
+    - role: apps/gaming
+      tags: gaming
+      when: "'gaming' in enabled_features"
+    - role: apps/emulation
+      tags: emulation
+      when: "'emulation' in enabled_features"
+    - role: apps/extra
+      tags: extra
+    - role: apps/labs
+      tags: labs
+      when: "'labs' in enabled_features"
+    - role: apps/mobile
+      tags: mobile
+      when: "'mobile' in enabled_features"
+    - role: apps/media
+      tags: media
+    - role: apps/downloader
+      tags: downloader
+    - role: apps/communication
+      tags: communication
+    - role: apps/mihon
+      tags: mihon
+    - role: apps/localsend
+      tags: localsend
+    - role: apps/office
+      tags: office
+    - role: apps/rclone
+      tags: rclone
+    - role: apps/syncthing
+      tags: syncthing
+    - role: apps/cli
+      tags: cli
+    - role: apps/vscode
+      tags: vscode
+
+    # User
+    - role: user/ssh
+      tags: ssh
+    - role: user/gpg
+      tags: gpg
+    - role: user/bin
+      tags: bin
+    - role: user/shell
+      tags: shell
+    - role: user/xdg
+      tags: xdg
+    - role: user/dotfiles
+      tags: dotfiles
+
+  post_tasks:
+    - name: Setup | Create post-run snapshot
+      tags: always
+      ansible.builtin.import_role:
+        name: lib/snapshot
+      vars:
+        snapshot_action: post
+        snapshot_description: "post ansible: {{ ansible_run_tags | join(',') }}"

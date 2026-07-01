@@ -1,0 +1,23 @@
+---
+base_pacman_packages:
+  # Network
+  - curl
+  - wget
+  - rsync
+
+  # Archive
+  - unzip
+  - unrar
+  - zip
+
+  # System
+  - logrotate
+  - man-db
+
+  # Dotfiles
+  - chezmoi
+
+base_aur_packages:
+  # Package management
+  - downgrade
+  - topgrade

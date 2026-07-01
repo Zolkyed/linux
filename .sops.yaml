@@ -1,0 +1,5 @@
+---
+creation_rules:
+  - path_regex: ansible/inventory/.*vault\.yml$
+    age: >-
+      age19qvn8ud9na2k04vnf9h0we8zekvqwu8x8q33zte8fhee450xnpwqp8mhvp

@@ -1,0 +1,5 @@
+---
+keyboard_pacman_packages:
+  - keyd
+  # dependency: community.general (xml module)
+  - python-lxml

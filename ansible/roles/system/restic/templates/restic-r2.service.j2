@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic backup to Cloudflare R2
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile={{ restic_env_file }}
+ExecStart=/usr/bin/restic backup{% for path in restic_backup_paths %} {{ path }}{% endfor %}{% for pattern in restic_exclude_patterns %} --exclude {{ pattern }}{% endfor %}
+
+ExecStartPost=/usr/bin/restic forget --prune --host {{ inventory_hostname }} --keep-daily {{ restic_keep_daily }} --keep-weekly {{ restic_keep_weekly }} --keep-monthly {{ restic_keep_monthly }}

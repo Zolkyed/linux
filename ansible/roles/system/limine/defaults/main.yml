@@ -1,0 +1,16 @@
+---
+# Configuration
+limine_defaults_path: /etc/default/limine
+limine_config_path: /boot/limine.conf
+limine_boot_order: "*, *lts, *fallback, Snapshots"
+limine_timeout: 0
+
+limine_aur_packages:
+  - limine-snapper-sync
+  - limine-mkinitcpio-hook
+
+# Snapper
+limine_snapper_config_path: /etc/limine-snapper-sync.conf
+limine_snapper_limit_usage_percent: 85
+limine_snapper_restore_method: replace
+limine_snapper_snapshot_format_choice: 2

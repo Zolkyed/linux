@@ -1,0 +1,24 @@
+---
+- name: KDE | Deploy keyboard shortcuts
+  ansible.builtin.copy:
+    src: "{{ inventory_hostname }}/keybinds/kglobalshortcutsrc"
+    dest: "{{ user_home }}/.config/kglobalshortcutsrc"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Deploy input settings
+  ansible.builtin.copy:
+    src: "{{ inventory_hostname }}/kcminputrc"
+    dest: "{{ user_home }}/.config/kcminputrc"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Deploy keyboard layout
+  ansible.builtin.template:
+    src: kxkbrc.j2
+    dest: "{{ user_home }}/.config/kxkbrc"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

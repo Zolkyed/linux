@@ -1,0 +1,8 @@
+file://{{ user_home }}/Documents
+file://{{ user_home }}/Music
+file://{{ user_home }}/Pictures
+file://{{ user_home }}/Videos
+file://{{ user_home }}/Downloads
+{% for place in gnome_nautilus_places %}
+{{ place.href }} {{ place.title }}
+{% endfor %}

@@ -1,0 +1,19 @@
+---
+- name: Disk | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Disk
+    install_pacman_packages: "{{ disk_pacman_packages }}"
+
+- name: Disk | Enable and start periodic TRIM timer
+  ansible.builtin.systemd_service:
+    name: fstrim.timer
+    enabled: true
+    state: started
+
+- name: Disk | Enable and start smart disk monitoring
+  ansible.builtin.systemd_service:
+    name: smartd.service
+    enabled: true
+    state: started

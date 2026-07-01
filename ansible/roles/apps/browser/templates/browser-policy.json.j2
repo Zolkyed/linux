@@ -1,0 +1,15 @@
+{%- set extension_settings = {} -%}
+{%- for extension in browser_extensions -%}
+{%- set _ = extension_settings.update({
+  extension.id: {
+    'installation_mode': 'force_installed',
+    'update_url': extension.update_url,
+    'toolbar_pin': extension.toolbar_pin | default('default_unpinned')
+  }
+}) -%}
+{%- endfor %}
+{% set policy = {'ExtensionSettings': extension_settings} | combine(browser_extra_policies) %}
+{% if browser_bookmarks %}
+{% set policy = policy | combine({'ManagedBookmarks': browser_bookmarks}) %}
+{% endif %}
+{{ policy | to_nice_json }}

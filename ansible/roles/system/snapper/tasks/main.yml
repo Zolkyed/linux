@@ -1,0 +1,35 @@
+---
+- name: Snapper | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Snapper
+    install_pacman_packages: "{{ snapper_pacman_packages }}"
+
+- name: Snapper | Initialize configs
+  ansible.builtin.command:
+    cmd: "snapper --no-dbus -c {{ item.config }} create-config {{ item.path }}"
+    creates: "/etc/snapper/configs/{{ item.config }}"
+  loop: "{{ snapper_subvolumes }}"
+  loop_control:
+    label: "{{ item.config }}"
+
+- name: Snapper | Deploy configs
+  ansible.builtin.template:
+    src: snapper.conf.j2
+    dest: "/etc/snapper/configs/{{ item.config }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "{{ snapper_subvolumes }}"
+  loop_control:
+    label: "{{ item.config }}"
+
+- name: Snapper | Configure systemd units
+  ansible.builtin.systemd_service:
+    name: "{{ item.name }}"
+    enabled: "{{ item.enabled }}"
+    state: "{{ item.state }}"
+  loop: "{{ snapper_services }}"
+  loop_control:
+    label: "{{ item.name }}"

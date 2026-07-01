@@ -1,0 +1,5 @@
+---
+- name: Limine | Update configuration
+  ansible.builtin.command:
+    cmd: limine-update
+  changed_when: true

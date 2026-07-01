@@ -1,0 +1,7 @@
+---
+- name: Fingerprint | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Fingerprint
+    install_pacman_packages: "{{ fingerprint_pacman_packages }}"

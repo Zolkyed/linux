@@ -1,0 +1,33 @@
+---
+labs_pacman_packages:
+  # TLS and certificates
+  - gnutls
+  - step-cli
+  - xca
+  - xmlsec
+  - xmlstarlet
+
+  # Certificate authority
+  - step-ca
+  - certbot
+
+  # TLS interception
+  - mitmproxy
+
+  # Identity and auth labs
+  - openldap
+  - krb5
+  - freeradius
+  - keycloak
+
+  # PKI labs
+  - softhsm
+  - opensc
+
+  # Reverse proxy labs
+  - caddy
+  - haproxy
+
+labs_aur_packages:
+  # OIDC proxy labs
+  - oauth2-proxy

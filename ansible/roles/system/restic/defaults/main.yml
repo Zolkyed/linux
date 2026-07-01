@@ -1,0 +1,43 @@
+---
+restic_pacman_packages:
+  - restic
+
+# Repository
+restic_r2_account_id: e476de3e96766285148c74e27f9dd1ef
+restic_r2_bucket: backups
+restic_repository: "s3:https://{{ restic_r2_account_id }}.r2.cloudflarestorage.com/{{ restic_r2_bucket }}"
+restic_r2_access_key_id: "{{ vault_restic_r2_access_key_id }}"
+restic_r2_secret_access_key: "{{ vault_restic_r2_secret_access_key }}"
+restic_password: "{{ vault_restic_password }}"
+
+# Paths
+restic_backup_paths:
+  - "{{ user_home }}"
+
+# Exclusions
+restic_exclude_patterns:
+  # Large transient directories
+  - "{{ user_home }}/.cache"
+  - "{{ user_home }}/Downloads"
+  - "{{ user_home }}/Games"
+  - "{{ user_home }}/mnt/GoogleDrive"
+  # Reproducible from dotfiles/package managers
+  - "{{ user_home }}/.local/share/Steam"
+  - "{{ user_home }}/.local/share/flatpak"
+  - "{{ user_home }}/.local/share/containers"
+  # Build artifacts
+  - "{{ user_home }}/Projects/*/node_modules"
+  - "{{ user_home }}/Projects/*/.venv"
+  - "{{ user_home }}/Projects/*/target"
+  - "{{ user_home }}/Projects/*/dist"
+
+# Retention
+restic_keep_daily: 7
+restic_keep_weekly: 4
+restic_keep_monthly: 6
+
+# Schedule
+restic_backup_schedule: "daily"
+restic_config_dir: /etc/restic
+restic_cache_dir: /var/cache/restic
+restic_env_file: "{{ restic_config_dir }}/r2.env"

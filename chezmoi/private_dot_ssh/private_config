@@ -1,0 +1,18 @@
+Host github.com
+    IdentityFile ~/.ssh/id_ed25519
+    User git
+
+Host server
+    HostName 192.168.2.36
+    User root
+    IdentityFile ~/.ssh/id_ed25519
+
+Host desktop
+    HostName desktop.local
+    User charl
+    IdentityFile ~/.ssh/id_ed25519
+
+Host laptop
+    HostName laptop.local
+    User charl
+    IdentityFile ~/.ssh/id_ed25519
