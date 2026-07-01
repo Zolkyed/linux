@@ -1,0 +1,15 @@
+---
+# User
+user_name: "charl"
+user_home: "/home/{{ user_name }}"
+# Available features:
+#   - emulation
+#   - fingerprint
+#   - gaming
+#   - gnome
+#   - kde
+#   - labs
+#   - mobile
+#   - restic
+#   - vpn
+enabled_features: []

@@ -1,0 +1,24 @@
+---
+media_pacman_packages:
+  # Media infrastructure
+  - ffmpeg
+  - ffmpegthumbnailer
+  - mediainfo
+
+  # Video
+  - mpv
+  - obs-studio
+
+  # Anime (mpv deps)
+  - python-guessit
+  - python-requests
+
+media_aur_packages:
+  # Images
+  - qview
+
+  # Audio
+  - spotify
+
+  # Anime
+  - hayase-desktop-bin

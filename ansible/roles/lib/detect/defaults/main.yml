@@ -1,0 +1,6 @@
+---
+# Environments
+detect_environments:
+  - { bin: /usr/bin/plasmashell, feature: kde }
+  - { bin: /usr/bin/gnome-shell, feature: gnome }
+  - { bin: /usr/bin/niri, feature: niri }

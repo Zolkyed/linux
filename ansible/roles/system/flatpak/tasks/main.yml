@@ -1,0 +1,16 @@
+---
+- name: Flatpak | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Flatpak
+    install_pacman_packages: "{{ flatpak_pacman_packages }}"
+
+- name: Flatpak | Add remotes
+  community.general.flatpak_remote:
+    name: "{{ item.name }}"
+    flatpakrepo_url: "{{ item.url }}"
+    state: present
+  loop: "{{ flatpak_remotes }}"
+  loop_control:
+    label: "{{ item.name }}"

@@ -1,0 +1,71 @@
+---
+dev_pacman_packages:
+  # Build tools
+  - base-devel
+  - cmake
+  - ninja
+  - clang
+
+  # Build and automation
+  - act
+  - direnv
+  - just
+
+  # Version control
+  - git
+  - github-cli
+  - git-delta
+  - lazygit
+  - lazydocker
+
+  # Python tooling
+  - uv
+
+  # Debug
+  - gdb
+  - strace
+  - valgrind
+  - ltrace
+
+  # Linters
+  - actionlint
+  - ansible-lint
+  - yamllint
+  - shellcheck
+  - shfmt
+  - pre-commit
+
+  # Database
+  - postgresql
+  - redis
+  - sqlite
+
+  # HTTP and local TLS
+  - xh
+  - mkcert
+
+  # Socket tools
+  - websocat
+
+  # Cloud
+  - terraform
+  - aws-cli-v2
+
+dev_uv_tools: []
+
+dev_cargo_packages: []
+
+dev_go_packages: []
+
+dev_flatpak_packages:
+  - com.jetbrains.DataGrip
+
+dev_aur_packages:
+  # Security
+  - burpsuite
+
+  # API
+  - bruno-bin
+
+  # Database
+  - redisinsight-bin

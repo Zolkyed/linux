@@ -1,0 +1,5 @@
+---
+# Configuration
+snapshot_config: root
+snapshot_action: pre
+snapshot_description: "ansible"

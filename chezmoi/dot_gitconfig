@@ -1,0 +1,45 @@
+[user]
+    name  = Zolkyed
+    email = 113072595+Zolkyed@users.noreply.github.com
+
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+    path = ~/.gitconfig-github
+[includeIf "hasconfig:remote.*.url:git@github.com:**/**"]
+    path = ~/.gitconfig-github
+[includeIf "hasconfig:remote.*.url:https://gitlab.info.uqam.ca/**"]
+    path = ~/.gitconfig-gitlab
+[includeIf "hasconfig:remote.*.url:git@gitlab.info.uqam.ca:**/**"]
+    path = ~/.gitconfig-gitlab
+
+[url "git@github.com:"]
+    pushInsteadOf = https://github.com/
+
+[url "git@gitlab.info.uqam.ca:"]
+    pushInsteadOf = https://gitlab.info.uqam.ca/
+
+[core]
+    editor       = code --wait
+    autocrlf     = input
+    excludesfile = ~/.gitignore_global
+
+[color]
+    ui = auto
+
+[pretty]
+    graph = format:%Cred%h%Creset - %s %Cgreen(%cr) %C(white)<%an>%Creset%C(green)%d%Creset
+
+[fetch]
+    prune = true
+
+[pull]
+    rebase = true
+
+[push]
+    default         = current
+    autoSetupRemote = true
+
+[rebase]
+    autoStash = true
+
+[merge]
+    conflictstyle = zdiff3

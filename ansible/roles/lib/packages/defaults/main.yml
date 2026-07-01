@@ -1,0 +1,4 @@
+---
+# Retry
+packages_retries: 5
+packages_retry_delay: 10

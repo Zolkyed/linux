@@ -1,0 +1,9 @@
+---
+all:
+  vars:
+    ansible_connection: ssh
+  hosts:
+    desktop:
+      ansible_host: desktop.local
+    laptop:
+      ansible_host: laptop.local

@@ -1,0 +1,64 @@
+---
+# Browser
+xdg_browser_desktop: brave-origin.desktop
+xdg_browser_mime_types:
+  - text/html
+  - x-scheme-handler/http
+  - x-scheme-handler/https
+
+# Editor
+xdg_editor_desktop: code.desktop
+xdg_editor_mime_types:
+  - text/plain
+  - application/json
+  - application/x-shellscript
+  - text/x-shellscript
+  - text/markdown
+  - text/x-python
+
+# Image
+xdg_image_desktop: com.interversehq.qView.desktop
+xdg_image_mime_types:
+  - image/jpeg
+  - image/png
+  - image/gif
+  - image/webp
+  - image/svg+xml
+  - image/tiff
+  - image/bmp
+  - image/avif
+  - image/heic
+
+# Mail
+xdg_mail_desktop: org.mozilla.Thunderbird.desktop
+xdg_mail_mime_types:
+  - message/rfc822
+  - x-scheme-handler/mailto
+
+# Media
+xdg_media_player_desktop: mpv.desktop
+xdg_media_mime_types:
+  - audio/aac
+  - audio/flac
+  - audio/mpeg
+  - audio/ogg
+  - audio/wav
+  - video/mp4
+  - video/mpeg
+  - video/ogg
+  - video/webm
+  - video/x-matroska
+
+# PDF
+xdg_pdf_desktop: brave-origin.desktop
+xdg_pdf_mime_types:
+  - application/pdf
+
+# Directories
+xdg_extra_directories:
+  - Applications
+  - Pictures/Screenshots
+  - Pictures/mpv
+  - Games
+  - Games/ROMs
+  - Torrents

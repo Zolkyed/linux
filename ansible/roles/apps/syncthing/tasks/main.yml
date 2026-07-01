@@ -1,0 +1,13 @@
+---
+- name: Syncthing | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Syncthing
+    install_pacman_packages: "{{ syncthing_pacman_packages }}"
+
+- name: Syncthing | Enable and start user service
+  ansible.builtin.systemd_service:
+    name: "syncthing@{{ user_name }}.service"
+    enabled: true
+    state: started

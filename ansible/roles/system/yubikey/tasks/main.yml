@@ -1,0 +1,13 @@
+---
+- name: YubiKey | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: YubiKey
+    install_pacman_packages: "{{ yubikey_pacman_packages }}"
+
+- name: YubiKey | Enable and start smart card socket
+  ansible.builtin.systemd_service:
+    name: pcscd.socket
+    enabled: true
+    state: started

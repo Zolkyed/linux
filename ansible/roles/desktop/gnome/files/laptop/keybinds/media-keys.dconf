@@ -1,0 +1,8 @@
+[/]
+calculator=@as []
+calculator-static=@as []
+home=['<Super>e']
+screensaver=['<Super>l']
+next=['XF86AudioNext', '<Shift><Super>s']
+play=['XF86AudioPlay', 'Favorites']
+previous=['XF86AudioPrev', 'Calculator']

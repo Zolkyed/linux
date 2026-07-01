@@ -1,0 +1,258 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = "catppuccin_mocha"
+
+format = """
+$os\
+$username\
+$shell\
+$hostname\
+$fill\
+$time
+$directory\
+$git_branch$git_status$git_state$git_commit\
+$lua\
+$c\
+$cpp\
+$cmake\
+$rust\
+$golang\
+$nodejs\
+$php\
+$ruby\
+$python\
+$character
+"""
+
+right_format = """
+$cmd_duration 
+"""
+
+add_newline = true
+
+[fill]
+symbol = ' '
+style = 'bold green'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "fg:lavender"
+format = '[  $time ]($style)'
+
+[os]
+disabled = false
+style = "bold blue"
+
+[username]
+show_always = true
+style_user = "bold fg:blue"
+style_root = "bold fg:red"
+format = '[$user]($style)'
+
+[shell]
+fish_indicator = '󰻴 '  
+style = 'fg:teal italic bold'
+format = ' [running](bold fg:teal italic) [$fish_indicator]($style)'
+disabled = false
+
+[hostname]
+ssh_only = false
+format = '[on](bold italic fg:mauve) [$hostname](bold fg:mauve) '
+trim_at = '.companyname.com'
+disabled = false
+
+[character]
+success_symbol = "[  ](bold fg:blue)"
+error_symbol = "[  ](bold fg:red)"
+vimcmd_symbol = "[ ](bold fg:green)"
+
+[git_branch]
+format = "[ [\\[$symbol$branch](fg:sky) |](fg:sapphire)"
+symbol = " "
+
+[git_status]
+format = " $all_status$ahead_behind[\\]](fg:sky)"
+conflicted = "="
+ahead = "[ ${count} ](green)"
+behind = "[ ${count} ](red) "
+diverged = "[ ${ahead_count} ⇣${behind_count} ](teal)"
+up_to_date = "[󰄸 ](bold green)"
+untracked = "[ ${count} ](maroon)"
+stashed = "[󰏖 ](bold green)"
+modified = "[ ${count} ](yellow)"
+staged = "[ ${count} ](green)"
+renamed = "[ ${count} ](peach)"
+deleted = "[ ${count} ](bold red)"
+
+[git_commit]
+format = "[\\($hash\\)]($style) [\\($tag\\)]($style)"
+style = "green"
+
+[git_state]
+rebase = "REBASING"
+merge = "MERGING"
+revert = "REVERTING"
+cherry_pick = "CHERRY-PICKING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+style = "yellow"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+
+[directory]
+home_symbol = "  "
+read_only = "  "
+style = "fg:blue "
+fish_style_pwd_dir_length = 2
+format = '[󰉋 $path ]($style)'
+
+[directory.substitutions]
+"Desktop" = "  "
+"Documents" = "  "
+"Downloads" = "  "
+"Music" = " 󰎈 "
+"Pictures" = "  "
+"Videos" = "  "
+"GitHub" = " 󰊤 "
+"vaults" = " 󰂺 "
+"personal" = " 󰛓 "
+".config" = " "
+
+[cmd_duration]
+min_time = 10
+format = '󰥔 [$duration](bold fg:mauve)'
+show_milliseconds = true
+
+[c]
+symbol = " "
+style = "fg:sapphire"
+format = '[\[[$symbol($version(-$name))]($style bold)\]]($style)'
+
+[cpp]
+symbol = " "
+style = "fg:sapphire"
+format = '[\[[$symbol($version(-$name))]($style bold)\]]($style)'
+
+[cmake]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[golang]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[hg_branch]
+symbol = " "
+
+[lua]
+symbol = " "
+style = "fg:blue"
+format = '[\[[$symbol($version)]($style bold)\]]($style)'
+
+[memory_usage]
+symbol = "󰍛 "
+
+[nodejs]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+
+[php]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[pixi]
+symbol = "󰏗 "
+
+[python]
+symbol = "󰌠 "
+style = "fg:green"
+format = '[\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style bold)\]]($style)'
+
+[ruby]
+symbol = " "
+style  = "fg:red"
+format = '[\[[$symbol($version)]($style bold)\]]($style)'
+
+[rust]
+symbol = "󱘗 "
+format = '\[[$symbol($version)]($style)\]'
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

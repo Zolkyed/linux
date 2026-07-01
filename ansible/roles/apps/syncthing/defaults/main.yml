@@ -1,0 +1,3 @@
+---
+syncthing_pacman_packages:
+  - syncthing

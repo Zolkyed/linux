@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: apps/mise
+  - role: system/flatpak

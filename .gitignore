@@ -1,0 +1,13 @@
+# Ansible logs
+ansible/.ansible/logs/*
+!ansible/.ansible/logs/.gitkeep
+
+# Ansible retry files
+*.retry
+
+# Ansible temporary files
+.ansible/tmp/
+
+# Python
+__pycache__/
+*.pyc

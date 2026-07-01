@@ -1,0 +1,28 @@
+---
+firewall_pacman_packages:
+  # Firewall manager and backend
+  - firewalld
+  - nftables
+
+# Zone
+firewall_zone: public
+
+# Rules
+firewall_allowed_services:
+  - ssh
+  - kdeconnect
+  - mdns
+  - syncthing
+
+# Ports
+firewall_allowed_ports:
+  # LocalSend
+  - 53317/tcp
+  - 53317/udp
+
+  # Sunshine
+  - 47984/tcp
+  - 47989/tcp
+  - 47990/tcp
+  - 48010/tcp
+  - 47998-48000/udp

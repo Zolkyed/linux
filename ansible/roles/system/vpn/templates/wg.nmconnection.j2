@@ -1,0 +1,24 @@
+[connection]
+id={{ vpn_name }}
+type=wireguard
+interface-name={{ vpn_interface }}
+autoconnect=false
+
+[wireguard]
+private-key={{ vault_wg_private_key }}
+
+[wireguard-peer.{{ vpn_peer_public_key }}]
+endpoint={{ vpn_peer_endpoint }}
+allowed-ips={{ vpn_peer_allowed_ips | join(';') }};
+persistent-keepalive={{ vpn_peer_persistent_keepalive }}
+preshared-key={{ vault_wg_preshared_key }}
+preshared-key-flags=0
+
+[ipv4]
+address1={{ vpn_address }}
+dns={{ vpn_dns }};
+method=manual
+never-default=true
+
+[ipv6]
+method=disabled

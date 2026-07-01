@@ -1,0 +1,71 @@
+---
+- name: Downloader | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Downloader
+    install_pacman_packages: "{{ downloader_pacman_packages }}"
+    install_aur_packages: "{{ downloader_aur_packages }}"
+
+- name: Downloader | Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+  loop:
+    - "{{ downloader_complete_directory }}"
+    - "{{ downloader_incomplete_directory }}"
+    - "{{ downloader_jdownloader_directory }}"
+    - "{{ downloader_jdownloader_config_path | dirname }}"
+    - "{{ downloader_qbittorrent_config_path | dirname }}"
+
+- name: Downloader | Initialize JDownloader configuration
+  ansible.builtin.copy:
+    content: "{}\n"
+    dest: "{{ downloader_jdownloader_config_path }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+    force: false
+
+- name: Downloader | Read JDownloader configuration
+  ansible.builtin.slurp:
+    src: "{{ downloader_jdownloader_config_path }}"
+  register: downloader_jdownloader_config
+
+- name: Downloader | Configure JDownloader download directory
+  ansible.builtin.copy:
+    content: >-
+      {{
+        downloader_jdownloader_config.content
+        | b64decode
+        | from_json
+        | combine({'defaultdownloadfolder': downloader_jdownloader_directory})
+        | to_nice_json
+      }}
+    dest: "{{ downloader_jdownloader_config_path }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: Downloader | Configure qBittorrent download directories
+  community.general.ini_file:
+    path: "{{ downloader_qbittorrent_config_path }}"
+    section: BitTorrent
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+    no_extra_spaces: true
+  loop:
+    - option: 'Session\DefaultSavePath'
+      value: "{{ downloader_complete_directory }}/"
+    - option: 'Session\TempPath'
+      value: "{{ downloader_incomplete_directory }}/"
+    - option: 'Session\TempPathEnabled'
+      value: "true"
+  loop_control:
+    label: "{{ item.option }}"

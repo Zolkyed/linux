@@ -1,0 +1,8 @@
+---
+- name: Labs | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Labs
+    install_pacman_packages: "{{ labs_pacman_packages }}"
+    install_aur_packages: "{{ labs_aur_packages }}"

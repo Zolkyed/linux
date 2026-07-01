@@ -1,0 +1,17 @@
+---
+rate_mirrors_pacman_packages:
+  - rate-mirrors
+
+# Paths
+rate_mirrors_mirrorlist_path: /etc/pacman.d/mirrorlist
+
+# Mirrors
+rate_mirrors_distribution: arch
+rate_mirrors_entry_country: CA
+rate_mirrors_protocol: https
+rate_mirrors_max_mirrors_to_output: 5
+rate_mirrors_max_delay: 21600
+rate_mirrors_sort_mirrors_by: score_asc
+
+# Systemd
+rate_mirrors_schedule: weekly

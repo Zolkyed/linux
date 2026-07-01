@@ -1,0 +1,27 @@
+---
+fonts_pacman_packages:
+  # Base coverage
+  - fontconfig
+  - noto-fonts
+  - noto-fonts-cjk
+  - noto-fonts-emoji
+  - noto-fonts-extra
+  - ttf-dejavu
+  - ttf-liberation
+  # UI and terminal
+  - awesome-terminal-fonts
+  - inter-font
+  - cantarell-fonts
+  - ttf-bitstream-vera
+  - ttf-fira-code
+  - ttf-jetbrains-mono-nerd
+  - ttf-meslo-nerd
+  - ttf-nerd-fonts-symbols
+  - ttf-nerd-fonts-symbols-mono
+  - otf-font-awesome
+  - ttf-opensans
+  - ttf-roboto
+  - ttf-firacode-nerd
+
+fonts_aur_packages:
+  - ttf-karla

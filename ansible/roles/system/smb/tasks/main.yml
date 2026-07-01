@@ -1,0 +1,7 @@
+---
+- name: SMB | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: SMB
+    install_pacman_packages: "{{ smb_pacman_packages }}"

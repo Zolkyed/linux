@@ -1,0 +1,25 @@
+---
+# Retry
+vscode_retries: 3
+vscode_retry_delay: 5
+
+vscode_aur_packages:
+  - visual-studio-code-bin
+
+# Extensions
+vscode_extensions:
+  # Language support
+  - redhat.ansible
+  - ms-vscode.cpptools
+  - wholroyd.jinja
+  - ms-python.python
+  - ms-pyright.pyright
+  - charliermarsh.ruff
+  # Tools
+  - ms-azuretools.vscode-docker
+  - ms-vscode-remote.remote-ssh
+  - eamodio.gitlens
+  - oderwat.indent-rainbow
+  # Appearance
+  - Catppuccin.catppuccin-vsc
+  - pkief.material-icon-theme

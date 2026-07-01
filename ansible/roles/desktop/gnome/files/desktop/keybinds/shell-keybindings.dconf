@@ -1,0 +1,6 @@
+[/]
+switch-to-application-1=['<Super>F1', '<Super>XF86AudioMute']
+switch-to-application-2=['<Super>F2', '<Super>XF86AudioLowerVolume']
+switch-to-application-3=['<Super>F3', '<Super>XF86AudioRaiseVolume']
+switch-to-application-4=['<Super>F4']
+toggle-application-view=['<Super>Tab']

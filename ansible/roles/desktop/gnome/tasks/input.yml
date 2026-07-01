@@ -1,0 +1,15 @@
+---
+- name: GNOME | Load keybindings
+  ansible.builtin.command:
+    argv:
+      - dconf
+      - load
+      - "{{ gnome_keybinding_paths[item | basename | replace('.dconf', '')] }}"
+    stdin: "{{ lookup('file', item) }}"
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become_user: "{{ user_name }}"
+  with_fileglob: "{{ inventory_hostname }}/keybinds/*.dconf"
+  loop_control:
+    label: "{{ item | basename }}"
+  changed_when: true

@@ -1,0 +1,8 @@
+---
+- name: Mise | Install package and tools
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Mise
+    install_pacman_packages: "{{ mise_pacman_packages }}"
+    install_mise_tools: "{{ mise_tools }}"

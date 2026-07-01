@@ -1,0 +1,7 @@
+---
+user_gpg_pacman_packages:
+  - gnupg
+
+# Key
+user_gpg_signing_key:
+  url: "https://github.com/zolkyed.gpg"

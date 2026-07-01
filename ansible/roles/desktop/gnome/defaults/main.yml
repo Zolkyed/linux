@@ -1,0 +1,97 @@
+---
+gnome_pacman_packages:
+  # GNOME
+  - extension-manager
+  - ghostty
+  - gnome-shell-extension-dash-to-panel
+  - gnome-shell-extensions
+
+  # Icon theme
+  - papirus-icon-theme
+
+  # Files & Network Shares
+  - gvfs-smb
+
+  # Dependency (community.general.dconf)
+  - python-psutil
+
+gnome_aur_packages:
+  # GNOME Extensions
+  - gnome-shell-extension-hanabi-git
+  - gnome-shell-extension-just-perfection-desktop
+
+  # Nautilus
+  - nautilus-open-any-terminal
+
+# Applications
+gnome_browser_command: brave-origin
+gnome_browser_keybinding: <Super>b
+gnome_code_command: code
+gnome_code_keybinding: <Super>c
+gnome_terminal_command: ghostty
+gnome_terminal_keybinding: <Super>t
+gnome_button_layout: ":minimize,maximize,close"
+
+# Nautilus
+gnome_nautilus_places_file: "{{ user_home }}/.config/gtk-3.0/bookmarks"
+gnome_server_smb: "smb://192.168.2.36/"
+
+gnome_nautilus_places:
+  - title: Applications
+    href: "file://{{ user_home }}/Applications"
+  - title: Games
+    href: "file://{{ user_home }}/Games"
+  - title: Projects
+    href: "file://{{ user_home }}/Projects"
+  - title: Torrents
+    href: "file://{{ user_home }}/Torrents"
+  - title: Server
+    href: "{{ gnome_server_smb }}"
+
+# GNOME Settings
+gnome_dconf_settings:
+  # Keyboard & Input
+  - key: /org/gnome/desktop/input-sources/sources
+    value: "[('xkb', 'us_programmer')]"
+  - key: /org/gnome/desktop/peripherals/touchpad/click-method
+    value: "'areas'"
+
+  # Workspaces
+  - key: /org/gnome/mutter/dynamic-workspaces
+    value: "false"
+  - key: /org/gnome/desktop/wm/preferences/num-workspaces
+    value: "4"
+  - key: /org/gnome/shell/app-switcher/current-workspace-only
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-panel/isolate-workspaces
+    value: "true"
+
+  # Windows
+  - key: /org/gnome/desktop/wm/preferences/button-layout
+    value: "'{{ gnome_button_layout }}'"
+  - key: /org/gnome/desktop/interface/enable-hot-corners
+    value: "false"
+  - key: /org/gnome/mutter/keybindings/toggle-tiled-left
+    value: "@as []"
+  - key: /org/gnome/mutter/keybindings/toggle-tiled-right
+    value: "@as []"
+  - key: /org/gnome/mutter/keybindings/switch-monitor
+    value: "['XF86Display']"
+
+  # Desktop
+  - key: /org/gnome/shell/extensions/just-perfection/osd
+    value: "false"
+
+  # Privacy
+  - key: /org/gnome/desktop/privacy/remember-recent-files
+    value: "false"
+
+  # Sound
+  - key: /org/gnome/settings-daemon/plugins/media-keys/volume-step
+    value: "10"
+
+# Keybindings
+gnome_keybinding_paths:
+  media-keys: /org/gnome/settings-daemon/plugins/media-keys/
+  wm-keybindings: /org/gnome/desktop/wm/keybindings/
+  shell-keybindings: /org/gnome/shell/keybindings/

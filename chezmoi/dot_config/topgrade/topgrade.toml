@@ -1,0 +1,25 @@
+[misc]
+pre_sudo = false
+cleanup = false
+disable = ["firmware", "snap"]
+notify_end = "on_failure"
+
+[git]
+repos = [
+    "~/dotfiles",
+]
+max_concurrency = 5
+arguments = "--rebase --autostash"
+
+[linux]
+arch_package_manager = "paru"
+show_arch_news = true
+
+[flatpak]
+use_sudo = true
+
+[firmware]
+upgrade = false
+
+[pkgfile]
+enable = true

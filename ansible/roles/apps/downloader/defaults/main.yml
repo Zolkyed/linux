@@ -1,0 +1,16 @@
+---
+downloader_pacman_packages:
+  # BitTorrent client
+  - qbittorrent
+  # Media downloader
+  - yt-dlp
+
+downloader_aur_packages:
+  # Download manager
+  - jdownloader2
+
+downloader_complete_directory: "{{ user_home }}/Torrents/Complete"
+downloader_incomplete_directory: "{{ user_home }}/Torrents/Incomplete"
+downloader_jdownloader_directory: "{{ user_home }}/Torrents/JDownloader"
+downloader_jdownloader_config_path: "{{ user_home }}/.jd/cfg/org.jdownloader.settings.GeneralSettings.json"
+downloader_qbittorrent_config_path: "{{ user_home }}/.config/qBittorrent/qBittorrent.conf"

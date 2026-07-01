@@ -1,0 +1,17 @@
+---
+vpn_pacman_packages:
+  - wireguard-tools
+
+# Interface
+vpn_interface: wg0
+vpn_name: Home
+vpn_address: 10.8.0.4/24
+vpn_dns: 1.1.1.1
+
+# Peer
+vpn_peer_public_key: ZB5TlWkphR32N1ZchGhKurNPt1Ttgw5CsJ7jtXZ5bgU=
+vpn_peer_endpoint: vpn.gabrielhome-lab.cc:51820
+vpn_peer_allowed_ips:
+  - 192.168.2.0/24
+  - 10.0.1.0/24
+vpn_peer_persistent_keepalive: 15

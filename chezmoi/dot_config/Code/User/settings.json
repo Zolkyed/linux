@@ -1,0 +1,378 @@
+{
+  "editor.tokenColorCustomizations": {
+    "[Default Dark Modern]": {
+      "textMateRules": [
+        {
+          "scope": ["meta.embedded", "source.groovy.embedded"],
+          "settings": {
+            "foreground": "#D4D4D4",
+          },
+        },
+        {
+          "scope": [
+            "entity.name.type.class",
+            "entity.other.inherited-class",
+            "support.class",
+          ],
+          "settings": {
+            "foreground": "#4EC9B0",
+          },
+        },
+        {
+          "scope": ["storage.type", "keyword.operator.new", "keyword.control"],
+          "settings": {
+            "foreground": "#ff7b72",
+          },
+        },
+        {
+          "scope": "entity.name.function",
+          "settings": {
+            "foreground": "#d2a8ff",
+          },
+        },
+        {
+          "scope": "support.variable.property",
+          "settings": {
+            "foreground": "#4FC1FF",
+          },
+        },
+        {
+          "scope": ["support.variable", "support.function"],
+          "settings": {
+            "foreground": "#ffa657",
+          },
+        },
+      ],
+    },
+    "[Dark Modern Darker]": {
+      "textMateRules": [
+        {
+          "scope": ["meta.embedded", "source.groovy.embedded"],
+          "settings": {
+            "foreground": "#D4D4D4",
+          },
+        },
+        {
+          "scope": [
+            "entity.name.type.class",
+            "entity.other.inherited-class",
+            "support.class",
+          ],
+          "settings": {
+            "foreground": "#4EC9B0",
+          },
+        },
+        {
+          "scope": ["storage.type", "keyword.operator.new", "keyword.control"],
+          "settings": {
+            "foreground": "#ff7b72",
+          },
+        },
+        {
+          "scope": "entity.name.function",
+          "settings": {
+            "foreground": "#d2a8ff",
+          },
+        },
+        {
+          "scope": "support.variable.property",
+          "settings": {
+            "foreground": "#4FC1FF",
+          },
+        },
+        {
+          "scope": ["support.variable", "support.function"],
+          "settings": {
+            "foreground": "#ffa657",
+          },
+        },
+      ],
+    },
+  },
+  // background
+  "workbench.colorCustomizations": {
+    "[Default Dark Modern]": {
+      "editor.background": "#181818",
+    },
+    "[Dark Modern Darker]": {
+      "editor.background": "#121212",
+    },
+    // scrollbar (https://stackoverflow.com/questions/59002585/how-can-i-remove-symbols-on-right-scrollbar-of-vscode)
+    // "editorOverviewRuler.addedForeground": "#0000",
+    // "editorOverviewRuler.modifiedForeground": "#0000",
+    // "editorOverviewRuler.deletedForeground": "#0000",
+    "editorOverviewRuler.infoForeground": "#0000",
+    "editorOverviewRuler.warningForeground": "#0000",
+    "editorOverviewRuler.errorForeground": "#0000",
+    "editorOverviewRuler.bracketMatchForeground": "#0000",
+    "editorOverviewRuler.commentForeground": "#0000",
+    "editorOverviewRuler.commentUnresolvedForeground": "#0000",
+    "editorOverviewRuler.currentContentForeground": "#0000",
+    "editorOverviewRuler.commonContentForeground": "#0000",
+    "editorOverviewRuler.incomingContentForeground": "#0000",
+    "editorOverviewRuler.findMatchForeground": "#0000",
+    "editorOverviewRuler.rangeHighlightForeground": "#0000",
+    "editorOverviewRuler.selectionHighlightForeground": "#0000",
+    "editorOverviewRuler.wordHighlightForeground": "#0000",
+    "editorOverviewRuler.wordHighlightStrongForeground": "#0000",
+    "editorOverviewRuler.wordHighlightTextForeground": "#0000",
+  },
+  "editor.hideCursorInOverviewRuler": true,
+  "debug.showBreakpointsInOverviewRuler": true,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.verticalScrollbarSize": 13,
+  "editor.scrollbar.vertical": "visible",
+  "editor.scrollbar.horizontalScrollbarSize": 0,
+  "editor.scrollbar.horizontal": "hidden",
+
+  // zoom
+  "window.zoomLevel": 0.3,
+  "editor.mouseWheelZoom": false,
+  "editor.smoothScrolling": false,
+
+  // icons
+  "workbench.iconTheme": "material-icon-theme",
+
+  // color Brackets
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": false, // (____)
+
+  // cursor
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "solid",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": false,
+  "terminal.integrated.cursorStyleInactive": "none",
+  "terminal.integrated.cursorWidth": 2,
+
+  // Editor
+  "editor.fontFamily": "Fira Code",
+
+  // terminal
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.tabs.hideCondition": "never",
+  "terminal.integrated.tabs.location": "right",
+  "terminal.integrated.tabs.title": "${sequence}",
+
+  // debug
+  "debug.toolBarLocation": "docked",
+
+  // render
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "none",
+
+  // Workspace
+  "workbench.layoutControl.enabled": false,
+  "workbench.settings.editor": "json",
+  "workbench.startupEditor": "none",
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
+  "workbench.editor.openOnFocus": false,
+  "workbench.activityBar.location": "default",
+
+  // file tree
+  "workbench.tree.renderIndentGuides": "onHover",
+
+  // breadcrumbs
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "last",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+
+  // explorer
+  "explorer.confirmDelete": false,
+  "explorer.confirmPasteNative": false,
+  "explorer.confirmDragAndDrop": false,
+
+  // security
+  "security.workspace.trust.banner": "never",
+  "security.workspace.trust.startupPrompt": "never",
+  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.enabled": false,
+
+  // indentation
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  // format
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": false,
+  "editor.formatOnType": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "mkhl.shfmt",
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+  },
+
+  // [javascript] & [typescript]
+  "js/ts.inlayHints.enumMemberValues.enabled": true,
+  "js/ts.inlayHints.parameterNames.enabled": "literals",
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "js/ts.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
+  "js/ts.autoClosingTags.enabled": true,
+
+  // [python]
+  "python.analysis.inlayHints.callArgumentNames": "partial",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.terminal.executeInFileDir": true,
+  "jupyter.notebookFileRoot": "${workspaceFolder}/notebooks",
+
+  // [html]
+  "editor.linkedEditing": true,
+  "emmet.includeLanguages": {
+    "html": "html",
+    "javascript": "javascriptreact",
+  },
+
+  // [md]
+  "markdown.preview.scrollEditorWithPreview": true,
+  "markdown.preview.scrollPreviewWithEditor": true,
+
+  // excludes
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist/**": true,
+    "**/log/**": true,
+    "**/logs/**": true,
+    "**/.fdk/**": true,
+    "**/__pycache__/**": true,
+  },
+  "files.exclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist/**": true,
+    "**/log/**": true,
+    "**/.fdk/**": true,
+    "**/__pycache__/**": true,
+  },
+  "search.exclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist/**": true,
+    "**/log/**": true,
+    "**/__pycache__/**": true,
+  },
+
+  // git
+  "scm.alwaysShowRepositories": true,
+  "git.suggestSmartCommit": false,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.showActionButton": {
+    "commit": true,
+    "publish": true,
+    "sync": true,
+  },
+  "git.mergeEditor": true,
+  "diffEditor.codeLens": true,
+
+  // gitHub copilot + CLI
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+  },
+  "editor.quickSuggestionsDelay": 0,
+  "workbench.editor.closeEmptyGroups": false,
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleSidebarVisibility",
+    "workbench.action.ZoomIn",
+    "workbench.action.ZoomOut",
+    "workbench.action.focusLeftGroup",
+    "workbench.action.focusRightGroup",
+    "workbench.action.openEditorAtIndex1",
+    "workbench.action.openEditorAtIndex2",
+    "workbench.action.openEditorAtIndex3",
+    "workbench.action.openEditorAtIndex4",
+    "workbench.action.openEditorAtIndex5",
+    "workbench.action.openEditorAtIndex6",
+    "workbench.action.terminal.rename",
+  ],
+
+  // misc
+  "editor.stickyScroll.enabled": false,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "extensions.autoUpdate": "onlyEnabledExtensions",
+  "workbench.colorTheme": "Catppuccin Mocha",
+}

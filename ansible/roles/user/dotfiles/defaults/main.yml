@@ -1,0 +1,9 @@
+---
+# Chezmoi
+chezmoi_bin: /usr/bin/chezmoi
+chezmoi_source_dir: "{{ dotfiles_repo_dir }}/chezmoi"
+
+# Repository
+dotfiles_repo_dir: "{{ user_home }}/dotfiles"
+dotfiles_repo: "https://github.com/Zolkyed/dotfiles.git"
+dotfiles_repo_branch: "main"

@@ -1,0 +1,46 @@
+---
+- name: Dotfiles | Manage as user
+  become_user: "{{ user_name }}"
+  block:
+    - name: Dotfiles | Clone repository
+      ansible.builtin.git:
+        repo: "{{ dotfiles_repo }}"
+        dest: "{{ dotfiles_repo_dir }}"
+        version: "{{ dotfiles_repo_branch }}"
+        update: false
+
+    - name: Dotfiles | Initialize chezmoi
+      ansible.builtin.command:
+        argv:
+          - "{{ chezmoi_bin }}"
+          - init
+          - --source
+          - "{{ chezmoi_source_dir }}"
+          - --no-tty
+          - --force
+      changed_when: false
+
+    - name: Dotfiles | Check managed state
+      ansible.builtin.command:
+        argv:
+          - "{{ chezmoi_bin }}"
+          - status
+          - --source
+          - "{{ chezmoi_source_dir }}"
+          - --exclude
+          - scripts
+      register: chezmoi_status
+      changed_when: false
+
+    - name: Dotfiles | Apply managed state
+      ansible.builtin.command:
+        argv:
+          - "{{ chezmoi_bin }}"
+          - apply
+          - --source
+          - "{{ chezmoi_source_dir }}"
+          - --no-tty
+          - --force
+          - --exclude
+          - scripts
+      changed_when: chezmoi_status.stdout | length > 0

@@ -1,0 +1,57 @@
+---
+- name: GNOME | Ensure local data directory exists
+  ansible.builtin.file:
+    path: "{{ gnome_nautilus_places_file | dirname }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
+- name: GNOME | Deploy Nautilus places
+  ansible.builtin.template:
+    src: bookmarks.j2
+    dest: "{{ gnome_nautilus_places_file }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: GNOME | Configure application defaults and shortcuts
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become_user: "{{ user_name }}"
+  loop:
+    - key: /org/gnome/desktop/default-applications/terminal/exec
+      value: "'{{ gnome_terminal_command }}'"
+    - key: /org/gnome/desktop/default-applications/terminal/exec-arg
+      value: "''"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+      value: >-
+        ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/']
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/name
+      value: "'Browser'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/command
+      value: "'{{ gnome_browser_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/binding
+      value: "'{{ gnome_browser_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/name
+      value: "'Visual Studio Code'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/command
+      value: "'{{ gnome_code_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/binding
+      value: "'{{ gnome_code_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/name
+      value: "'Terminal'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/command
+      value: "'{{ gnome_terminal_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/binding
+      value: "'{{ gnome_terminal_keybinding }}'"
+    - key: /com/github/stunkymonkey/nautilus-open-any-terminal/terminal
+      value: "'{{ gnome_terminal_command }}'"
+  loop_control:
+    label: "{{ item.key }}"

@@ -1,0 +1,13 @@
+---
+rclone_pacman_packages:
+  - fuse3
+  - rclone
+
+# Configuration
+rclone_remote: gdrive
+rclone_conf_dir: "{{ user_home }}/.config/rclone"
+rclone_conf_dest: "{{ rclone_conf_dir }}/rclone.conf"
+rclone_mount_dir: "{{ user_home }}/mnt/GoogleDrive"
+rclone_cache_dir: "{{ user_home }}/.cache/rclone"
+rclone_vfs_cache_max_size: 10G
+rclone_vfs_cache_max_age: 168h

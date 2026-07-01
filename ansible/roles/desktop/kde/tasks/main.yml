@@ -1,0 +1,23 @@
+---
+- name: KDE | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: KDE
+    install_pacman_packages: "{{ kde_pacman_packages }}"
+    install_aur_packages: "{{ kde_aur_packages }}"
+
+- name: KDE | Configure input
+  ansible.builtin.include_tasks: input.yml
+
+- name: KDE | Configure applications
+  ansible.builtin.include_tasks: applications.yml
+
+- name: KDE | Configure feedback
+  ansible.builtin.include_tasks: feedback.yml
+
+- name: KDE | Configure workspaces
+  ansible.builtin.include_tasks: workspaces.yml
+
+- name: KDE | Configure audio
+  ansible.builtin.include_tasks: audio.yml

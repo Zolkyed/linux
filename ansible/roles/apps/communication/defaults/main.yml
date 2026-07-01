@@ -1,0 +1,7 @@
+---
+communication_pacman_packages:
+  - discord
+  - thunderbird
+
+communication_aur_packages:
+  - hexchat

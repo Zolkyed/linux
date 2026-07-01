@@ -1,0 +1,42 @@
+---
+- name: CachyOS repo | Check if already configured
+  ansible.builtin.command:
+    cmd: grep -q '^\[cachyos' /etc/pacman.conf
+  changed_when: false
+  failed_when: cachyos_repo_configured.rc not in [0, 1]
+  register: cachyos_repo_configured
+
+- name: CachyOS repo | Configure repository
+  when: cachyos_repo_configured.rc == 1
+  block:
+    - name: CachyOS repo | Download installer tarball
+      ansible.builtin.get_url:
+        url: "{{ cachyos_repo_download_url }}"
+        dest: /tmp/cachyos-repo.tar.xz
+        mode: "0644"
+
+    - name: CachyOS repo | Extract tarball
+      ansible.builtin.unarchive:
+        src: /tmp/cachyos-repo.tar.xz
+        dest: /tmp
+        remote_src: true
+        creates: /tmp/cachyos-repo/cachyos-repo.sh
+
+    - name: CachyOS repo | Execute installer
+      ansible.builtin.shell:
+        cmd: |
+          set -o pipefail
+          yes | /bin/bash ./cachyos-repo.sh --install
+          exit "${PIPESTATUS[1]}"
+        chdir: /tmp/cachyos-repo
+        executable: /bin/bash
+      changed_when: true
+
+  always:
+    - name: CachyOS repo | Clean up installer files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /tmp/cachyos-repo.tar.xz
+        - /tmp/cachyos-repo

@@ -1,0 +1,38 @@
+---
+- name: Firewall | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Firewall
+    install_pacman_packages: "{{ firewall_pacman_packages }}"
+
+- name: Firewall | Stop and disable UFW service
+  ansible.builtin.systemd_service:
+    name: ufw.service
+    enabled: false
+    state: stopped
+  failed_when: false
+
+- name: Firewall | Enable and start firewalld service
+  ansible.builtin.systemd_service:
+    name: firewalld.service
+    enabled: true
+    state: started
+
+- name: Firewall | Allow services
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    zone: "{{ firewall_zone }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  loop: "{{ firewall_allowed_services }}"
+
+- name: Firewall | Allow ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    zone: "{{ firewall_zone }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  loop: "{{ firewall_allowed_ports }}"

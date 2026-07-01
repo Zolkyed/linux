@@ -1,0 +1,19 @@
+---
+- name: Power | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Power
+    install_pacman_packages: "{{ power_pacman_packages }}"
+
+- name: Power | Enable and start power profiles daemon
+  ansible.builtin.systemd_service:
+    name: power-profiles-daemon.service
+    enabled: true
+    state: started
+
+- name: Power | Enable and start firmware update refresh timer
+  ansible.builtin.systemd_service:
+    name: fwupd-refresh.timer
+    enabled: true
+    state: started

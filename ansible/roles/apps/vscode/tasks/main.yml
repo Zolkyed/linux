@@ -1,0 +1,36 @@
+---
+- name: VSCode | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: VSCode
+    install_aur_packages: "{{ vscode_aur_packages }}"
+
+- name: VSCode | List installed extensions
+  ansible.builtin.command:
+    argv:
+      - code
+      - --list-extensions
+  register: vscode_installed_extensions
+  changed_when: false
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+
+- name: VSCode | Install missing extensions
+  ansible.builtin.command:
+    argv:
+      - code
+      - --install-extension
+      - "{{ item }}"
+  loop: "{{ vscode_extensions | difference(vscode_installed_extensions.stdout_lines) }}"
+  loop_control:
+    label: "{{ item }}"
+  register: vscode_extension_result
+  retries: "{{ vscode_retries }}"
+  delay: "{{ vscode_retry_delay }}"
+  until: vscode_extension_result.rc == 0
+  changed_when: true
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"

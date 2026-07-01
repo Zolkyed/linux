@@ -1,0 +1,10 @@
+---
+- name: Plymouth | Rebuild initramfs
+  ansible.builtin.command:
+    cmd: mkinitcpio -P
+  changed_when: true
+
+- name: Plymouth | Update Limine
+  ansible.builtin.command:
+    cmd: limine-update
+  changed_when: true

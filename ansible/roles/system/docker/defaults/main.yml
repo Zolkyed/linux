@@ -1,0 +1,21 @@
+---
+# Retry
+docker_retries: 3
+docker_retry_delay: 15
+
+# Images
+docker_netdata_image: netdata/netdata:stable
+
+docker_postgres_image: postgres:18-alpine
+docker_postgres_user: "{{ user_name }}"
+docker_postgres_database: db
+
+docker_redis_image: redis:8-alpine
+
+docker_pacman_packages:
+  - docker
+  - docker-compose
+  - docker-buildx
+
+  # dependency: community.docker
+  - python-docker

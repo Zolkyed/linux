@@ -1,0 +1,128 @@
+---
+# System packages
+- name: "Packages | Install pacman packages for {{ install_label }}"
+  community.general.pacman:
+    name: "{{ install_pacman_packages }}"
+    state: present
+  when: install_pacman_packages | default([]) | length > 0
+  register: pacman_result
+  until: pacman_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+
+# AUR packages (via paru)
+- name: "Packages | Install AUR packages for {{ install_label }}"
+  kewlfft.aur.aur:
+    name: "{{ install_aur_packages }}"
+    use: paru
+    state: present
+  become_user: "{{ user_name }}"
+  when: install_aur_packages | default([]) | length > 0
+  register: aur_result
+  until: aur_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+
+# Sandboxed apps (via Flathub)
+- name: "Packages | Install Flatpak packages for {{ install_label }}"
+  community.general.flatpak:
+    name: "{{ install_flatpak_packages }}"
+    state: present
+    remote: flathub
+  when: install_flatpak_packages | default([]) | length > 0
+  register: flatpak_result
+  until: flatpak_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+
+# Python CLI tools (via uv tool)
+- name: "Packages | Install uv tools for {{ install_label }}"
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/uv
+      - tool
+      - install
+      - "{{ item }}"
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+  loop: "{{ install_uv_tools | default([]) }}"
+  when: install_uv_tools | default([]) | length > 0
+  register: uv_result
+  until: uv_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+  changed_when: "'Installed' in uv_result.stdout"
+
+# Node.js global CLI tools
+- name: "Packages | Install npm packages for {{ install_label }}"
+  community.general.npm:
+    name: "{{ item }}"
+    global: true
+    state: present
+    executable: "{{ user_home }}/.local/share/mise/shims/npm"
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+  loop: "{{ install_npm_packages | default([]) }}"
+  when: install_npm_packages | default([]) | length > 0
+  register: npm_result
+  until: npm_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+
+# Rust binaries
+- name: "Packages | Install cargo packages for {{ install_label }}"
+  community.general.cargo:
+    name: "{{ item }}"
+    state: present
+    executable: "{{ user_home }}/.local/share/mise/shims/cargo"
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+  loop: "{{ install_cargo_packages | default([]) }}"
+  when: install_cargo_packages | default([]) | length > 0
+  register: cargo_result
+  until: cargo_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+
+# Go CLI tools
+- name: "Packages | Install go packages for {{ install_label }}"
+  ansible.builtin.command:
+    argv:
+      - "{{ user_home }}/.local/share/mise/shims/go"
+      - install
+      - "{{ item }}"
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+    GOBIN: "{{ user_home }}/.local/bin"
+  loop: "{{ install_go_packages | default([]) }}"
+  when: install_go_packages | default([]) | length > 0
+  register: go_result
+  until: go_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+  changed_when: false
+
+# Runtime version management
+- name: "Packages | Install mise tools for {{ install_label }}"
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/mise
+      - use
+      - --global
+      - "{{ item }}"
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+  loop: "{{ install_mise_tools | default([]) }}"
+  when: install_mise_tools | default([]) | length > 0
+  register: mise_result
+  until: mise_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+  changed_when: >
+    'installed' in mise_result.stdout
+    or 'installed' in mise_result.stderr

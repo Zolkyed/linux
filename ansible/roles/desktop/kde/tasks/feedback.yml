@@ -1,0 +1,33 @@
+---
+- name: KDE | Configure cursor launch feedback
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/klaunchrc"
+    values:
+      - group: FeedbackStyle
+        key: BusyCursor
+        bool_value: "{{ kde_cursor_launch_feedback_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Configure shake cursor effect
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/kwinrc"
+    values:
+      - group: Plugins
+        key: shakecursorEnabled
+        bool_value: "{{ kde_shake_cursor_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Disable status OSD popups
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/plasmarc"
+    values:
+      - group: OSD
+        key: Enabled
+        bool_value: "{{ kde_status_osd_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
