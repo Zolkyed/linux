@@ -6,8 +6,6 @@ user_home: "/home/{{ user_name }}"
 #   - emulation
 #   - fingerprint
 #   - gaming
-#   - gnome
-#   - kde
 #   - labs
 #   - mobile
 #   - restic
