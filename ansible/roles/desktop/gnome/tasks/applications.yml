@@ -32,7 +32,11 @@
       value: >-
         ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/',
         '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/',
-        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/']
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/']
     - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/name
       value: "'Browser'"
     - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/command
@@ -51,6 +55,30 @@
       value: "'{{ gnome_terminal_command }}'"
     - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/binding
       value: "'{{ gnome_terminal_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/name
+      value: "'Spotify - Manga'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/command
+      value: "'xdg-open {{ gnome_spotify_manga_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/binding
+      value: "'Launch5'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/name
+      value: "'Spotify - Quality'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/command
+      value: "'xdg-open {{ gnome_spotify_quality_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/binding
+      value: "'Launch6'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/name
+      value: "'Spotify - Creepy'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/command
+      value: "'xdg-open {{ gnome_spotify_creepy_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/binding
+      value: "'Launch7'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/name
+      value: "'Spotify - Extra'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/command
+      value: "'xdg-open {{ gnome_spotify_extra_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/binding
+      value: "'Launch8'"
     - key: /com/github/stunkymonkey/nautilus-open-any-terminal/terminal
       value: "'{{ gnome_terminal_command }}'"
   loop_control:

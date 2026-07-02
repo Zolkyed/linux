@@ -30,6 +30,12 @@ gnome_code_command: code
 gnome_code_keybinding: <Super>c
 gnome_terminal_command: ghostty
 gnome_terminal_keybinding: <Super>t
+
+# Spotify
+gnome_spotify_manga_uri: spotify:playlist:6qhXWOPKB8o9xM1zRMLiJn
+gnome_spotify_quality_uri: spotify:playlist:1QanwoLXN5nEDrXdvY1V1w
+gnome_spotify_creepy_uri: spotify:playlist:5tWi1kvdZL4oNOasrYQdFe
+gnome_spotify_extra_uri: spotify:playlist:1bFImNx4XN90RHyfdiedlU
 gnome_button_layout: ":minimize,maximize,close"
 
 # Nautilus
