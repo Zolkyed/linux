@@ -41,7 +41,7 @@
         upgrade: true
 
   roles:
-    # System
+    # system
     - role: system/pacman
       tags: pacman
     - role: system/rate_mirrors
@@ -104,7 +104,7 @@
     - role: system/virtualization
       tags: virtualization
 
-    # Desktop
+    # desktop
     - role: desktop/gnome
       tags: gnome
       when: "'gnome' in enabled_features"
@@ -156,7 +156,7 @@
     - role: apps/vscode
       tags: vscode
 
-    # User
+    # user
     - role: user/ssh
       tags: ssh
     - role: user/gpg
