@@ -21,6 +21,5 @@ shell_pacman_packages:
   # Completion
   - bash-completion
 
-
 shell_aur_packages:
   - zsh-autopair-git
