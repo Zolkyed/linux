@@ -5,3 +5,6 @@
   vars:
     install_label: Communication
     install_pacman_packages: "{{ communication_pacman_packages }}"
+
+- name: Communication | Configure Thunderbird
+  ansible.builtin.include_tasks: thunderbird.yml
