@@ -3,4 +3,6 @@ audio_pacman_packages:
   - easyeffects
   - calf
 
+# https://github.com/wwmm/easyeffects/wiki/Community-presets
+# https://github.com/p-chan5/EasyPulse/blob/main/p-chan5/hifi-min.json
 audio_easyeffects_preset_dir: "{{ user_home }}/.config/easyeffects/output"
