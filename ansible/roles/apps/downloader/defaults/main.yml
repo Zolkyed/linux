@@ -21,7 +21,7 @@ downloader_hexchat_incomplete_directory: "{{ downloader_hexchat_directory }}/Inc
 # Config
 downloader_jdownloader_config_path: "{{ user_home }}/.jd/cfg/org.jdownloader.settings.GeneralSettings.json"
 downloader_qbittorrent_config_path: "{{ user_home }}/.config/qBittorrent/qBittorrent.conf"
-downloader_hexchat_config_dir: "{{ downloader_hexchat_directory }}/.config/hexchat"
+downloader_hexchat_config_dir: "{{ user_home }}/.config/hexchat"
 downloader_hexchat_conf_path: "{{ downloader_hexchat_config_dir }}/hexchat.conf"
 downloader_hexchat_colors_path: "{{ downloader_hexchat_config_dir }}/colors.conf"
 downloader_hexchat_servlist_path: "{{ downloader_hexchat_config_dir }}/servlist.conf"
