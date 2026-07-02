@@ -1,4 +1,5 @@
 # Extra
+alias speed='speedtest-cli'
 alias yay='paru'
 alias orphans='pacman -Qtdq'
 removeorphans() {
