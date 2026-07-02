@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./chezmoi/dot_config/rofi/girl-3.png">
+    <img src="./assets/banner.png">
     <h1>Linux</h1>
     <h3></h3>
 </div>
@@ -97,34 +97,27 @@ Additional wallpapers are filtered from the [Orangci collection](https://github.
 
 | Shortcut | Action |
 | --- | --- |
-| <kbd>Super</kbd> + <kbd>T</kbd> | Open Kitty |
 | <kbd>Super</kbd> + <kbd>B</kbd> | Open Brave |
 | <kbd>Super</kbd> + <kbd>C</kbd> | Open Visual Studio Code |
 | <kbd>Super</kbd> + <kbd>E</kbd> | Open the file manager |
-| <kbd>Super</kbd> + <kbd>L</kbd> | Lock the session |
-| <kbd>Super</kbd> + <kbd>W</kbd> | Close the active window |
+| <kbd>Super</kbd> + <kbd>T</kbd> | Open Kitty |
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | Open the overview |
 | <kbd>Super</kbd> + <kbd>D</kbd> | Peek at desktop |
-| <kbd>Alt</kbd> + <kbd>Tab</kbd> | Switch windows |
-| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>Tab</kbd> | Switch windows in reverse |
-| <kbd>Super</kbd> + <kbd>1/2/3/4</kbd> | Switch to workspace 1, 2, 3, 4 |
+| <kbd>Super</kbd> + <kbd>W</kbd> | Close the active window |
+| <kbd>Super</kbd> + <kbd>L</kbd> | Lock the session |
 | <kbd>Super</kbd> + <kbd>Left/Right</kbd> | Switch workspace |
+| <kbd>Super</kbd> + <kbd>1/2/3/4</kbd> | Switch to workspace 1, 2, 3, 4 |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1/2/3/4</kbd> | Send window to workspace 1, 2, 3, 4 |
 | <kbd>Super</kbd> + <kbd>F1/F2/F3/F4</kbd> | Activate task manager entry 1, 2, 3, 4 |
 | <kbd>Shift</kbd> + <kbd>F1/F2/F3/F4</kbd> | Playlist 1, 2, 3, 4 |
-| <kbd>Alt</kbd> + <kbd>F1</kbd> | Switch to DisplayPort |
-| <kbd>Alt</kbd> + <kbd>F2</kbd> | Switch to HDMI 1 |
-| <kbd>Alt</kbd> + <kbd>F3</kbd> | Switch to HDMI 2 |
-| <kbd>PrintScreen</kbd> | Snipping Tool |
-| <kbd>Shift</kbd> + <kbd>PrintScreen</kbd> | Take Screenshot (Game Bar) |
-| <kbd>Ctrl</kbd> + <kbd>PrintScreen</kbd> | OCR (Capture & Extract) |
+| <kbd>Alt</kbd> + <kbd>Tab</kbd> | Switch windows |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>Tab</kbd> | Switch windows in reverse |
 
 ### Extensions
 
 | Shortcut | Action |
 | --- | --- |
-| <kbd>ScrollLock</kbd> | Chrome Extensions 1 |
-| <kbd>Shift</kbd> + <kbd>ScrollLock</kbd> | Chrome Extensions 2 |
+| <kbd>ScrollLock</kbd> | Chrome Extensions |
 
 ### Music Controls
 
@@ -136,9 +129,11 @@ Additional wallpapers are filtered from the [Orangci collection](https://github.
 | <kbd>PageUp</kbd> | Next Track |
 | <kbd>PageDown</kbd> | Previous Track |
 
-### Brightness Controls
+### Hardware Controls
 
 | Shortcut | Action |
 | --- | --- |
+| <kbd>Numpad4</kbd> | Toggle Fan |
+| <kbd>NumpadEnter</kbd> | Find Phone |
 | <kbd>NumpadAdd</kbd> | Increase Brightness |
 | <kbd>NumpadSub</kbd> | Decrease Brightness |
