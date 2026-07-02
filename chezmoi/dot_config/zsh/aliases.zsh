@@ -1,22 +1,34 @@
 # Extra
-alias speed='speedtest-cli'
 alias yay='paru'
+alias update='topgrade'
 alias orphans='pacman -Qtdq'
+
 removeorphans() {
   local pkgs
-  pkgs=$(pacman -Qtdq) || { echo "No orphaned packages found."; return 0; }
-  sudo pacman -Rns $pkgs
+  pkgs=($(pacman -Qtdq))
+
+  if [ ${#pkgs[@]} -eq 0 ]; then
+    echo "No orphaned packages found."
+    return 0
+  fi
+
+  sudo pacman -Rns "${pkgs[@]}"
 }
+
+alias speed='speedtest-cli'
 alias netscan='sudo nmap -sn 192.168.2.0/24'
-alias myip='curl -s ipinfo.io/ip'
+alias myip='curl -s https://api.ipify.org; echo'
 alias weather='curl wttr.in'
-alias yt2mp3='yt-dlp -x --audio-format mp3 --audio-quality 0 --add-metadata --embed-thumbnail'
-alias untar='tar -zxvf'
-alias path='echo -e ${PATH//:/\\n}'
 alias ports='sudo ss -tulpn'
+
+alias path='echo -e ${PATH//:/\\n}'
+alias untar='tar -zxvf'
 alias open='xdg-open'
 alias docker-compose='docker compose'
-alias update='topgrade'
+alias journal='journalctl -xe'
+alias logs='journalctl -f'
+
+alias yt2mp3='yt-dlp -x --audio-format mp3 --audio-quality 0 --add-metadata --embed-thumbnail'
 
 # Navigation
 alias ..='cd ..'
