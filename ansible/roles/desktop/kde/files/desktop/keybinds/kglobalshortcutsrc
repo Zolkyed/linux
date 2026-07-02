@@ -60,3 +60,15 @@ ActiveWindowScreenShot=Print
 RecordRegion=Meta+R\tMeta+Shift+R
 RectangularRegionScreenShot=Meta+Shift+S
 _launch=none
+
+[services][spotify-manga.desktop]
+_launch=Shift+F1
+
+[services][spotify-quality.desktop]
+_launch=Shift+F2
+
+[services][spotify-creepy.desktop]
+_launch=Shift+F3
+
+[services][spotify-extra.desktop]
+_launch=Shift+F4

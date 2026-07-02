@@ -56,3 +56,15 @@ _launch=none
 RectangularRegionScreenShot=none
 RecordRegion=Meta+R\tMeta+Shift+R
 _launch=none
+
+[services][spotify-manga.desktop]
+_launch=Launch5
+
+[services][spotify-quality.desktop]
+_launch=Launch6
+
+[services][spotify-creepy.desktop]
+_launch=Launch7
+
+[services][spotify-extra.desktop]
+_launch=Launch8

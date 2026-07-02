@@ -16,6 +16,17 @@
     mode: "0644"
     validate: xmllint --noout %s
 
+- name: KDE | Deploy Spotify playlist launchers
+  ansible.builtin.template:
+    src: spotify-playlist.desktop.j2
+    dest: "{{ user_home }}/.local/share/applications/spotify-{{ item.id }}.desktop"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+  loop: "{{ kde_spotify_shortcuts }}"
+  loop_control:
+    label: "{{ item.name }}"
+
 - name: KDE | Configure terminal preference
   community.general.kdeconfig:
     path: "{{ user_home }}/.config/kdeglobals"
