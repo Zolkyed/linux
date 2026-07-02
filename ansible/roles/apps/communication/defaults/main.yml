@@ -2,12 +2,3 @@
 communication_pacman_packages:
   - discord
   - thunderbird
-
-# Thunderbird
-communication_thunderbird_profile_directory: "{{ user_home }}/.thunderbird/mcgx5h9j.default-release"
-communication_thunderbird_gmail_address: "zolkyed@gmail.com"
-communication_thunderbird_gmail_name: "Zolkyed"
-communication_thunderbird_outlook_address: "charles.hamelin@outlook.com"
-communication_thunderbird_outlook_name: "Charles Hamelin"
-communication_thunderbird_uqam_address: "ed691953@ens.uqam.ca"
-communication_thunderbird_uqam_name: "Charles Hamelin"
