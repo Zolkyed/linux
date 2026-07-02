@@ -1,0 +1,6 @@
+---
+audio_pacman_packages:
+  - easyeffects
+  - calf
+
+audio_easyeffects_preset_dir: "{{ user_home }}/.config/easyeffects/output"

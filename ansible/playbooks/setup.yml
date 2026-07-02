@@ -64,6 +64,8 @@
       tags: flatpak
     - role: system/base
       tags: base
+    - role: system/audio
+      tags: audio
     - role: system/logging
       tags: logging
     - role: system/keyboard
