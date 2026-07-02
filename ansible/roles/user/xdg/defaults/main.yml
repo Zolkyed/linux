@@ -15,6 +15,7 @@ xdg_editor_mime_types:
   - text/x-shellscript
   - text/markdown
   - text/x-python
+  - text/xml
 
 # Image
 xdg_image_desktop: com.interversehq.qView.desktop
@@ -38,16 +39,29 @@ xdg_mail_mime_types:
 # Media
 xdg_media_player_desktop: mpv.desktop
 xdg_media_mime_types:
+  - application/ogg
   - audio/aac
+  - audio/aiff
   - audio/flac
+  - audio/m4a
+  - audio/mp3
+  - audio/mp4
   - audio/mpeg
   - audio/ogg
+  - audio/opus
+  - audio/vorbis
   - audio/wav
+  - video/3gpp
+  - video/avi
+  - video/divx
+  - video/flv
+  - video/mp2t
   - video/mp4
   - video/mpeg
   - video/ogg
+  - video/quicktime
   - video/webm
-  - video/x-matroska
+  - video/x-ogm+ogg
 
 # PDF
 xdg_pdf_desktop: brave-origin.desktop
