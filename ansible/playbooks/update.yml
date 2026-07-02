@@ -4,20 +4,6 @@
   become: true
   gather_facts: false
 
-  pre_tasks:
-    - name: Update | Create pre-run snapshot
-      tags: always
-      ansible.builtin.import_role:
-        name: lib/snapshot
-      vars:
-        snapshot_action: pre
-        snapshot_description: "pre ansible-update: {{ ansible_run_tags | join(',') }}"
-
-    - name: Update | Detect OS variant
-      tags: always
-      ansible.builtin.import_role:
-        name: lib/os
-
   tasks:
     - name: Update | Run topgrade
       ansible.builtin.command:
@@ -27,12 +13,3 @@
         HOME: "{{ user_home }}"
       changed_when: true
       failed_when: false
-
-  post_tasks:
-    - name: Update | Create post-run snapshot
-      tags: always
-      ansible.builtin.import_role:
-        name: lib/snapshot
-      vars:
-        snapshot_action: post
-        snapshot_description: "post ansible-update: {{ ansible_run_tags | join(',') }}"
