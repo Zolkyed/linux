@@ -2,19 +2,13 @@
 collections:
   # dconf (GNOME), kdeconfig (KDE), flatpak, pacman, XML, npm, Cargo
   - name: community.general
-    version: "13.1.0"
   # authorized_key, firewalld
   - name: ansible.posix
-    version: "2.2.0"
   # load_vars for SOPS-encrypted variables
   - name: community.sops
-    version: "2.4.0"
   # virt_net; requires python-lxml and libvirt-python on the managed host
   - name: community.libvirt
-    version: "2.2.0"
   # docker_container; requires python-docker on the managed host
   - name: community.docker
-    version: "5.2.1"
   # AUR packages through paru
   - name: kewlfft.aur
-    version: "0.13.0"
