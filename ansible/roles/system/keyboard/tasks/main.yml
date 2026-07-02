@@ -8,7 +8,7 @@
 
 - name: Keyboard | Configure keyd
   ansible.builtin.copy:
-    src: keyd.conf
+    src: "{{ inventory_hostname }}/keyd.conf"
     dest: /etc/keyd/default.conf
     owner: root
     group: root
