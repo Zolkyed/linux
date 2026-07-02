@@ -60,6 +60,9 @@ xdg_media_mime_types:
   - video/mpeg
   - video/ogg
   - video/quicktime
+  - application/x-matroska
+  - video/x-matroska
+  - video/mkv
   - video/webm
   - video/x-ogm+ogg
 
