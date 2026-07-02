@@ -23,6 +23,14 @@
     group: "{{ user_name }}"
     mode: "0600"
 
+- name: Communication | Configure HexChat colors
+  ansible.builtin.copy:
+    src: hexchat/colors.conf
+    dest: "{{ user_home }}/.config/hexchat/colors.conf"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+
 - name: Communication | Configure HexChat file transfers
   ansible.builtin.lineinfile:
     path: "{{ user_home }}/.config/hexchat/hexchat.conf"
