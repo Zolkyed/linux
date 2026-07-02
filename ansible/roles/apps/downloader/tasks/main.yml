@@ -15,57 +15,20 @@
     group: "{{ user_name }}"
     mode: "0755"
   loop:
-    - "{{ downloader_complete_directory }}"
-    - "{{ downloader_incomplete_directory }}"
+    - "{{ downloader_qbittorrent_complete_directory }}"
+    - "{{ downloader_qbittorrent_incomplete_directory }}"
     - "{{ downloader_jdownloader_directory }}"
+    - "{{ downloader_hexchat_directory }}"
+    - "{{ downloader_hexchat_complete_directory }}"
+    - "{{ downloader_hexchat_incomplete_directory }}"
     - "{{ downloader_jdownloader_config_path | dirname }}"
     - "{{ downloader_qbittorrent_config_path | dirname }}"
 
-- name: Downloader | Initialize JDownloader configuration
-  ansible.builtin.copy:
-    content: "{}\n"
-    dest: "{{ downloader_jdownloader_config_path }}"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    mode: "0644"
-    force: false
+- name: Downloader | Configure JDownloader
+  ansible.builtin.include_tasks: jdownloader.yml
 
-- name: Downloader | Read JDownloader configuration
-  ansible.builtin.slurp:
-    src: "{{ downloader_jdownloader_config_path }}"
-  register: downloader_jdownloader_config
+- name: Downloader | Configure qBittorrent
+  ansible.builtin.include_tasks: qbittorrent.yml
 
-- name: Downloader | Configure JDownloader download directory
-  ansible.builtin.copy:
-    content: >-
-      {{
-        downloader_jdownloader_config.content
-        | b64decode
-        | from_json
-        | combine({'defaultdownloadfolder': downloader_jdownloader_directory})
-        | to_nice_json
-      }}
-    dest: "{{ downloader_jdownloader_config_path }}"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    mode: "0644"
-
-- name: Downloader | Configure qBittorrent download directories
-  community.general.ini_file:
-    path: "{{ downloader_qbittorrent_config_path }}"
-    section: BitTorrent
-    option: "{{ item.option }}"
-    value: "{{ item.value }}"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    mode: "0644"
-    no_extra_spaces: true
-  loop:
-    - option: 'Session\DefaultSavePath'
-      value: "{{ downloader_complete_directory }}/"
-    - option: 'Session\TempPath'
-      value: "{{ downloader_incomplete_directory }}/"
-    - option: 'Session\TempPathEnabled'
-      value: "true"
-  loop_control:
-    label: "{{ item.option }}"
+- name: Downloader | Configure HexChat
+  ansible.builtin.include_tasks: hexchat.yml

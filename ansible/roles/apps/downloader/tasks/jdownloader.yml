@@ -1,0 +1,29 @@
+---
+- name: Downloader | Initialize JDownloader configuration
+  ansible.builtin.copy:
+    content: "{}\n"
+    dest: "{{ downloader_jdownloader_config_path }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+    force: false
+
+- name: Downloader | Read JDownloader configuration
+  ansible.builtin.slurp:
+    src: "{{ downloader_jdownloader_config_path }}"
+  register: downloader_jdownloader_config
+
+- name: Downloader | Configure JDownloader download directory
+  ansible.builtin.copy:
+    content: >-
+      {{
+        downloader_jdownloader_config.content
+        | b64decode
+        | from_json
+        | combine({'defaultdownloadfolder': downloader_jdownloader_directory})
+        | to_nice_json
+      }}
+    dest: "{{ downloader_jdownloader_config_path }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

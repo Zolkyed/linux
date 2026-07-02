@@ -1,0 +1,20 @@
+---
+- name: Downloader | Configure qBittorrent download directories
+  community.general.ini_file:
+    path: "{{ downloader_qbittorrent_config_path }}"
+    section: BitTorrent
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+    no_extra_spaces: true
+  loop:
+    - option: 'Session\DefaultSavePath'
+      value: "{{ downloader_qbittorrent_complete_directory }}/"
+    - option: 'Session\TempPath'
+      value: "{{ downloader_qbittorrent_incomplete_directory }}/"
+    - option: 'Session\TempPathEnabled'
+      value: "true"
+  loop_control:
+    label: "{{ item.option }}"
