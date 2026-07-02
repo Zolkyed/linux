@@ -47,19 +47,6 @@ kde_spotify_manga_uri: spotify:playlist:6qhXWOPKB8o9xM1zRMLiJn
 kde_spotify_quality_uri: spotify:playlist:1QanwoLXN5nEDrXdvY1V1w
 kde_spotify_creepy_uri: spotify:playlist:5tWi1kvdZL4oNOasrYQdFe
 kde_spotify_extra_uri: spotify:playlist:1bFImNx4XN90RHyfdiedlU
-kde_spotify_shortcuts:
-  - id: manga
-    name: Manga
-    uri: "{{ kde_spotify_manga_uri }}"
-  - id: quality
-    name: Quality
-    uri: "{{ kde_spotify_quality_uri }}"
-  - id: creepy
-    name: Creepy
-    uri: "{{ kde_spotify_creepy_uri }}"
-  - id: extra
-    name: Extra
-    uri: "{{ kde_spotify_extra_uri }}"
 
 # Dolphin
 kde_dolphin_places_file: "{{ user_home }}/.local/share/user-places.xbel"

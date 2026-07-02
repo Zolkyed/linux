@@ -23,7 +23,19 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: "0644"
-  loop: "{{ kde_spotify_shortcuts }}"
+  loop:
+    - id: manga
+      name: Manga
+      uri: "{{ kde_spotify_manga_uri }}"
+    - id: quality
+      name: Quality
+      uri: "{{ kde_spotify_quality_uri }}"
+    - id: creepy
+      name: Creepy
+      uri: "{{ kde_spotify_creepy_uri }}"
+    - id: extra
+      name: Extra
+      uri: "{{ kde_spotify_extra_uri }}"
   loop_control:
     label: "{{ item.name }}"
 
