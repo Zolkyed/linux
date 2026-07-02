@@ -43,7 +43,13 @@
   loop:
     - key: dcc_auto_recv
       value: "2"
+    - key: dcc_completed_dir
+      value: "{{ user_home }}/Downloads/Complete"
     - key: dcc_dir
       value: "{{ user_home }}/Downloads"
+    - key: gui_autoopen_recv
+      value: "0"
+    - key: gui_autoopen_send
+      value: "0"
   loop_control:
     label: "{{ item.key }}"
