@@ -6,3 +6,36 @@
     install_label: Communication
     install_pacman_packages: "{{ communication_pacman_packages }}"
     install_aur_packages: "{{ communication_aur_packages }}"
+
+- name: Communication | Create HexChat configuration directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/hexchat"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+
+- name: Communication | Configure HexChat
+  ansible.builtin.copy:
+    src: hexchat/servlist.conf
+    dest: "{{ user_home }}/.config/hexchat/servlist.conf"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+
+- name: Communication | Configure HexChat file transfers
+  ansible.builtin.lineinfile:
+    path: "{{ user_home }}/.config/hexchat/hexchat.conf"
+    regexp: "^{{ item.key }} ="
+    line: "{{ item.key }} = {{ item.value }}"
+    create: true
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  loop:
+    - key: dcc_auto_recv
+      value: "2"
+    - key: dcc_dir
+      value: "{{ user_home }}/Downloads"
+  loop_control:
+    label: "{{ item.key }}"
