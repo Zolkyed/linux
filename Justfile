@@ -29,11 +29,11 @@ banner:
         '╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝'
 
 # Apply the setup playbook to this host, optionally limited by tags.
-run-local tags="": banner
+setup-local tags="": banner
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{HOSTNAME}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
 # Apply the setup playbook over SSH, optionally limited by tags.
-run-ssh host=`hostname -s` tags="": banner
+setup-ssh host=`hostname -s` tags="": banner
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{host}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
 # Apply chezmoi-managed dotfiles to this host.
