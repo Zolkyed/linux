@@ -48,21 +48,18 @@
     state: present
     timeout: 30
 
-- name: Syncthing | Read initial configuration
-  ansible.builtin.slurp:
-    src: "{{ user_home }}/.local/state/syncthing/config.xml"
+- name: Syncthing | Read API key
+  community.general.xml:
+    path: "{{ user_home }}/.local/state/syncthing/config.xml"
+    xpath: /configuration/gui/apikey
+    content: text
   register: syncthing_config_file
   no_log: true
 
 - name: Syncthing | Extract API key
   ansible.builtin.set_fact:
     syncthing_api_key: >-
-      {{
-        syncthing_config_file.content
-        | b64decode
-        | regex_findall('<apikey>([^<]+)</apikey>')
-        | first
-      }}
+      {{ syncthing_config_file.matches[0].apikey }}
   no_log: true
 
 - name: Syncthing | Wait for REST API

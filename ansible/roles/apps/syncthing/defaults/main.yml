@@ -1,6 +1,7 @@
 ---
 syncthing_pacman_packages:
   - syncthing
+  - python-lxml
 
 syncthing_devices: []
 
