@@ -3,6 +3,7 @@ syncthing_pacman_packages:
   - syncthing
 
 syncthing_devices: []
+
 syncthing_folders:
   - id: pictures
     label: Pictures
