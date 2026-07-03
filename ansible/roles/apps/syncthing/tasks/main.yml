@@ -6,8 +6,116 @@
     install_label: Syncthing
     install_pacman_packages: "{{ syncthing_pacman_packages }}"
 
-- name: Syncthing | Enable and start user service
+- name: Syncthing | Create configuration directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.local/state/syncthing"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+
+- name: Syncthing | Restore identity
+  ansible.builtin.copy:
+    content: "{{ item.content }}"
+    dest: "{{ user_home }}/.local/state/syncthing/{{ item.name }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - name: cert.pem
+      content: "{{ vault_syncthing_cert }}"
+      mode: "0640"
+    - name: key.pem
+      content: "{{ vault_syncthing_key }}"
+      mode: "0600"
+  loop_control:
+    label: "{{ item.name }}"
+  register: syncthing_identity
+  when:
+    - vault_syncthing_cert is defined
+    - vault_syncthing_key is defined
+  no_log: true
+
+- name: Syncthing | Enable and start service
   ansible.builtin.systemd_service:
     name: "syncthing@{{ user_name }}.service"
     enabled: true
-    state: started
+    state: "{{ 'restarted' if syncthing_identity.changed else 'started' }}"
+
+- name: Syncthing | Wait for initial configuration
+  ansible.builtin.wait_for:
+    path: "{{ user_home }}/.local/state/syncthing/config.xml"
+    state: present
+    timeout: 30
+
+- name: Syncthing | Read initial configuration
+  ansible.builtin.slurp:
+    src: "{{ user_home }}/.local/state/syncthing/config.xml"
+  register: syncthing_config_file
+  no_log: true
+
+- name: Syncthing | Extract API key
+  ansible.builtin.set_fact:
+    syncthing_api_key: >-
+      {{
+        syncthing_config_file.content
+        | b64decode
+        | regex_findall('<apikey>([^<]+)</apikey>')
+        | first
+      }}
+  no_log: true
+
+- name: Syncthing | Wait for REST API
+  ansible.builtin.uri:
+    url: http://127.0.0.1:8384/rest/noauth/health
+  register: syncthing_api_health
+  until: syncthing_api_health.status == 200
+  retries: 15
+  delay: 2
+
+- name: Syncthing | Configure devices
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:8384/rest/config/devices/{{ item.id }}"
+    method: PUT
+    headers:
+      X-API-Key: "{{ syncthing_api_key }}"
+    body_format: json
+    body:
+      deviceID: "{{ item.id }}"
+      name: "{{ item.name }}"
+      addresses:
+        - dynamic
+      compression: metadata
+      introducer: false
+      autoAcceptFolders: false
+      paused: false
+  loop: "{{ syncthing_devices }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Syncthing | Create shared folder directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "{{ item.mode | default('0755') }}"
+  loop: "{{ syncthing_folders }}"
+  loop_control:
+    label: "{{ item.label | default(item.id) }}"
+
+- name: Syncthing | Build folder device list
+  ansible.builtin.set_fact:
+    syncthing_folder_devices: >-
+      {%- set result = [] -%}
+      {%- for device in syncthing_devices -%}
+      {%- set _ = result.append({'deviceID': device.id}) -%}
+      {%- endfor -%}
+      {{ result }}
+
+- name: Syncthing | Configure shared folders
+  ansible.builtin.include_tasks: folder.yml
+  loop: "{{ syncthing_folders }}"
+  loop_control:
+    loop_var: syncthing_folder
+    label: "{{ syncthing_folder.label | default(syncthing_folder.id) }}"

@@ -4,3 +4,7 @@ enabled_features:
   - gaming
   - labs
   - vpn
+
+syncthing_devices:
+  - name: desktop
+    id: 2NICI3Y-ZURLXST-5S5VJMS-CADHSFI-PIUZNFA-4C4NBJX-6D7V6I6-HBQLGA7
