@@ -1,4 +1,12 @@
 ---
+- name: Gaming | Create games directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/Games"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
 - name: Gaming | Install packages
   ansible.builtin.include_role:
     name: lib/packages

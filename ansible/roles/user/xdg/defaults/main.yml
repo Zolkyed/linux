@@ -72,6 +72,3 @@ xdg_extra_directories:
   - Applications
   - Pictures/Screenshots
   - Pictures/mpv
-  - Games
-  - Games/ROMs
-  - Transfers
