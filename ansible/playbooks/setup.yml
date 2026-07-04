@@ -91,6 +91,8 @@
       tags: fonts
     - role: system/sshd
       tags: sshd
+    - role: system/cockpit
+      tags: cockpit
     - role: system/firewall
       tags: firewall
     - role: system/fail2ban

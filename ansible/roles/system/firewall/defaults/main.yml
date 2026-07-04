@@ -10,6 +10,7 @@ firewall_zone: public
 # Rules
 firewall_allowed_services:
   - ssh
+  - cockpit
   - kdeconnect
   - mdns
   - syncthing

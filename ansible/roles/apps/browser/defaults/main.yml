@@ -80,6 +80,8 @@ browser_bookmarks:
         url: https://www.protondb.com/explore
   - name: Local
     children:
+      - name: Cockpit
+        url: https://localhost:9090
       - name: Netdata
         url: http://localhost:19999
       - name: Syncthing
