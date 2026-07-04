@@ -11,10 +11,11 @@ downloader_aur_packages:
   - hexchat
 
 # Directory
-downloader_qbittorrent_complete_directory: "{{ user_home }}/Torrents/qBittorrent/Complete"
-downloader_qbittorrent_incomplete_directory: "{{ user_home }}/Torrents/qBittorrent/Incomplete"
-downloader_jdownloader_directory: "{{ user_home }}/Torrents/JDownloader"
-downloader_hexchat_directory: "{{ user_home }}/Torrents/HexChat"
+downloader_directory: "{{ user_home }}/Transfers"
+downloader_qbittorrent_complete_directory: "{{ downloader_directory }}/qBittorrent/Complete"
+downloader_qbittorrent_incomplete_directory: "{{ downloader_directory }}/qBittorrent/Incomplete"
+downloader_jdownloader_directory: "{{ downloader_directory }}/JDownloader"
+downloader_hexchat_directory: "{{ downloader_directory }}/HexChat"
 downloader_hexchat_complete_directory: "{{ downloader_hexchat_directory }}/Complete"
 downloader_hexchat_incomplete_directory: "{{ downloader_hexchat_directory }}/Incomplete"
 

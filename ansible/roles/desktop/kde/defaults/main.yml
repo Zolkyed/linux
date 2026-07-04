@@ -62,8 +62,8 @@ kde_dolphin_places:
   - title: Projects
     href: "file://{{ user_home }}/Projects"
     icon: folder
-  - title: Torrents
-    href: "file://{{ user_home }}/Torrents"
+  - title: Transfers
+    href: "file://{{ user_home }}/Transfers"
     icon: folder-downloads
   - title: Server
     href: "{{ kde_server_smb }}"

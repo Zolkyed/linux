@@ -49,8 +49,8 @@ gnome_nautilus_places:
     href: "file://{{ user_home }}/Games"
   - title: Projects
     href: "file://{{ user_home }}/Projects"
-  - title: Torrents
-    href: "file://{{ user_home }}/Torrents"
+  - title: Transfers
+    href: "file://{{ user_home }}/Transfers"
   - title: Server
     href: "{{ gnome_server_smb }}"
 
