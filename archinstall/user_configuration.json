@@ -17,7 +17,7 @@
   },
   "hostname": "archlinux",
   "kernels": [
-    "linux-zen",
+    "linux",
     "linux-lts"
   ],
   "locale_config": {
