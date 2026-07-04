@@ -3,3 +3,7 @@ cachyos_performance_pacman_packages:
   - cachyos-settings
   - linux-cachyos
   - linux-cachyos-headers
+
+cachyos_performance_removed_pacman_packages:
+  - linux
+  - linux-headers

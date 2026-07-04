@@ -5,3 +5,8 @@
   vars:
     install_label: CachyOS performance
     install_pacman_packages: "{{ cachyos_performance_pacman_packages }}"
+
+- name: CachyOS performance | Remove standard kernel and headers
+  community.general.pacman:
+    name: "{{ cachyos_performance_removed_pacman_packages }}"
+    state: absent
