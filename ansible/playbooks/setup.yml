@@ -54,7 +54,7 @@
       tags: pacman
     - role: system/rate_mirrors
       tags: rate_mirrors
-      when: os_is_arch
+      when: not os_is_cachyos
     - role: system/cachyos_repo
       tags: cachyos_repo
       when: not os_is_cachyos
