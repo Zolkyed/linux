@@ -41,28 +41,24 @@ xdg_media_player_desktop: mpv.desktop
 xdg_media_mime_types:
   - application/ogg
   - audio/aac
-  - audio/aiff
+  - audio/x-aiff
   - audio/flac
-  - audio/m4a
-  - audio/mp3
   - audio/mp4
   - audio/mpeg
   - audio/ogg
   - audio/opus
-  - audio/vorbis
+  - audio/x-vorbis+ogg
   - audio/wav
   - video/3gpp
-  - video/avi
-  - video/divx
-  - video/flv
+  - video/vnd.avi
+  - video/x-flv
   - video/mp2t
   - video/mp4
   - video/mpeg
   - video/ogg
   - video/quicktime
   - application/x-matroska
-  - video/x-matroska
-  - video/mkv
+  - video/matroska
   - video/webm
   - video/x-ogm+ogg
 
