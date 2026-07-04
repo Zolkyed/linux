@@ -58,6 +58,9 @@
     - role: system/cachyos_repo
       tags: cachyos_repo
       when: not os_is_cachyos
+    - role: system/cachyos_performance
+      tags: cachyos_performance
+      when: not os_is_cachyos
     - role: system/aur
       tags: aur
     - role: system/flatpak
