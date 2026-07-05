@@ -1,0 +1,28 @@
+---
+- name: GNOME | Create local extension directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.local/share/gnome-shell/extensions"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
+- name: GNOME | Install Toggle Favorite extension
+  ansible.builtin.copy:
+    src: extensions/toggle-favorite@charl/
+    dest: "{{ user_home }}/.local/share/gnome-shell/extensions/toggle-favorite@charl/"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: preserve
+
+- name: GNOME | Enable Toggle Favorite extension
+  ansible.builtin.command:
+    argv:
+      - gnome-extensions
+      - enable
+      - toggle-favorite@charl
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become_user: "{{ user_name }}"
+  changed_when: true
+  failed_when: false

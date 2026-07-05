@@ -1,0 +1,7 @@
+{
+  "name": "Toggle Favorite",
+  "description": "Minimize a favorite application when its shortcut is pressed while focused.",
+  "uuid": "toggle-favorite@charl",
+  "shell-version": ["50"],
+  "version": 1
+}

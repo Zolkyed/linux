@@ -13,5 +13,8 @@
 - name: GNOME | Configure input
   ansible.builtin.include_tasks: input.yml
 
+- name: GNOME | Configure extensions
+  ansible.builtin.include_tasks: extensions.yml
+
 - name: GNOME | Configure applications
   ansible.builtin.include_tasks: applications.yml
