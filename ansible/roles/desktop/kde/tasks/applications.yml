@@ -16,6 +16,14 @@
     mode: "0644"
     validate: xmllint --noout %s
 
+- name: KDE | Ensure local applications directory exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.local/share/applications"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
 - name: KDE | Deploy Spotify playlist launchers
   ansible.builtin.template:
     src: spotify-playlist.desktop.j2
