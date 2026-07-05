@@ -1,0 +1,49 @@
+---
+- name: Syncthing | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Syncthing
+    install_pacman_packages: "{{ syncthing_pacman_packages }}"
+
+- name: Syncthing | Create configuration directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.local/state/syncthing"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+
+- name: Syncthing | Restore identity
+  ansible.builtin.copy:
+    content: "{{ item.content }}"
+    dest: "{{ user_home }}/.local/state/syncthing/{{ item.name }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - name: cert.pem
+      content: "{{ vault_syncthing_cert }}"
+      mode: "0640"
+    - name: key.pem
+      content: "{{ vault_syncthing_key }}"
+      mode: "0600"
+  loop_control:
+    label: "{{ item.name }}"
+  register: syncthing_identity
+  when:
+    - vault_syncthing_cert is defined
+    - vault_syncthing_key is defined
+  no_log: true
+
+- name: Syncthing | Enable and start service
+  ansible.builtin.systemd_service:
+    name: "syncthing@{{ user_name }}.service"
+    enabled: true
+    state: "{{ 'restarted' if syncthing_identity.changed else 'started' }}"
+
+- name: Syncthing | Wait for initial configuration
+  ansible.builtin.wait_for:
+    path: "{{ user_home }}/.local/state/syncthing/config.xml"
+    state: present
+    timeout: 30
