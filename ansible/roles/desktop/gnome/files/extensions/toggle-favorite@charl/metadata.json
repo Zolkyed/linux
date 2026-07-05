@@ -1,7 +1,7 @@
 {
   "name": "Toggle Favorite",
-  "description": "Minimize a favorite application when its shortcut is pressed while focused.",
+  "description": "Toggle single-window favorites and cycle through grouped application windows.",
   "uuid": "toggle-favorite@charl",
   "shell-version": ["50"],
-  "version": 1
+  "version": 2
 }

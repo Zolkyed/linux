@@ -14,6 +14,7 @@ export default class ToggleFavoriteExtension extends Extension {
     enable() {
         this._settings = new Gio.Settings({schema_id: KEYBINDING_SCHEMA});
         this._stockHandler = Main.wm._switchToApplication.bind(Main.wm);
+        this._cycle = null;
 
         for (let index = 1; index <= KEYBINDING_COUNT; index++)
             this._addKeybinding(index, this._toggleFavorite.bind(this));
@@ -25,6 +26,7 @@ export default class ToggleFavoriteExtension extends Extension {
 
         this._stockHandler = null;
         this._settings = null;
+        this._cycle = null;
     }
 
     _addKeybinding(index, handler) {
@@ -43,14 +45,45 @@ export default class ToggleFavoriteExtension extends Extension {
     _toggleFavorite(display, window, event, binding) {
         const target = Number.parseInt(binding.get_name().split('-').at(-1), 10);
         const app = AppFavorites.getAppFavorites().getFavorites()[target - 1];
+
+        if (!app)
+            return;
+
+        const windows = app.get_windows();
         const focusedWindow = global.display.focus_window;
 
-        if (app && focusedWindow && app.get_windows().includes(focusedWindow)) {
-            Main.overview.hide();
-            focusedWindow.minimize();
-            return;
-        }
+        Main.overview.hide();
 
-        this._stockHandler(display, window, event, binding);
+        // A single-window app toggles like a taskbar button. For a grouped app,
+        // repeated presses cycle through its windows instead of minimizing one.
+        if (focusedWindow && windows.includes(focusedWindow)) {
+            if (windows.length === 1) {
+                focusedWindow.minimize();
+                this._cycle = null;
+                return;
+            }
+
+            const sameCycle = this._cycle?.app === app &&
+                this._cycle.windows.length === windows.length &&
+                this._cycle.windows.every(cycleWindow => windows.includes(cycleWindow)) &&
+                this._cycle.windows[this._cycle.index] === focusedWindow;
+
+            if (!sameCycle) {
+                this._cycle = {
+                    app,
+                    windows: [focusedWindow, ...windows.filter(appWindow => appWindow !== focusedWindow)],
+                    index: 0,
+                };
+            }
+
+            this._cycle.index = (this._cycle.index + 1) % this._cycle.windows.length;
+            Main.activateWindow(this._cycle.windows[this._cycle.index], event.get_time());
+        } else if (windows.length > 0) {
+            this._cycle = {app, windows: [...windows], index: 0};
+            Main.activateWindow(windows[0], event.get_time());
+        } else {
+            this._cycle = null;
+            app.activate_full(-1, event.get_time());
+        }
     }
 }
