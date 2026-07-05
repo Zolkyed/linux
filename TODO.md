@@ -1,2 +1,2 @@
 1. retroDeck
-3. Hyprland
+2. Hyprland

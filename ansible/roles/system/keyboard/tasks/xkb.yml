@@ -1,0 +1,27 @@
+---
+- name: Keyboard | Install programmer XKB symbols
+  ansible.builtin.copy:
+    src: us_programmer
+    dest: /usr/share/X11/xkb/symbols/us_programmer
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Keyboard | Register programmer XKB layout
+  community.general.xml:
+    path: /usr/share/X11/xkb/rules/evdev.xml
+    xpath: /xkbConfigRegistry/layoutList[not(layout/configItem/name='us_programmer')]
+    add_children:
+      - |
+        <layout>
+          <configItem>
+            <name>us_programmer</name>
+            <shortDescription>eng</shortDescription>
+            <description>English (US, Programmer)</description>
+            <languageList>
+              <iso639Id>eng</iso639Id>
+            </languageList>
+          </configItem>
+        </layout>
+    input_type: xml
+    pretty_print: true

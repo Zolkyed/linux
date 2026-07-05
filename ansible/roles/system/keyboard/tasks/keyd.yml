@@ -1,0 +1,39 @@
+---
+- name: Keyboard | Deploy keyd configuration
+  ansible.builtin.copy:
+    src: "{{ inventory_hostname }}/keyd.conf"
+    dest: /etc/keyd/default.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Keyboard | Restart keyd
+
+- name: Keyboard | Enable and start keyd
+  ansible.builtin.systemd_service:
+    name: keyd.service
+    enabled: true
+    state: started
+
+- name: Keyboard | Add user to keyd group
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    groups: keyd
+    append: true
+
+- name: Keyboard | Create user keyd config directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/keyd"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+  when: inventory_hostname == "desktop"
+
+- name: Keyboard | Configure application-specific mappings
+  ansible.builtin.copy:
+    src: desktop/keyd-app.conf
+    dest: "{{ user_home }}/.config/keyd/app.conf"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+  when: inventory_hostname == "desktop"
