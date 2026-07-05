@@ -32,6 +32,13 @@
         executable: /bin/bash
       changed_when: true
 
+    - name: CachyOS repo | Align installed packages with configured repositories
+      community.general.pacman:
+        update_cache: true
+        force: true
+        upgrade: true
+        upgrade_extra_args: --sysupgrade
+
   always:
     - name: CachyOS repo | Clean up installer files
       ansible.builtin.file:
