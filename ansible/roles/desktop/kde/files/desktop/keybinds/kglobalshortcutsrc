@@ -12,10 +12,10 @@ Walk Through Windows=Alt+Tab,Meta+Tab\tAlt+Tab,Walk Through Windows
 Walk Through Windows (Reverse)=Alt+Shift+Tab,Meta+Shift+Tab\tAlt+Shift+Tab,Walk Through Windows (Reverse)
 Window Quick Tile Left=none,Meta+Left,Quick Tile Window to the Left
 Window Quick Tile Right=none,Meta+Right,Quick Tile Window to the Right
-Window to Desktop 1=Meta+Shift+1,,Window to Desktop 1
-Window to Desktop 2=Meta+Shift+2,,Window to Desktop 2
-Window to Desktop 3=Meta+Shift+3,,Window to Desktop 3
-Window to Desktop 4=Meta+Shift+4,,Window to Desktop 4
+Window to Desktop 1=Meta+!,,Window to Desktop 1
+Window to Desktop 2=Meta+@,,Window to Desktop 2
+Window to Desktop 3=Meta+#,,Window to Desktop 3
+Window to Desktop 4=Meta+$,,Window to Desktop 4
 
 [ksmserver]
 Lock Session=Meta+L,Meta+L\tScreensaver,Lock Session
