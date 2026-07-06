@@ -33,6 +33,8 @@ maximize = true
 gtk-single-instance = true
 
 # Functionality
+# Use a terminal type that is available on remote hosts over SSH.
+term = xterm-256color
 scrollback-limit = 10000
 copy-on-select = true
 clipboard-trim-trailing-spaces = true
