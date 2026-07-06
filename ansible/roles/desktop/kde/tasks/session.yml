@@ -1,0 +1,11 @@
+---
+- name: KDE | Start with an empty session
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/ksmserverrc"
+    values:
+      - group: General
+        key: loginMode
+        value: "{{ kde_login_session_mode }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

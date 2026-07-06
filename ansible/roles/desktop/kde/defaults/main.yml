@@ -31,6 +31,9 @@ kde_keyboard_display_name: us_programmer
 # Workspaces
 kde_workspace_count: 4
 
+# Session
+kde_login_session_mode: emptySession
+
 # Notifications
 kde_status_osd_enabled: false
 kde_volume_step: 10

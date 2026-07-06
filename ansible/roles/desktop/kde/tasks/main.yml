@@ -19,5 +19,8 @@
 - name: KDE | Configure workspaces
   ansible.builtin.include_tasks: workspaces.yml
 
+- name: KDE | Configure session
+  ansible.builtin.include_tasks: session.yml
+
 - name: KDE | Configure audio
   ansible.builtin.include_tasks: audio.yml
