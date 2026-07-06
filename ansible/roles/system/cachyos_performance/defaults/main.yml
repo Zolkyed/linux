@@ -1,5 +1,7 @@
 ---
 cachyos_performance_pacman_packages:
+  # Settings
   - cachyos-settings
+  # Kernel
   - linux-cachyos
   - linux-cachyos-headers
