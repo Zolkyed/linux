@@ -3,6 +3,7 @@ set shell := ["bash", "-cu"]
 ANSIBLE_DIR          := "ansible"
 ANSIBLE_CONFIG       := "ansible/ansible.cfg"
 ANSIBLE_LINT_CONFIG  := "ansible/.ansible-lint.yml"
+ANSIBLE_LOG          := "ansible/.ansible/logs/ansible.log"
 ANSIBLE_ROLES_PATH   := "ansible/roles"
 LOCAL_INVENTORY      := "inventory/local.yml"
 SSH_INVENTORY        := "inventory/ssh.yml"
@@ -17,6 +18,9 @@ YAMLLINT_CONFIG      := ".yamllint"
 default:
     @just --list
 
+_clear-log:
+    @: > {{ANSIBLE_LOG}}
+
 # Show the Ansible banner.
 banner:
     @[[ -t 1 ]] && clear || true
@@ -29,23 +33,23 @@ banner:
         '╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝'
 
 # Apply the setup playbook to this host, optionally limited by tags.
-setup-local tags="": banner
+setup-local tags="": banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{HOSTNAME}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
 # Apply the setup playbook over SSH, optionally limited by tags.
-setup-ssh host=`hostname -s` tags="": banner
+setup-ssh host=`hostname -s` tags="": banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{host}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
 # Apply chezmoi-managed dotfiles to this host.
-dotfiles: banner
+dotfiles: banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} -v --diff
 
 # Preview chezmoi-managed dotfile changes.
-dotfiles-check:
+dotfiles-check: _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} --check --diff
 
 # Run the update playbook for this host.
-update: banner
+update: banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{UPDATE_PLAYBOOK}} -l {{HOSTNAME}} -v
 
 # Run every local validation check.
@@ -56,5 +60,5 @@ check: syntax
     ANSIBLE_CONFIG={{ANSIBLE_CONFIG}} ANSIBLE_ROLES_PATH={{ANSIBLE_ROLES_PATH}} ansible-lint -c {{ANSIBLE_LINT_CONFIG}} {{ANSIBLE_DIR}}
 
 # Syntax-check all playbooks.
-syntax:
+syntax: _clear-log
     cd {{ANSIBLE_DIR}} && for playbook in {{PLAYBOOKS}}; do ansible-playbook --syntax-check -i {{LOCAL_INVENTORY}} "$playbook"; done
