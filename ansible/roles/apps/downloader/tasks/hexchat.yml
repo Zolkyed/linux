@@ -23,7 +23,7 @@
     group: "{{ user_name }}"
     mode: "0600"
 
-- name: Downloader | Configure HexChat file transfers
+- name: Downloader | Configure HexChat preferences
   ansible.builtin.lineinfile:
     path: "{{ downloader_hexchat_conf_path }}"
     regexp: "^{{ item.key }} ="
@@ -43,5 +43,7 @@
       value: "0"
     - key: gui_autoopen_send
       value: "0"
+    - key: gui_slist_skip
+      value: "1"
   loop_control:
     label: "{{ item.key }}"
