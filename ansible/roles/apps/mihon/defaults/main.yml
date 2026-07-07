@@ -1,5 +1,6 @@
 ---
 # Paths
+# https://nicolasfella.de/posts/fixing-wayland-taskbar-icons/
 mihon_desktop_dest: "{{ user_home }}/.local/share/applications/brave-mihon.org__-Default.desktop"
 mihon_icon_dest: "{{ user_home }}/.local/share/icons/mihon.png"
 mihon_icon_src: mihon.png
