@@ -46,7 +46,7 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | Global Theme | [Catppuccin Mocha Lavender](https://github.com/catppuccin/kde) |
 | Colors | Catppuccin Mocha Lavender |
 | Application Style | [Klassy](https://github.com/paulmcauley/klassy) |
-| Plasma Style | Breeze |
+| Plasma Style | Darkly |
 | Window Decorations | [Klassy](https://github.com/paulmcauley/klassy) |
 | Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders) |
 | Cursors | Breeze Dark |
