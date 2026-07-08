@@ -1,6 +1,7 @@
 [/]
 calculator=['Calculator']
 home=['<Super>e']
+logout=@as []
 screensaver=['<Super>l']
 screen-brightness-up=['XF86MonBrightnessUp', 'KP_Add']
 screen-brightness-down=['XF86MonBrightnessDown', 'KP_Subtract']

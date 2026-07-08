@@ -9,6 +9,7 @@ kde_pacman_packages:
   - kcalc
   - kdeconnect
   - ffmpegthumbs
+  - plasma-systemmonitor
 
   # Icon theme
   - papirus-icon-theme

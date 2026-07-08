@@ -5,6 +5,7 @@ gnome_pacman_packages:
   - ghostty
   - gnome-shell-extension-dash-to-panel
   - gnome-shell-extensions
+  - gnome-system-monitor
 
   # Icon theme
   - papirus-icon-theme
@@ -30,6 +31,8 @@ gnome_code_command: code
 gnome_code_keybinding: <Super>c
 gnome_terminal_command: ghostty
 gnome_terminal_keybinding: <Super>t
+gnome_system_monitor_command: gnome-system-monitor
+gnome_system_monitor_keybinding: <Control><Alt>Delete
 
 # Spotify
 gnome_spotify_manga_uri: spotify:playlist:6qhXWOPKB8o9xM1zRMLiJn

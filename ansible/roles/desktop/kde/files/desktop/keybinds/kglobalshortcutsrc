@@ -19,6 +19,7 @@ Window to Desktop 4=Meta+$,,Window to Desktop 4
 
 [ksmserver]
 Lock Session=Meta+L,Meta+L\tScreensaver,Lock Session
+Log Out=none,Ctrl+Alt+Del,Show Logout Screen
 
 [kmix]
 decrease_volume=Volume Down\tEnd,Volume Down,Decrease Volume
@@ -54,6 +55,9 @@ _launch=Meta+E
 
 [services][org.kde.kcalc.desktop]
 _launch=Calculator
+
+[services][org.kde.plasma-systemmonitor.desktop]
+_launch=Ctrl+Alt+Del
 
 [services][org.kde.spectacle.desktop]
 ActiveWindowScreenShot=Print

@@ -33,6 +33,7 @@
         ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/',
         '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/',
         '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/',
         '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/',
         '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/',
         '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/',
@@ -55,6 +56,12 @@
       value: "'{{ gnome_terminal_command }}'"
     - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/binding
       value: "'{{ gnome_terminal_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/name
+      value: "'System Monitor'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/command
+      value: "'{{ gnome_system_monitor_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/binding
+      value: "'{{ gnome_system_monitor_keybinding }}'"
     - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/name
       value: "'Spotify - Manga'"
     - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/command
