@@ -34,6 +34,7 @@ This is my personal Linux configuration. The setup is a bit of a Frankenstein's 
 - [agridyne's dotfiles-dt](https://github.com/agridyne/dotfiles-dt)
 - [prathmesh0077's dotfiles](https://github.com/prathmesh0077)
 - [neuromask's Catppuccin Linux Theme](https://github.com/neuromask/catppuccin-linux-theme)
+- [keenanweaver's Nix configuration](https://github.com/keenanweaver/nix-config)
 
 Many of the configs are also slightly tweaked versions from the official [Catppuccin](https://catppuccin.com/) repositories.
 
@@ -54,6 +55,12 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | Splash Screen | Rem |
 | Video Wallpaper (Lock Screen) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
 | Video Wallpaper (Desktop) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
+
+**Widgets**:
+
+| Widget | Purpose |
+| --- | --- |
+| [Compact Pager](https://github.com/tilorenz/compact_pager) | Switch between virtual desktops |
 
 ### GNOME Settings
 
