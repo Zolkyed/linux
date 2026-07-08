@@ -35,6 +35,10 @@ kde_workspace_count: 4
 # Session
 kde_login_session_mode: emptySession
 
+# Power
+kde_ac_auto_suspend_action: 0
+kde_ac_display_idle_timeout: 900
+
 # Notifications
 kde_status_osd_enabled: false
 kde_volume_step: 10

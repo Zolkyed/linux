@@ -22,5 +22,8 @@
 - name: KDE | Configure session
   ansible.builtin.include_tasks: session.yml
 
+- name: KDE | Configure power management
+  ansible.builtin.include_tasks: power.yml
+
 - name: KDE | Configure audio
   ansible.builtin.include_tasks: audio.yml

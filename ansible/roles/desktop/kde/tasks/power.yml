@@ -1,0 +1,18 @@
+---
+- name: KDE | Configure AC power management
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/powerdevilrc"
+    values:
+      - groups:
+          - AC
+          - SuspendAndShutdown
+        key: AutoSuspendAction
+        value: "{{ kde_ac_auto_suspend_action | string }}"
+      - groups:
+          - AC
+          - Display
+        key: TurnOffDisplayIdleTimeoutSec
+        value: "{{ kde_ac_display_idle_timeout | string }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
