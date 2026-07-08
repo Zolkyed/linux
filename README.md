@@ -50,9 +50,10 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | Window Decorations | [Klassy](https://github.com/paulmcauley/klassy) |
 | Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders) |
 | Cursors | Breeze Dark |
-| Login Screen (SDDM) | [SDDM Astronaut Theme](https://github.com/Keyitdev/sddm-astronaut-theme) — Hyprland Kath |
-| Splash Screen | None |
-| Video Wallpaper (Desktop & Lock Screen) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
+| Login Screen (SDDM) | Image of the Wallpaper |
+| Splash Screen | Rem |
+| Video Wallpaper (Lock Screen) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
+| Video Wallpaper (Desktop) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
 
 ### GNOME Settings
 
