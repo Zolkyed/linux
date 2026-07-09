@@ -101,9 +101,3 @@ gnome_dconf_settings:
   # Sound
   - key: /org/gnome/settings-daemon/plugins/media-keys/volume-step
     value: "10"
-
-# Keybindings
-gnome_keybinding_paths:
-  media-keys: /org/gnome/settings-daemon/plugins/media-keys/
-  wm-keybindings: /org/gnome/desktop/wm/keybindings/
-  shell-keybindings: /org/gnome/shell/keybindings/
