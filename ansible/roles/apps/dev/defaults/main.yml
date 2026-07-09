@@ -49,6 +49,7 @@ dev_pacman_packages:
 
   # Cloud
   - terraform
+  - opentofu
   - aws-cli-v2
 
 dev_uv_tools: []
