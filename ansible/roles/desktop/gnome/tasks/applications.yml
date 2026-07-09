@@ -1,7 +1,7 @@
 ---
 - name: GNOME | Ensure local data directory exists
   ansible.builtin.file:
-    path: "{{ gnome_nautilus_places_file | dirname }}"
+    path: "{{ user_home }}/.config/gtk-3.0"
     state: directory
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
@@ -10,7 +10,7 @@
 - name: GNOME | Deploy Nautilus places
   ansible.builtin.template:
     src: bookmarks.j2
-    dest: "{{ gnome_nautilus_places_file }}"
+    dest: "{{ user_home }}/.config/gtk-3.0/bookmarks"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: "0644"

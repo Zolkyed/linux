@@ -42,7 +42,6 @@ gnome_spotify_extra_uri: spotify:playlist:1bFImNx4XN90RHyfdiedlU
 gnome_button_layout: ":minimize,maximize,close"
 
 # Nautilus
-gnome_nautilus_places_file: "{{ user_home }}/.config/gtk-3.0/bookmarks"
 gnome_server_smb: "smb://192.168.2.36/"
 
 gnome_nautilus_places:
