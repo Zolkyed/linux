@@ -4,12 +4,12 @@
     argv:
       - dconf
       - load
-      - "{{ keybinding_paths[item | basename | replace('.dconf', '')] }}"
+      - "{{ keybinding_paths[item | basename | regex_replace('\\.dconf$', '')] }}"
     stdin: "{{ lookup('file', item) }}"
   environment:
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
   become_user: "{{ user_name }}"
-  with_fileglob: "{{ inventory_hostname }}/keybinds/*.dconf"
+  loop: "{{ query('fileglob', inventory_hostname ~ '/keybinds/*.dconf') }}"
   loop_control:
     label: "{{ item | basename }}"
   changed_when: true
