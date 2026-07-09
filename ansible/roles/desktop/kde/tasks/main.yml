@@ -16,6 +16,9 @@
 - name: KDE | Configure feedback
   ansible.builtin.include_tasks: feedback.yml
 
+- name: KDE | Configure system tray
+  ansible.builtin.include_tasks: system_tray.yml
+
 - name: KDE | Configure workspaces
   ansible.builtin.include_tasks: workspaces.yml
 
