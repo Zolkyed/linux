@@ -97,6 +97,8 @@ gnome_dconf_settings:
   # Privacy
   - key: /org/gnome/desktop/privacy/remember-recent-files
     value: "false"
+  - key: /org/gnome/desktop/privacy/recent-files-max-age
+    value: "0"
 
   # Sound
   - key: /org/gnome/settings-daemon/plugins/media-keys/volume-step
