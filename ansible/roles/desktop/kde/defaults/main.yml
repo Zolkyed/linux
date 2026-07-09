@@ -54,6 +54,7 @@ kde_system_tray_hidden_items:
   - org.kde.plasma.bluetooth
   - org.kde.plasma.cameraindicator
   - org.kde.plasma.clipboard
+  - org.kde.discover.notifier
   - org.kde.plasma.devicenotifier
   - org.kde.plasma.keyboardindicator
   - org.kde.plasma.keyboardlayout

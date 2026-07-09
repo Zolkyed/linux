@@ -1,34 +1,24 @@
 ---
-- name: KDE | Locate system tray applet IDs
-  ansible.builtin.command:
-    argv:
-      - awk
-      - >-
-        /^\[Containments\]\[[0-9]+\]\[Applets\]\[[0-9]+\]$/ {
-          group=$0;
-          sub(/^\[Containments\]\[/, "", group);
-          sub(/\]\[Applets\]\[/, " ", group);
-          sub(/\]$/, "", group);
-          ids=group;
-          next;
-        }
-        /^plugin=org\.kde\.plasma\.systemtray$/ {
-          print ids;
-          exit;
-        }
-      - "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-  register: kde_system_tray_ids
-  changed_when: false
+- name: KDE | Read Plasma applets config
+  ansible.builtin.slurp:
+    src: "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+  register: kde_plasma_applets_config
   failed_when: false
+  no_log: true
 
-- name: KDE | Remove malformed escaped system tray group
-  ansible.builtin.replace:
-    path: "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-    regexp: '\n?\[Containments\\x5d\\x5b[^\n]*Applets[^\n]*General[^\n]*\]\nhiddenItems=.*\n'
-    replace: "\n"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    mode: "0644"
+- name: KDE | Locate system tray applet IDs
+  ansible.builtin.set_fact:
+    kde_system_tray_ids: >-
+      {{
+        (
+          kde_plasma_applets_config.content
+          | default('')
+          | b64decode
+          | regex_findall('(?ms)^\[Containments\]\[(\d+)\]\[Applets\]\[(\d+)\]\n(?:(?!^\[).)*?^plugin=org\.kde\.plasma\.systemtray$')
+          | first
+          | default([])
+        )
+      }}
 
 - name: KDE | Read hidden system tray items
   ansible.builtin.command:
@@ -39,11 +29,11 @@
       - --group
       - Containments
       - --group
-      - "{{ kde_system_tray_ids.stdout.split()[0] }}"
+      - "{{ kde_system_tray_ids[0] }}"
       - --group
       - Applets
       - --group
-      - "{{ kde_system_tray_ids.stdout.split()[1] }}"
+      - "{{ kde_system_tray_ids[1] }}"
       - --group
       - General
       - --key
@@ -56,7 +46,7 @@
   failed_when: false
   when:
     - kde_system_tray_hidden_items | length > 0
-    - kde_system_tray_ids.stdout.split() | length == 2
+    - kde_system_tray_ids | length == 2
 
 - name: KDE | Configure hidden system tray items
   ansible.builtin.command:
@@ -67,11 +57,11 @@
       - --group
       - Containments
       - --group
-      - "{{ kde_system_tray_ids.stdout.split()[0] }}"
+      - "{{ kde_system_tray_ids[0] }}"
       - --group
       - Applets
       - --group
-      - "{{ kde_system_tray_ids.stdout.split()[1] }}"
+      - "{{ kde_system_tray_ids[1] }}"
       - --group
       - General
       - --key
@@ -82,7 +72,7 @@
     HOME: "{{ user_home }}"
   when:
     - kde_system_tray_hidden_items | length > 0
-    - kde_system_tray_ids.stdout.split() | length == 2
+    - kde_system_tray_ids | length == 2
     - kde_system_tray_current_hidden_items.stdout | default('') != kde_system_tray_hidden_items | join(',')
 
 - name: KDE | Ensure system tray config ownership
@@ -93,4 +83,4 @@
     mode: "0644"
   when:
     - kde_system_tray_hidden_items | length > 0
-    - kde_system_tray_ids.stdout.split() | length == 2
+    - kde_system_tray_ids | length == 2
