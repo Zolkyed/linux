@@ -64,6 +64,8 @@ gnome_dconf_settings:
     value: "[('xkb', 'us_programmer')]"
   - key: /org/gnome/desktop/peripherals/touchpad/click-method
     value: "'areas'"
+  - key: /org/gnome/desktop/peripherals/mouse/accel-profile
+    value: "'flat'"
 
   # Workspaces
   - key: /org/gnome/mutter/dynamic-workspaces
@@ -80,6 +82,8 @@ gnome_dconf_settings:
     value: "'{{ gnome_button_layout }}'"
   - key: /org/gnome/desktop/interface/enable-hot-corners
     value: "false"
+  - key: /org/gnome/mutter/center-new-windows
+    value: "true"
   - key: /org/gnome/mutter/keybindings/toggle-tiled-left
     value: "@as []"
   - key: /org/gnome/mutter/keybindings/toggle-tiled-right
