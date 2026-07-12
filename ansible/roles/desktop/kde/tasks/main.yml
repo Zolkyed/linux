@@ -13,6 +13,9 @@
 - name: KDE | Configure applications
   ansible.builtin.include_tasks: applications.yml
 
+- name: KDE | Configure Spectacle
+  ansible.builtin.include_tasks: spectacle.yml
+
 - name: KDE | Configure feedback
   ansible.builtin.include_tasks: feedback.yml
 
