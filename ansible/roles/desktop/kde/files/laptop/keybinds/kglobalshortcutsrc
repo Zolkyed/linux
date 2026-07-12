@@ -53,6 +53,9 @@ _launch=Meta+E
 [services][org.kde.kcalc.desktop]
 _launch=none
 
+[services][org.kde.konsole.desktop]
+_launch=none
+
 [services][org.kde.plasma-systemmonitor.desktop]
 _launch=Ctrl+Alt+Del
 

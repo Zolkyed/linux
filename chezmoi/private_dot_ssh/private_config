@@ -11,6 +11,7 @@ Host desktop
     HostName desktop.local
     User charl
     IdentityFile ~/.ssh/id_ed25519
+    CheckHostIP no
 
 Host laptop
     HostName laptop.local
