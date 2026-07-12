@@ -16,5 +16,10 @@
       value: "{{ downloader_qbittorrent_incomplete_directory }}/"
     - option: 'Session\TempPathEnabled'
       value: "true"
+    - option: 'Session\GlobalMaxSeedingMinutes'
+      value: "{{ downloader_qbittorrent_max_seeding_minutes }}"
+    # Remove the completed torrent from qBittorrent without deleting its content.
+    - option: 'Session\ShareLimitAction'
+      value: Remove
   loop_control:
     label: "{{ item.option }}"
