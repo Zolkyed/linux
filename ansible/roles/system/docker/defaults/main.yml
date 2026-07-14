@@ -3,6 +3,9 @@
 docker_retries: 3
 docker_retry_delay: 15
 
+docker_daemon_config:
+  ip-forward-no-drop: true
+
 # Images
 docker_netdata_image: netdata/netdata:stable
 

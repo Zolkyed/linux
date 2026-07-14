@@ -19,6 +19,10 @@
     enabled: true
     state: started
 
+- name: Firewall | Allow IP forwarding
+  ansible.builtin.command: iptables -P FORWARD ACCEPT
+  changed_when: false
+
 - name: Firewall | Allow services
   ansible.posix.firewalld:
     service: "{{ item }}"
