@@ -9,7 +9,7 @@ downloader_aur_packages:
   # Download manager
   - jdownloader2
   # Image gallery downloader
-  - gallery-dl
+  - gallery-dl-bin
   - hexchat
 
 # Directory
