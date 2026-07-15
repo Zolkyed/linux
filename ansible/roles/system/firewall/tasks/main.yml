@@ -19,9 +19,11 @@
     enabled: true
     state: started
 
-- name: Firewall | Allow IP forwarding
-  ansible.builtin.command: iptables -P FORWARD ACCEPT
-  changed_when: false
+- name: Firewall | Allow forwarding through iptables compatibility chain
+  ansible.builtin.iptables:
+    table: filter
+    chain: FORWARD
+    policy: ACCEPT
 
 - name: Firewall | Allow services
   ansible.posix.firewalld:
