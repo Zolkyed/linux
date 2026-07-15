@@ -1,2 +1,8 @@
-# Save downloaded media in the shared downloader directory.
+# Downloads
 --paths ~/Transfers/yt-dlp
+--output "%(title)s [%(id)s].%(ext)s"
+
+# Metadata and cover art
+--embed-metadata
+--embed-thumbnail
+--convert-thumbnails jpg
