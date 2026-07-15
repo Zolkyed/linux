@@ -8,10 +8,14 @@ downloader_pacman_packages:
 downloader_aur_packages:
   # Download manager
   - jdownloader2
+  # Image gallery downloader
+  - gallery-dl
   - hexchat
 
 # Directory
 downloader_directory: "{{ user_home }}/Transfers"
+downloader_gallerydl_directory: "{{ downloader_directory }}/gallery-dl"
+downloader_gallerydl_state_directory: "{{ user_home }}/.local/state/gallery-dl"
 downloader_ytdlp_directory: "{{ downloader_directory }}/yt-dlp"
 downloader_qbittorrent_complete_directory: "{{ downloader_directory }}/qBittorrent/Complete"
 downloader_qbittorrent_incomplete_directory: "{{ downloader_directory }}/qBittorrent/Incomplete"

@@ -15,6 +15,8 @@
     group: "{{ user_name }}"
     mode: "0755"
   loop:
+    - "{{ downloader_gallerydl_directory }}"
+    - "{{ downloader_gallerydl_state_directory }}"
     - "{{ downloader_ytdlp_directory }}"
     - "{{ downloader_qbittorrent_complete_directory }}"
     - "{{ downloader_qbittorrent_incomplete_directory }}"
