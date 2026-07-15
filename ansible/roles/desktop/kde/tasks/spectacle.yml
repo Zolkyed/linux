@@ -6,6 +6,9 @@
       - group: General
         key: clipboardGroup
         value: PostScreenshotCopyImage
+      - group: General
+        key: defaultSaveLocation
+        value: "file://{{ user_home }}/Pictures/Screenshots"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: "0644"
