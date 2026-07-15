@@ -78,7 +78,6 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | [User Themes](https://gitlab.gnome.org/GNOME/gnome-shell-extensions) | Load shell themes from the user directory |
 | [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel) | Panel and taskbar |
 | [Space Bar](https://github.com/christopher-l/space-bar) | Workspace indicator in the top bar |
-| [Blur My Shell](https://github.com/aunetx/blur-my-shell) | Blur effects |
 | [Caffeine](https://github.com/eonpatapon/gnome-shell-extension-caffeine) | Prevent sleep |
 | [Vitals](https://github.com/corecoding/Vitals) | System monitor |
 | [Start Overlay in Application View](https://extensions.gnome.org/extension/5040/start-overlay-in-application-view/) | Open the application grid with a single press of the Super key |
