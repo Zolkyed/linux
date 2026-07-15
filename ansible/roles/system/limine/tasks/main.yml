@@ -48,3 +48,6 @@
     group: root
     mode: "0644"
   notify: Limine | Update configuration
+
+- name: Limine | Apply pending bootloader changes
+  ansible.builtin.meta: flush_handlers

@@ -35,3 +35,6 @@
     replace: ''
   when: limine_config.stat.exists
   notify: Plymouth | Update Limine
+
+- name: Plymouth | Apply pending boot changes
+  ansible.builtin.meta: flush_handlers
