@@ -72,3 +72,4 @@ xdg_extra_directories:
   - Applications
   - Pictures/Screenshots
   - Pictures/mpv
+  - Videos/Screencasts

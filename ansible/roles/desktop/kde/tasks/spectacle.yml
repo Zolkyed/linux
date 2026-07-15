@@ -6,9 +6,12 @@
       - group: General
         key: clipboardGroup
         value: PostScreenshotCopyImage
-      - group: General
-        key: defaultSaveLocation
+      - group: ImageSave
+        key: imageSaveLocation
         value: "file://{{ user_home }}/Pictures/Screenshots"
+      - group: VideoSave
+        key: translatedScreencastsFolder
+        value: Screencasts
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: "0644"
