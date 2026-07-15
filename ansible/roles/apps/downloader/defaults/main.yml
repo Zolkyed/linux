@@ -12,6 +12,7 @@ downloader_aur_packages:
 
 # Directory
 downloader_directory: "{{ user_home }}/Transfers"
+downloader_ytdlp_directory: "{{ downloader_directory }}/yt-dlp"
 downloader_qbittorrent_complete_directory: "{{ downloader_directory }}/qBittorrent/Complete"
 downloader_qbittorrent_incomplete_directory: "{{ downloader_directory }}/qBittorrent/Incomplete"
 downloader_qbittorrent_max_seeding_minutes: 0

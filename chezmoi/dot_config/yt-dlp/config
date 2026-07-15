@@ -1,0 +1,2 @@
+# Save downloaded media in the shared downloader directory.
+--paths ~/Transfers/yt-dlp
