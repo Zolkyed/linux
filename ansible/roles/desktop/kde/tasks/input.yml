@@ -22,3 +22,14 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: "0644"
+
+- name: KDE | Configure middle-click paste
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/kwinrc"
+    values:
+      - group: Wayland
+        key: EnablePrimarySelection
+        bool_value: "{{ kde_middle_click_paste_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

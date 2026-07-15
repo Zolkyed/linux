@@ -27,6 +27,7 @@ kde_aur_packages:
 kde_cursor_launch_feedback_enabled: false
 kde_shake_cursor_enabled: false
 kde_overview_screen_edge: 9
+kde_middle_click_paste_enabled: false
 kde_keyboard_layout: us_programmer
 kde_keyboard_display_name: us_programmer
 
