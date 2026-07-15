@@ -6,6 +6,7 @@
     install_label: Downloader
     install_pacman_packages: "{{ downloader_pacman_packages }}"
     install_aur_packages: "{{ downloader_aur_packages }}"
+    install_uv_tools: "{{ downloader_uv_tools }}"
 
 - name: Downloader | Create directories
   ansible.builtin.file:

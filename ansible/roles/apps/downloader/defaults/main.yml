@@ -8,9 +8,11 @@ downloader_pacman_packages:
 downloader_aur_packages:
   # Download manager
   - jdownloader2
+  - hexchat
+
+downloader_uv_tools:
   # Image gallery downloader
   - gallery-dl
-  - hexchat
 
 # Directory
 downloader_directory: "{{ user_home }}/Transfers"
