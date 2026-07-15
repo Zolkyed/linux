@@ -17,6 +17,9 @@ gnome_pacman_packages:
   - python-psutil
 
 gnome_aur_packages:
+  # Icon theme lavender
+  - papirus-folders-catppuccin-git
+
   # GNOME Extensions
   - gnome-shell-extension-hanabi-git
   - gnome-shell-extension-just-perfection-desktop

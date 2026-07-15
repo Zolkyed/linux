@@ -49,7 +49,7 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | Application Style | [Klassy](https://github.com/paulmcauley/klassy) |
 | Plasma Style | Darkly |
 | Window Decorations | [Klassy](https://github.com/paulmcauley/klassy) |
-| Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders) |
+| Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders)<br>`papirus-folders -C cat-mocha-lavender --theme Papirus-Dark` |
 | Cursors | Breeze Dark |
 | Login Screen (SDDM) | Image of the Wallpaper |
 | Splash Screen | Rem |
@@ -66,8 +66,8 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 
 | Setting | Value |
 | --- | --- |
-| Shell Theme | [Catppuccin GTK Theme](https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme) ([apply via GNOME Tweaks](https://docs.rockylinux.org/desktop/gnome/gnome-tweaks/), [Flatpak guide](https://itsfoss.com/flatpak-app-apply-theme/)) |
-| Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders) |
+| Shell Theme | [Catppuccin GTK Theme](https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme)<br>`./install.sh --libadwaita --tweaks files-legacy -a lavender` |
+| Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders)<br>`papirus-folders -C cat-mocha-lavender --theme Papirus-Dark` |
 | Video Wallpaper (Desktop & Lock Screen) | [Hanabi](https://github.com/jeffshee/gnome-ext-hanabi) |
 
 **Extensions** (managed with Extension Manager):

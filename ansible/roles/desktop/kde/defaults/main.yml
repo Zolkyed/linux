@@ -18,6 +18,8 @@ kde_pacman_packages:
   - kconfig
 
 kde_aur_packages:
+  # Icon theme lavender
+  - papirus-folders-catppuccin-git
   # Theme
   - klassy
   # Wallpaper
