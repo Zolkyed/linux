@@ -9,8 +9,7 @@ LOCAL_INVENTORY      := "inventory/local.yml"
 SSH_INVENTORY        := "inventory/ssh.yml"
 DOTFILES_PLAYBOOK    := "playbooks/dotfiles.yml"
 SETUP_PLAYBOOK       := "playbooks/setup.yml"
-UPDATE_PLAYBOOK      := "playbooks/update.yml"
-PLAYBOOKS            := SETUP_PLAYBOOK + " " + DOTFILES_PLAYBOOK + " " + UPDATE_PLAYBOOK
+PLAYBOOKS            := SETUP_PLAYBOOK + " " + DOTFILES_PLAYBOOK
 HOSTNAME             := `hostname -s`
 YAMLLINT_CONFIG      := ".yamllint"
 
@@ -47,10 +46,6 @@ dotfiles: banner _clear-log
 # Preview chezmoi-managed dotfile changes.
 dotfiles-check: _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} --check --diff
-
-# Run the update playbook for this host.
-update: banner _clear-log
-    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{UPDATE_PLAYBOOK}} -l {{HOSTNAME}} -v
 
 # Run every local validation check.
 check: syntax
