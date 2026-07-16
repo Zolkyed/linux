@@ -5,28 +5,6 @@
   gather_facts: true
 
   pre_tasks:
-    - name: Setup | Create pre-run snapshot
-      tags: always
-      ansible.builtin.import_role:
-        name: lib/snapshot
-      vars:
-        snapshot_action: pre
-        snapshot_description: "pre ansible: {{ ansible_run_tags | join(',') }}"
-
-    - name: Setup | Load shared secrets
-      tags: always
-      community.sops.load_vars:
-        file: "{{ playbook_dir }}/../inventory/group_vars/vault.yml"
-      become: false
-      no_log: true
-
-    - name: Setup | Load host secrets
-      tags: always
-      community.sops.load_vars:
-        file: "{{ playbook_dir }}/../inventory/host_vars/{{ inventory_hostname }}/vault.yml"
-      become: false
-      no_log: true
-
     - name: Setup | Detect OS variant
       tags: always
       ansible.builtin.import_role:
@@ -182,12 +160,3 @@
       tags: xdg
     - role: user/dotfiles
       tags: dotfiles
-
-  post_tasks:
-    - name: Setup | Create post-run snapshot
-      tags: always
-      ansible.builtin.import_role:
-        name: lib/snapshot
-      vars:
-        snapshot_action: post
-        snapshot_description: "post ansible: {{ ansible_run_tags | join(',') }}"

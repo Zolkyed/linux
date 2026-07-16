@@ -57,7 +57,7 @@ readonly ACTION
 
 mapfile -t VAULT_FILES < <(
   cd "$REPO_ROOT"
-  find ansible/inventory -type f -name vault.yml | sort
+  find ansible/inventory -type f -name '*.sops.yml' | sort
 )
 
 [[ "${#VAULT_FILES[@]}" -gt 0 ]] || {
