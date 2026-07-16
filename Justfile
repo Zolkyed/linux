@@ -37,7 +37,7 @@ setup-local tags="": banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{HOSTNAME}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
 # Apply the setup playbook over SSH, optionally limited by tags.
-setup-ssh host=`hostname -s` tags="": banner _clear-log
+setup-remote host=`hostname -s` tags="": banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{host}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
 # Apply chezmoi-managed dotfiles to this host.
