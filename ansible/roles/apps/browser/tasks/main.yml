@@ -41,6 +41,16 @@
     group: "{{ user_name }}"
     mode: "0644"
 
+- name: Browser | Configure Brave flags
+  ansible.builtin.blockinfile:
+    path: "{{ browser_flags_file }}"
+    marker: "# {mark} ANSIBLE MANAGED BRAVE FLAGS"
+    block: "{{ browser_flags | join('\n') }}"
+    create: true
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
 - name: Browser | Ensure managed policy directory exists
   ansible.builtin.file:
     path: "{{ browser_policy_dir }}"
