@@ -6,6 +6,7 @@ autoconnect=false
 
 [wireguard]
 private-key={{ vault_wg_private_key }}
+private-key-flags=0
 
 [wireguard-peer.{{ vpn_peer_public_key }}]
 endpoint={{ vpn_peer_endpoint }}
