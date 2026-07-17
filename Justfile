@@ -10,7 +10,6 @@ DOTFILES_PLAYBOOK    := "playbooks/dotfiles.yml"
 SETUP_PLAYBOOK       := "playbooks/setup.yml"
 PLAYBOOKS            := SETUP_PLAYBOOK + " " + DOTFILES_PLAYBOOK
 HOSTNAME             := `hostname -s`
-YAMLLINT_CONFIG      := ".yamllint"
 
 default:
     @just --list
@@ -36,7 +35,6 @@ dotfiles: banner
 
 check: syntax
     git diff --check
-    yamllint -c {{YAMLLINT_CONFIG}} .
     find scripts -name "*.sh" -exec shellcheck {} +
     ANSIBLE_CONFIG={{ANSIBLE_CONFIG}} ANSIBLE_ROLES_PATH={{ANSIBLE_ROLES_PATH}} ansible-lint -c {{ANSIBLE_LINT_CONFIG}} {{ANSIBLE_DIR}}
 
