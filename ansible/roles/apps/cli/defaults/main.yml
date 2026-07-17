@@ -38,6 +38,5 @@ cli_pacman_packages:
 
   # Fun
   - cmatrix
-  - cowsay
   - figlet
   - lolcat

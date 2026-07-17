@@ -7,7 +7,7 @@ REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 ANSIBLE_DIR="${REPO_DIR}/ansible"
 AGE_KEY_ENCRYPTED="${REPO_DIR}/secrets/age_key.age"
 SUDOERS_FILE="/etc/sudoers.d/99-nopasswd"
-PACKAGES=(age sops ansible cowsay just)
+PACKAGES=(age sops ansible just)
 VALID_HOSTS=(desktop laptop)
 
 export SOPS_AGE_KEY_FILE="${SOPS_AGE_KEY_FILE:-$HOME/.config/sops/age/keys.txt}"
