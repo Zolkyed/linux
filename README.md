@@ -9,7 +9,6 @@
 <a href="https://github.com/Zolkyed/linux/stargazers"><img src="https://img.shields.io/github/stars/Zolkyed/linux?style=for-the-badge&logo=starship&color=89b4fa&logoColor=89b4fa&labelColor=11111b"  alt="stars"></a>&nbsp;&nbsp;
 <a href="https://github.com/Zolkyed/linux/forks"><img src="https://img.shields.io/github/forks/Zolkyed/linux?style=for-the-badge&logo=appveyor&logoColor=a6e3a1&label=Forks&labelColor=11111b&color=a6e3a1" alt="forks"></a>&nbsp;&nbsp;
 <a href="https://github.com/Zolkyed/linux/commits/main/"><img src="https://img.shields.io/github/last-commit/Zolkyed/linux?style=for-the-badge&logo=github&logoColor=cba6f7&label=Last%20Commit&labelColor=11111b&color=cba6f7" alt="last commit"></a>&nbsp;&nbsp;
-<a href="https://github.com/Zolkyed/linux/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Zolkyed/linux?style=for-the-badge&color=f38ba8&logoColor=f38ba8&labelColor=11111b" alt="license"></a>&nbsp;&nbsp;
 </p>
 </div>
 
