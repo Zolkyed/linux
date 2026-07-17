@@ -4,7 +4,7 @@ Host github.com
 
 Host server
     HostName 192.168.2.36
-    User root
+    User ansible
     IdentityFile ~/.ssh/id_ed25519
 
 Host desktop

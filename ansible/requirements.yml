@@ -1,14 +1,8 @@
 ---
 collections:
-  # dconf (GNOME), kdeconfig (KDE), flatpak, pacman, XML, npm, Cargo
   - name: community.general
-  # authorized_key, firewalld
   - name: ansible.posix
-  # load_vars for SOPS-encrypted variables
   - name: community.sops
-  # virt_net; requires python-lxml and libvirt-python on the managed host
   - name: community.libvirt
-  # docker_container; requires python-docker on the managed host
   - name: community.docker
-  # AUR packages through paru
   - name: kewlfft.aur
