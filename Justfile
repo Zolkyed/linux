@@ -13,14 +13,12 @@ PLAYBOOKS            := SETUP_PLAYBOOK + " " + DOTFILES_PLAYBOOK
 HOSTNAME             := `hostname -s`
 YAMLLINT_CONFIG      := ".yamllint"
 
-# List available recipes.
 default:
     @just --list
 
 _clear-log:
     @: > {{ANSIBLE_LOG}}
 
-# Show the Ansible banner.
 banner:
     @[[ -t 1 ]] && clear || true
     @printf '%s\n' \
@@ -31,25 +29,20 @@ banner:
         '██║  ██║██║ ╚████║███████║██║██████╔╝███████╗███████╗' \
         '╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝'
 
-# Apply the setup playbook to this host, optionally limited by tags.
 setup-local tags="": banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{HOSTNAME}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
-# Apply the setup playbook over SSH, optionally limited by tags.
 setup-remote host=`hostname -s` tags="": banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{host}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
 
-# Apply chezmoi-managed dotfiles to this host.
 dotfiles: banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} -v --diff
 
-# Run every local validation check.
 check: syntax
     git diff --check
     yamllint -c {{YAMLLINT_CONFIG}} .
     find scripts -name "*.sh" -exec shellcheck {} +
     ANSIBLE_CONFIG={{ANSIBLE_CONFIG}} ANSIBLE_ROLES_PATH={{ANSIBLE_ROLES_PATH}} ansible-lint -c {{ANSIBLE_LINT_CONFIG}} {{ANSIBLE_DIR}}
 
-# Syntax-check all playbooks.
 syntax: _clear-log
     cd {{ANSIBLE_DIR}} && for playbook in {{PLAYBOOKS}}; do ansible-playbook --syntax-check -i {{LOCAL_INVENTORY}} "$playbook"; done
