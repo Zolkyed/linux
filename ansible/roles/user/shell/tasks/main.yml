@@ -10,9 +10,9 @@
 - name: Shell | Set user shell
   ansible.builtin.user:
     name: "{{ user_name }}"
-    shell: "{{ user_shell }}"
+    shell: "{{ shell_user_shell }}"
 
 - name: Shell | Set root shell
   ansible.builtin.user:
     name: root
-    shell: "{{ root_shell }}"
+    shell: "{{ shell_root_shell }}"

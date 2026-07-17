@@ -1,7 +1,7 @@
 ---
 # Chezmoi
-chezmoi_bin: /usr/bin/chezmoi
-chezmoi_source_dir: "{{ dotfiles_repo_dir }}/chezmoi"
+dotfiles_chezmoi_bin: /usr/bin/chezmoi
+dotfiles_chezmoi_source_dir: "{{ dotfiles_repo_dir }}/chezmoi"
 
 # Repository
 dotfiles_repo_dir: "{{ user_home }}/linux"

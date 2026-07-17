@@ -5,8 +5,8 @@
     name: "{{ install_pacman_packages }}"
     state: present
   when: install_pacman_packages | default([]) | length > 0
-  register: pacman_result
-  until: pacman_result is succeeded
+  register: packages_pacman_result
+  until: packages_pacman_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
 
@@ -16,10 +16,11 @@
     name: "{{ install_aur_packages }}"
     use: paru
     state: present
+  become: true
   become_user: "{{ user_name }}"
   when: install_aur_packages | default([]) | length > 0
-  register: aur_result
-  until: aur_result is succeeded
+  register: packages_aur_result
+  until: packages_aur_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
 
@@ -30,8 +31,8 @@
     state: present
     remote: flathub
   when: install_flatpak_packages | default([]) | length > 0
-  register: flatpak_result
-  until: flatpak_result is succeeded
+  register: packages_flatpak_result
+  until: packages_flatpak_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
 
@@ -43,16 +44,17 @@
       - tool
       - install
       - "{{ item }}"
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"
   loop: "{{ install_uv_tools | default([]) }}"
   when: install_uv_tools | default([]) | length > 0
-  register: uv_result
-  until: uv_result is succeeded
+  register: packages_uv_result
+  until: packages_uv_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
-  changed_when: "'Installed' in uv_result.stdout"
+  changed_when: "'Installed' in packages_uv_result.stdout"
 
 # Node.js global CLI tools
 - name: "Packages | Install npm packages for {{ install_label }}"
@@ -61,13 +63,14 @@
     global: true
     state: present
     executable: "{{ user_home }}/.local/share/mise/shims/npm"
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"
   loop: "{{ install_npm_packages | default([]) }}"
   when: install_npm_packages | default([]) | length > 0
-  register: npm_result
-  until: npm_result is succeeded
+  register: packages_npm_result
+  until: packages_npm_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
 
@@ -77,13 +80,14 @@
     name: "{{ item }}"
     state: present
     executable: "{{ user_home }}/.local/share/mise/shims/cargo"
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"
   loop: "{{ install_cargo_packages | default([]) }}"
   when: install_cargo_packages | default([]) | length > 0
-  register: cargo_result
-  until: cargo_result is succeeded
+  register: packages_cargo_result
+  until: packages_cargo_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
 
@@ -94,14 +98,15 @@
       - "{{ user_home }}/.local/share/mise/shims/go"
       - install
       - "{{ item }}"
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"
     GOBIN: "{{ user_home }}/.local/bin"
   loop: "{{ install_go_packages | default([]) }}"
   when: install_go_packages | default([]) | length > 0
-  register: go_result
-  until: go_result is succeeded
+  register: packages_go_result
+  until: packages_go_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
   changed_when: false
@@ -114,15 +119,16 @@
       - use
       - --global
       - "{{ item }}"
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"
   loop: "{{ install_mise_tools | default([]) }}"
   when: install_mise_tools | default([]) | length > 0
-  register: mise_result
-  until: mise_result is succeeded
+  register: packages_mise_result
+  until: packages_mise_result is succeeded
   retries: "{{ packages_retries }}"
   delay: "{{ packages_retry_delay }}"
   changed_when: >
-    'installed' in mise_result.stdout
-    or 'installed' in mise_result.stderr
+    'installed' in packages_mise_result.stdout
+    or 'installed' in packages_mise_result.stderr

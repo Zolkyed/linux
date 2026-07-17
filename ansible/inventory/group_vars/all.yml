@@ -10,4 +10,4 @@ user_home: "/home/{{ user_name }}"
 #   - mobile
 #   - restic
 #   - vpn
-enabled_features: []
+detect_enabled_features: []

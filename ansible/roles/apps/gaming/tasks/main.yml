@@ -16,6 +16,7 @@
     install_aur_packages: "{{ gaming_aur_packages }}"
 
 - name: Gaming | Configure Sunshine credentials
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv:

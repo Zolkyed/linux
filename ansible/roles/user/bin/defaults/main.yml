@@ -3,5 +3,5 @@
 bin_dest: "{{ user_home }}/.local/bin"
 
 # Assistant
-assistant_base_url: "https://home.mihon.org"
-assistant_entity_id_fan: "switch.charles_fan"
+bin_assistant_base_url: "https://home.mihon.org"
+bin_assistant_entity_id_fan: "switch.charles_fan"

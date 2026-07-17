@@ -4,15 +4,16 @@
     name: lib/packages
   vars:
     install_label: User GPG
-    install_pacman_packages: "{{ user_gpg_pacman_packages }}"
+    install_pacman_packages: "{{ gpg_pacman_packages }}"
 
 - name: User GPG | Fetch signing key
   ansible.builtin.uri:
-    url: "{{ user_gpg_signing_key.url }}"
+    url: "{{ gpg_signing_key.url }}"
     return_content: true
   register: user_gpg_key_response
 
 - name: User GPG | Derive fingerprint
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [gpg, --with-colons, --import-options, show-only, --import]
@@ -21,6 +22,7 @@
   changed_when: false
 
 - name: User GPG | Import signing key
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [gpg, --import]
@@ -29,6 +31,7 @@
   changed_when: "'imported' in user_gpg_import.stderr"
 
 - name: User GPG | Set ultimate trust
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [gpg, --import-ownertrust]

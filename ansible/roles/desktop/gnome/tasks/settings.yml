@@ -6,6 +6,7 @@
     state: present
   environment:
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become: true
   become_user: "{{ user_name }}"
   loop: "{{ gnome_dconf_settings }}"
   loop_control:

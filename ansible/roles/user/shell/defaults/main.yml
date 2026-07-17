@@ -1,7 +1,7 @@
 ---
 # Shell
-user_shell: /bin/zsh
-root_shell: /bin/bash
+shell_user_shell: /bin/zsh
+shell_root_shell: /bin/bash
 
 shell_pacman_packages:
   # Shell

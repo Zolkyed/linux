@@ -10,8 +10,6 @@ exclude_paths:
   - inventory/host_vars/*.sops.yml
 
 skip_list:
-  - partial-become
   - role-name
-  - var-naming[no-role-prefix]
 
 use_default_rules: true

@@ -1,5 +1,5 @@
 ---
-enabled_features:
+detect_enabled_features:
   - fingerprint
   - gaming
   - labs

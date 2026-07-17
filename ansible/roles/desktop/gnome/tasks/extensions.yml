@@ -23,6 +23,7 @@
       - toggle-favorite@charl
   environment:
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become: true
   become_user: "{{ user_name }}"
   changed_when: true
   failed_when: false

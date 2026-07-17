@@ -4,14 +4,14 @@ aur_retries: 3
 aur_retry_delay: 10
 
 # Paru
-paru_options:
+aur_paru_options:
   - PgpFetch
   - Devel
   - Provides
   - "DevelSuffixes = -git -cvs -svn -bzr -darcs -always -hg -fossil"
 
 # Makepkg
-makepkg_options:
+aur_makepkg_options:
   - 'CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection"'
   - 'CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"'
   - 'LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs"'

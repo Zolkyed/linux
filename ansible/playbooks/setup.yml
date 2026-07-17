@@ -53,7 +53,7 @@
       tags: keyboard
     - role: system/fingerprint
       tags: fingerprint
-      when: "'fingerprint' in enabled_features"
+      when: "'fingerprint' in detect_enabled_features"
     - role: system/yubikey
       tags: yubikey
     - role: system/disk
@@ -86,10 +86,10 @@
       tags: limine
     - role: system/restic
       tags: restic
-      when: "'restic' in enabled_features"
+      when: "'restic' in detect_enabled_features"
     - role: system/vpn
       tags: vpn
-      when: "'vpn' in enabled_features"
+      when: "'vpn' in detect_enabled_features"
     - role: system/docker
       tags: docker
     - role: system/virtualization
@@ -98,10 +98,10 @@
     # desktop
     - role: desktop/gnome
       tags: gnome
-      when: "'gnome' in enabled_features"
+      when: "'gnome' in detect_enabled_features"
     - role: desktop/kde
       tags: kde
-      when: "'kde' in enabled_features"
+      when: "'kde' in detect_enabled_features"
 
     # Apps
     - role: apps/mise
@@ -114,18 +114,18 @@
       tags: browser
     - role: apps/gaming
       tags: gaming
-      when: "'gaming' in enabled_features"
+      when: "'gaming' in detect_enabled_features"
     - role: apps/emulation
       tags: emulation
-      when: "'emulation' in enabled_features"
+      when: "'emulation' in detect_enabled_features"
     - role: apps/extra
       tags: extra
     - role: apps/labs
       tags: labs
-      when: "'labs' in enabled_features"
+      when: "'labs' in detect_enabled_features"
     - role: apps/mobile
       tags: mobile
-      when: "'mobile' in enabled_features"
+      when: "'mobile' in detect_enabled_features"
     - role: apps/media
       tags: media
     - role: apps/downloader

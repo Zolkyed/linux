@@ -26,14 +26,14 @@
 - name: Plymouth | Check Limine configuration
   ansible.builtin.stat:
     path: /etc/default/limine
-  register: limine_config
+  register: plymouth_limine_config
 
 - name: Plymouth | Remove splash and quiet from Limine cmdline
   ansible.builtin.replace:
     path: /etc/default/limine
     regexp: '\b(splash|quiet)\b\s*'
     replace: ''
-  when: limine_config.stat.exists
+  when: plymouth_limine_config.stat.exists
   notify: Plymouth | Update Limine
 
 - name: Plymouth | Apply pending boot changes

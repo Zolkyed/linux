@@ -38,6 +38,7 @@
       - General
       - --key
       - hiddenItems
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"
@@ -67,6 +68,7 @@
       - --key
       - hiddenItems
       - "{{ kde_system_tray_hidden_items | join(',') }}"
+  become: true
   become_user: "{{ user_name }}"
   environment:
     HOME: "{{ user_home }}"

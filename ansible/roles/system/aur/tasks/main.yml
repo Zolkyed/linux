@@ -4,6 +4,7 @@
     name: paru
     use: makepkg
     state: present
+  become: true
   become_user: "{{ user_name }}"
   register: aur_result
   until: aur_result is succeeded
@@ -27,6 +28,6 @@
     owner: root
     group: root
     mode: "0644"
-  loop: "{{ makepkg_options }}"
+  loop: "{{ aur_makepkg_options }}"
   loop_control:
     label: "{{ item | regex_replace('=.*$', '') }}"

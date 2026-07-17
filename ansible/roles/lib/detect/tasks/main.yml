@@ -7,7 +7,7 @@
 
 - name: Detect | Resolve enabled features
   ansible.builtin.set_fact:
-    enabled_features: >-
-      {{ (enabled_features | default([])
+    detect_enabled_features: >-
+      {{ (detect_enabled_features | default([])
           + (detect_de.results | selectattr('stat.exists') | map(attribute='item.feature') | list))
          | unique }}
