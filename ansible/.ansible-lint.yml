@@ -11,5 +11,3 @@ exclude_paths:
 
 skip_list:
   - role-name
-
-use_default_rules: true
