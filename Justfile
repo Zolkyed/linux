@@ -43,10 +43,6 @@ setup-remote host=`hostname -s` tags="": banner _clear-log
 dotfiles: banner _clear-log
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} -v --diff
 
-# Preview chezmoi-managed dotfile changes.
-dotfiles-check: _clear-log
-    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} --check --diff
-
 # Run every local validation check.
 check: syntax
     git diff --check

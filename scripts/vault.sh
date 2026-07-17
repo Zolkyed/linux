@@ -17,43 +17,32 @@ export SOPS_AGE_KEY_FILE="${SOPS_AGE_KEY_FILE:-$HOME/.config/sops/age/keys.txt}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 usage() {
-  echo "Usage: $0 [encrypt|decrypt]" >&2
+  echo "Usage: $0 [SOPS_FILE]" >&2
 }
 
-select_action() {
+select_file() {
   local choice
 
-  cat >&2 <<'EOF'
-Select an operation:
-  1) Encrypt vault files
-  2) Decrypt vault files
-  0) Exit
-EOF
+  echo "Select a SOPS file to edit:" >&2
+  local index
+  for index in "${!VAULT_FILES[@]}"; do
+    printf '  %d) %s\n' "$((index + 1))" "${VAULT_FILES[$index]}" >&2
+  done
+  echo "  0) Exit" >&2
 
   while true; do
-    if ! read -r -p "Selection [0-2]: " choice; then
-      echo "ERROR: unable to read operation selection." >&2
+    if ! read -r -p "Selection [0-${#VAULT_FILES[@]}]: " choice; then
+      echo "ERROR: unable to read file selection." >&2
       return 1
     fi
-    case "$choice" in
-      1) printf '%s' encrypt; return ;;
-      2) printf '%s' decrypt; return ;;
-      0) return 1 ;;
-      *) echo "ERROR: select a number from 0 to 2." >&2 ;;
-    esac
+    [[ "$choice" == 0 ]] && return 1
+    if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#VAULT_FILES[@]} )); then
+      printf '%s' "${VAULT_FILES[$((choice - 1))]}"
+      return
+    fi
+    echo "ERROR: select a number from 0 to ${#VAULT_FILES[@]}." >&2
   done
 }
-
-if (( $# == 0 )); then
-  [[ -t 0 && -t 1 ]] || { echo "ERROR: interactive mode requires a terminal." >&2; exit 1; }
-  ACTION="$(select_action)" || { echo "==> No operation selected."; exit 0; }
-elif (( $# == 1 )) && [[ "$1" =~ ^(encrypt|decrypt)$ ]]; then
-  ACTION="$1"
-else
-  usage
-  exit 1
-fi
-readonly ACTION
 
 mapfile -t VAULT_FILES < <(
   cd "$REPO_ROOT"
@@ -65,20 +54,19 @@ mapfile -t VAULT_FILES < <(
   exit 1
 }
 
-is_encrypted() {
-  sops filestatus "$1" 2>/dev/null | grep -Eq '"encrypted"[[:space:]]*:[[:space:]]*true'
-}
+if (( $# == 0 )); then
+  [[ -t 0 && -t 1 ]] || { echo "ERROR: interactive mode requires a terminal." >&2; exit 1; }
+  REL_PATH="$(select_file)" || { echo "==> No file selected."; exit 0; }
+elif (( $# == 1 )); then
+  REL_PATH="${1#"${REPO_ROOT}/"}"
+  [[ " ${VAULT_FILES[*]} " == *" ${REL_PATH} "* ]] || {
+    echo "ERROR: '${1}' is not a SOPS file under ansible/inventory." >&2
+    usage
+    exit 1
+  }
+else
+  usage
+  exit 1
+fi
 
-for rel_path in "${VAULT_FILES[@]}"; do
-  file="${REPO_ROOT}/${rel_path}"
-
-  if [[ "$ACTION" == "encrypt" ]]; then
-    is_encrypted "$file" && { echo "Already encrypted: ${rel_path}"; continue; }
-    sops --encrypt --in-place "$file"
-    echo "Encrypted: ${rel_path}"
-  else
-    is_encrypted "$file" || { echo "Already decrypted: ${rel_path}"; continue; }
-    sops --decrypt --in-place "$file"
-    echo "Decrypted: ${rel_path}"
-  fi
-done
+sops "${REPO_ROOT}/${REL_PATH}"

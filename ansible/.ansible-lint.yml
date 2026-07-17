@@ -6,8 +6,8 @@ warn_list:
   - experimental
 
 exclude_paths:
-  - inventory/group_vars/vault.yml
-  - inventory/host_vars/*/vault.yml
+  - inventory/group_vars/*.sops.yml
+  - inventory/host_vars/*.sops.yml
 
 skip_list:
   - partial-become

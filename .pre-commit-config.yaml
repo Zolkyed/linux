@@ -6,25 +6,25 @@ repos:
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-yaml
-        exclude: ^ansible/inventory/.*/vault\.yml$
+        exclude: ^ansible/inventory/.*\.sops\.yml$
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
   - repo: local
     hooks:
       - id: check-vault-encrypted
-        name: vault files must be SOPS-encrypted
+        name: SOPS files must be encrypted
         language: pygrep
         entry: "^sops:"
         args: [--negate]
-        files: ^ansible/inventory/.*/vault\.yml$
+        files: ^ansible/inventory/.*\.sops\.yml$
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.38.0
     hooks:
       - id: yamllint
         args: [-c, .yamllint]
-        exclude: ^ansible/inventory/.*/vault\.yml$
+        exclude: ^ansible/inventory/.*\.sops\.yml$
 
   - repo: https://github.com/ansible/ansible-lint
     rev: v26.6.0
