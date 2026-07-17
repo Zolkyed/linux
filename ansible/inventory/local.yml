@@ -1,9 +1,7 @@
 ---
 all:
-  vars:
-    ansible_connection: local
   hosts:
     desktop:
-      ansible_host: localhost
+      ansible_connection: local
     laptop:
-      ansible_host: localhost
+      ansible_connection: local
