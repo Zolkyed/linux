@@ -20,4 +20,4 @@ setup-remote host=HOSTNAME tags="":
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} --limit {{quote(host)}} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
 
 dotfiles:
-    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} -v --diff
+    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} --limit {{quote(HOSTNAME)}} -v --diff
