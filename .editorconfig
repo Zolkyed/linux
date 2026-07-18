@@ -18,6 +18,10 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+[*.{tf,tfvars}]
+indent_style = space
+indent_size = 2
+
 [*.sh]
 indent_style = space
 indent_size = 4
