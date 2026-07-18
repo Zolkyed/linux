@@ -1,4 +1,4 @@
-set shell := ["bash", "-cu"]
+set shell := ["bash", "-euo", "pipefail", "-c"]
 
 ANSIBLE_DIR          := "ansible"
 ANSIBLE_CONFIG       := "ansible/ansible.cfg"
@@ -12,7 +12,7 @@ PLAYBOOKS            := SETUP_PLAYBOOK + " " + DOTFILES_PLAYBOOK
 HOSTNAME             := `hostname -s`
 
 default:
-    @just --list
+    @just --list --unsorted
 
 banner:
     @[[ -t 1 ]] && clear || true
@@ -25,10 +25,13 @@ banner:
         '╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝╚══════╝'
 
 setup-local tags="": banner
-    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{HOSTNAME}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
+    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{SETUP_PLAYBOOK}} --limit {{quote(HOSTNAME)}} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
 
-setup-remote host=`hostname -s` tags="": banner
-    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} -l {{host}} -v {{ if tags != "" { "--tags " + tags } else { "" } }}
+ping-remote host:
+    cd {{ANSIBLE_DIR}} && ansible {{quote(host)}} -i {{SSH_INVENTORY}} --one-line -m ping
+
+setup-remote host=HOSTNAME tags="": banner
+    cd {{ANSIBLE_DIR}} && ansible-playbook -i {{SSH_INVENTORY}} {{SETUP_PLAYBOOK}} --limit {{quote(host)}} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
 
 dotfiles: banner
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} -v --diff
