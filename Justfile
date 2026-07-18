@@ -1,14 +1,10 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 ANSIBLE_DIR          := "ansible"
-ANSIBLE_CONFIG       := "ansible/ansible.cfg"
-ANSIBLE_LINT_CONFIG  := "ansible/.ansible-lint.yml"
-ANSIBLE_ROLES_PATH   := "ansible/roles"
 LOCAL_INVENTORY      := "inventory/local.yml"
 SSH_INVENTORY        := "inventory/ssh.yml"
 DOTFILES_PLAYBOOK    := "playbooks/dotfiles.yml"
 SETUP_PLAYBOOK       := "playbooks/setup.yml"
-PLAYBOOKS            := SETUP_PLAYBOOK + " " + DOTFILES_PLAYBOOK
 HOSTNAME             := `hostname -s`
 
 default:
@@ -35,11 +31,3 @@ setup-remote host=HOSTNAME tags="": banner
 
 dotfiles: banner
     cd {{ANSIBLE_DIR}} && ansible-playbook -i {{LOCAL_INVENTORY}} {{DOTFILES_PLAYBOOK}} -l {{HOSTNAME}} -v --diff
-
-check: syntax
-    git diff --check
-    find scripts -name "*.sh" -exec shellcheck {} +
-    ANSIBLE_CONFIG={{ANSIBLE_CONFIG}} ANSIBLE_ROLES_PATH={{ANSIBLE_ROLES_PATH}} ansible-lint -c {{ANSIBLE_LINT_CONFIG}} {{ANSIBLE_DIR}}
-
-syntax:
-    cd {{ANSIBLE_DIR}} && for playbook in {{PLAYBOOKS}}; do ansible-playbook --syntax-check -i {{LOCAL_INVENTORY}} "$playbook"; done
