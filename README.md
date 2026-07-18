@@ -1,43 +1,16 @@
-<div align="center">
-    <img src="./assets/banner.png">
-    <h1>Linux</h1>
-    <h3></h3>
-</div>
-
-<div align="center">
-<p>
-<a href="https://github.com/Zolkyed/linux/stargazers"><img src="https://img.shields.io/github/stars/Zolkyed/linux?style=for-the-badge&logo=starship&color=89b4fa&logoColor=89b4fa&labelColor=11111b"  alt="stars"></a>&nbsp;&nbsp;
-<a href="https://github.com/Zolkyed/linux/forks"><img src="https://img.shields.io/github/forks/Zolkyed/linux?style=for-the-badge&logo=appveyor&logoColor=a6e3a1&label=Forks&labelColor=11111b&color=a6e3a1" alt="forks"></a>&nbsp;&nbsp;
-<a href="https://github.com/Zolkyed/linux/commits/main/"><img src="https://img.shields.io/github/last-commit/Zolkyed/linux?style=for-the-badge&logo=github&logoColor=cba6f7&label=Last%20Commit&labelColor=11111b&color=cba6f7" alt="last commit"></a>&nbsp;&nbsp;
+<p align="center">
+  <img src="./assets/banner.png" alt="Linux configuration banner">
 </p>
-</div>
 
-## Table of Contents
+<h1 align="center">Linux</h1>
 
-- [Description](#description)
-- [Desktop Setup](#desktop-setup)
-  - [KDE Settings](#kde-settings)
-  - [GNOME Settings](#gnome-settings)
-  - [Font](#font)
-  - [Shell](#shell)
-  - [Wallpapers](#wallpapers)
-- [Shortcuts and Commands](#shortcuts-and-commands)
+<p align="center">
+  <a href="https://github.com/Zolkyed/linux/stargazers"><img src="https://img.shields.io/github/stars/Zolkyed/linux?style=for-the-badge&logo=starship&color=89b4fa&logoColor=89b4fa&labelColor=11111b" alt="GitHub stars"></a>
+  <a href="https://github.com/Zolkyed/linux/forks"><img src="https://img.shields.io/github/forks/Zolkyed/linux?style=for-the-badge&logo=appveyor&logoColor=a6e3a1&label=Forks&labelColor=11111b&color=a6e3a1" alt="GitHub forks"></a>
+  <a href="https://github.com/Zolkyed/linux/commits/main/"><img src="https://img.shields.io/github/last-commit/Zolkyed/linux?style=for-the-badge&logo=github&logoColor=cba6f7&label=Last%20Commit&labelColor=11111b&color=cba6f7" alt="Last commit"></a>
+</p>
 
-## Description
-
-This is my personal Linux configuration. The setup is a bit of a Frankenstein's monster, mixing original work with plenty of inspiration from:
-
-- [Pazl27's dotfiles](https://github.com/Pazl27/dotfiles/tree/master)
-- [Emmale64's KDE setup](https://www.reddit.com/r/unixporn/comments/1o4lofv/kde_who_needs_hyprland/)
-- [Kuehnelt's solstice-dots](https://github.com/Kuehnelt/solstice-dots/tree/main)
-- [agridyne's dotfiles-dt](https://github.com/agridyne/dotfiles-dt)
-- [prathmesh0077's dotfiles](https://github.com/prathmesh0077)
-- [neuromask's Catppuccin Linux Theme](https://github.com/neuromask/catppuccin-linux-theme)
-- [keenanweaver's Nix configuration](https://github.com/keenanweaver/nix-config)
-
-Many of the configs are also slightly tweaked versions from the official [Catppuccin](https://catppuccin.com/) repositories.
-
-## Desktop Setup
+## 🖥️ Desktop Setup
 
 ### KDE Settings
 
@@ -55,7 +28,7 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | Video Wallpaper (Lock Screen) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
 | Video Wallpaper (Desktop) | [Smart Video Wallpaper Reborn](https://github.com/luisbocanegra/plasma-smart-video-wallpaper-reborn) |
 
-**Widgets**:
+#### Widgets
 
 | Widget | Purpose |
 | --- | --- |
@@ -69,7 +42,7 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 | Icons | [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) + [Catppuccin folders](https://github.com/catppuccin/papirus-folders)<br>`papirus-folders -C cat-mocha-lavender --theme Papirus-Dark` |
 | Video Wallpaper (Desktop & Lock Screen) | [Hanabi](https://github.com/jeffshee/gnome-ext-hanabi) |
 
-**Extensions** (managed with Extension Manager):
+#### Extensions
 
 | Extension | Purpose |
 | --- | --- |
@@ -90,16 +63,22 @@ Many of the configs are also slightly tweaked versions from the official [Catppu
 
 ### Shell
 
-Zsh with [Starship](https://github.com/catppuccin/starship/discussions/18) and the [Catppuccin Mocha zsh-syntax-highlighting](https://github.com/catppuccin/zsh-syntax-highlighting) theme.
+| Component | Configuration |
+| --- | --- |
+| Shell | Zsh |
+| Prompt | [Starship](https://github.com/catppuccin/starship/discussions/18) |
+| Syntax highlighting | [Catppuccin Mocha](https://github.com/catppuccin/zsh-syntax-highlighting) |
 
 ### Wallpapers
 
-- [Synthwave Dreamwave Girl](https://www.desktophut.com/synthwave-dreamwave-girl)
-- [Digital Gaze](https://www.desktophut.com/digital-gaze-8642)
+| Wallpaper | Source |
+| --- | --- |
+| Synthwave Dreamwave Girl | [DesktopHut](https://www.desktophut.com/synthwave-dreamwave-girl) |
+| Digital Gaze | [DesktopHut](https://www.desktophut.com/digital-gaze-8642) |
 
-Additional wallpapers are filtered from the [Orangci collection](https://github.com/orangci/walls-catppuccin-mocha) and recolored with the [Wallpaper Theme Converter](https://notneelpatel.xyz/WallpaperThemeConverter/).
+Additional wallpapers come from the [Orangci collection](https://github.com/orangci/walls-catppuccin-mocha) and are recolored with the [Wallpaper Theme Converter](https://notneelpatel.xyz/WallpaperThemeConverter/).
 
-## Shortcuts and Commands
+## ⌨️ Shortcuts and Commands
 
 | Shortcut | Action |
 | --- | --- |
@@ -119,7 +98,7 @@ Additional wallpapers are filtered from the [Orangci collection](https://github.
 | <kbd>Alt</kbd> + <kbd>Tab</kbd> | Switch windows |
 | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>Tab</kbd> | Switch windows in reverse |
 
-### Extensions
+### Browser Extensions
 
 | Shortcut | Action |
 | --- | --- |
@@ -143,3 +122,14 @@ Additional wallpapers are filtered from the [Orangci collection](https://github.
 | <kbd>NumpadEnter</kbd> | Find Phone |
 | <kbd>NumpadAdd</kbd> | Increase Brightness |
 | <kbd>NumpadSub</kbd> | Decrease Brightness |
+
+## 📚 Resources
+
+- [Pazl27's dotfiles](https://github.com/Pazl27/dotfiles/tree/master)
+- [Emmale64's KDE setup](https://www.reddit.com/r/unixporn/comments/1o4lofv/kde_who_needs_hyprland/)
+- [Kuehnelt's solstice-dots](https://github.com/Kuehnelt/solstice-dots/tree/main)
+- [agridyne's dotfiles-dt](https://github.com/agridyne/dotfiles-dt)
+- [prathmesh0077's dotfiles](https://github.com/prathmesh0077)
+- [neuromask's Catppuccin Linux Theme](https://github.com/neuromask/catppuccin-linux-theme)
+- [keenanweaver's Nix configuration](https://github.com/keenanweaver/nix-config)
+- [Catppuccin](https://catppuccin.com/)
