@@ -40,7 +40,7 @@ def bootstrap() -> str:
         print("==> Updating Linux configuration...", file=sys.stderr)
         subprocess.run(["git", "-C", repo_dir, "pull", "--ff-only"], check=True)
 
-    target = os.path.join(repo_dir, "scripts", "run_archinstall.py")
+    target = os.path.join(repo_dir, "scripts", "bootstrap-archinstall.py")
     os.execv(sys.executable, [sys.executable, target, *sys.argv[1:]])
 
 
