@@ -1,4 +1,1 @@
 ---
-# Keys
-ssh_authorized_keys:
-  - "https://github.com/zolkyed.keys"

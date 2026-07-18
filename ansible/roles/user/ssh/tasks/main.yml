@@ -10,6 +10,6 @@
 - name: User SSH | Deploy authorized keys
   ansible.posix.authorized_key:
     user: "{{ user_name }}"
-    key: "{{ item }}"
+    key: https://github.com/zolkyed.keys
     state: present
-  loop: "{{ ssh_authorized_keys }}"
+    exclusive: true
