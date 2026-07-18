@@ -1,13 +1,37 @@
-# Ansible logs
+# Ansible
 ansible/.ansible/logs/*
 !ansible/.ansible/logs/.gitkeep
 
-# Ansible retry files
-*.retry
-
-# Ansible temporary files
-.ansible/tmp/
-
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyrc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.tfstate.lock.info
+
+# Local environment and temporary files
+.env
+.env.*
+*.tmp
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*~
+.DS_Store
+Thumbs.db
