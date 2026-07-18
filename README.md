@@ -10,6 +10,8 @@
   <a href="https://github.com/Zolkyed/linux/commits/main/"><img src="https://img.shields.io/github/last-commit/Zolkyed/linux?style=for-the-badge&logo=github&logoColor=cba6f7&label=Last%20Commit&labelColor=11111b&color=cba6f7" alt="Last commit"></a>
 </p>
 
+---
+
 ## 🖥️ Desktop Setup
 
 ### KDE Settings
@@ -78,6 +80,8 @@
 
 Additional wallpapers come from the [Orangci collection](https://github.com/orangci/walls-catppuccin-mocha) and are recolored with the [Wallpaper Theme Converter](https://notneelpatel.xyz/WallpaperThemeConverter/).
 
+---
+
 ## ⌨️ Shortcuts and Commands
 
 | Shortcut | Action |
@@ -122,6 +126,8 @@ Additional wallpapers come from the [Orangci collection](https://github.com/oran
 | <kbd>NumpadEnter</kbd> | Find Phone |
 | <kbd>NumpadAdd</kbd> | Increase Brightness |
 | <kbd>NumpadSub</kbd> | Decrease Brightness |
+
+---
 
 ## 📚 Resources
 
