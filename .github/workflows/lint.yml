@@ -62,8 +62,8 @@ jobs:
       - name: Check playbook syntax
         working-directory: ansible
         run: |
-          ansible-playbook --syntax-check --inventory inventory/local.yml playbooks/setup.yml
-          ansible-playbook --syntax-check --inventory inventory/local.yml playbooks/dotfiles.yml
+          ansible-playbook --syntax-check --inventory 'localhost,' playbooks/setup.yml
+          ansible-playbook --syntax-check --inventory 'localhost,' playbooks/dotfiles.yml
 
       - name: Run Ansible lint
         run: ansible-lint --config-file ansible/.ansible-lint.yml ansible
