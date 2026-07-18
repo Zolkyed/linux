@@ -17,11 +17,17 @@ vscode_extensions:
   - charliermarsh.ruff
   - hashicorp.hcl
   - hashicorp.terraform
-  # Tools
+  # Infrastructure and remote access
   - ms-azuretools.vscode-docker
   - ms-vscode-remote.remote-ssh
   - shipitsmarter.sops-edit
+  # Git and GitHub
   - eamodio.gitlens
+  - github.vscode-pull-request-github
+  - github.vscode-github-actions
+  # API development
+  - humao.rest-client
+  # Formatting and linting
   - oderwat.indent-rainbow
   - esbenp.prettier-vscode
   - dbaeumer.vscode-eslint
