@@ -3,8 +3,8 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 ANSIBLE_DIR          := "ansible"
 LOCAL_INVENTORY      := "inventory/local.yml"
 SSH_INVENTORY        := "inventory/ssh.yml"
-DOTFILES_PLAYBOOK    := "playbooks/dotfiles.yml"
 SETUP_PLAYBOOK       := "playbooks/setup.yml"
+DOTFILES_PLAYBOOK    := "playbooks/dotfiles.yml"
 HOSTNAME             := `hostname -s`
 
 default:
