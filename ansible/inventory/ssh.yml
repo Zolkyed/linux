@@ -3,5 +3,6 @@ all:
   hosts:
     desktop:
       ansible_host: desktop.local
+      ansible_user: charl
     laptop:
       ansible_host: laptop.local
