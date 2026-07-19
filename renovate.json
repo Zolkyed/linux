@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "docker:pinDigests"],
+  "ignorePaths": ["chezmoi/**"],
   "schedule": ["before 6am on monday"],
   "dependencyDashboard": true,
   "packageRules": [
@@ -23,7 +24,7 @@
       "description": "Docker image tags pinned as *_image vars in role defaults",
       "managerFilePatterns": ["/ansible/roles/.+/defaults/main\\.yml$/"],
       "matchStrings": [
-        "_image:\\s+\"?(?<depName>[a-zA-Z0-9./_-]+):(?<currentValue>[a-zA-Z0-9._-]+)\"?\\s*$"
+        "_image:\\s+\"?(?<depName>[a-zA-Z0-9./_-]+):(?<currentValue>[a-zA-Z0-9._-]+)\"?"
       ],
       "datasourceTemplate": "docker"
     }
