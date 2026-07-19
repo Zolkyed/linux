@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "docker:pinDigests"],
+  "schedule": ["before 6am on monday"],
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "matchManagers": ["pip_requirements"],
+      "groupName": "Python tooling"
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "groupName": "Docker images"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Docker image tags pinned as *_image vars in role defaults",
+      "managerFilePatterns": ["/ansible/roles/.+/defaults/main\\.yml$/"],
+      "matchStrings": [
+        "_image:\\s+\"?(?<depName>[a-zA-Z0-9./_-]+):(?<currentValue>[a-zA-Z0-9._-]+)\"?\\s*$"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}
