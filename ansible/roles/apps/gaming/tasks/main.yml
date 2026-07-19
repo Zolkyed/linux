@@ -22,8 +22,8 @@
     argv:
       - sunshine
       - --creds
-      - "{{ vault_sunshine_username }}"
-      - "{{ vault_sunshine_password }}"
+      - "{{ sunshine_username }}"
+      - "{{ sunshine_password }}"
   environment:
     HOME: "{{ user_home }}"
   changed_when: false

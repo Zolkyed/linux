@@ -23,17 +23,17 @@
     mode: "{{ item.mode }}"
   loop:
     - name: cert.pem
-      content: "{{ vault_syncthing_cert }}"
+      content: "{{ syncthing_cert }}"
       mode: "0640"
     - name: key.pem
-      content: "{{ vault_syncthing_key }}"
+      content: "{{ syncthing_key }}"
       mode: "0600"
   loop_control:
     label: "{{ item.name }}"
   register: syncthing_identity
   when:
-    - vault_syncthing_cert is defined
-    - vault_syncthing_key is defined
+    - syncthing_cert is defined
+    - syncthing_key is defined
   no_log: true
 
 - name: Syncthing | Enable and start service

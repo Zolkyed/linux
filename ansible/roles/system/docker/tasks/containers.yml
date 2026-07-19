@@ -47,7 +47,7 @@
       - 127.0.0.1:5432:5432
     env:
       POSTGRES_USER: "{{ docker_postgres_user }}"
-      POSTGRES_PASSWORD: "{{ vault_postgres_password }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
       POSTGRES_DB: "{{ docker_postgres_database }}"
       POSTGRES_INITDB_ARGS: --data-checksums
     volumes:
