@@ -30,6 +30,10 @@ override.tf.json
 *.tmp
 *.tmp.*
 
+# Runtime service data on managed hosts
+appdata/
+data/
+
 # Editor and operating-system files
 .idea/
 .vscode/
