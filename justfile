@@ -9,7 +9,7 @@ default:
     @just --list --unsorted
 
 ping host="all":
-    cd {{ ANSIBLE_DIR }} && ansible {{ quote(host) }} -i {{ SSH_INVENTORY }} -m ansible.builtin.ping
+    cd {{ ANSIBLE_DIR }} && ansible {{ quote(host) }} -i {{ SSH_INVENTORY }} {{ if host == "all" { "" } else { "-i " + host + "," } }} -m ansible.builtin.ping
 
 local playbook tags="":
     cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ LOCAL_INVENTORY }} playbooks/{{ playbook }}.yml --limit {{ quote(HOSTNAME) }} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
