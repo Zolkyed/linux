@@ -16,6 +16,3 @@ local playbook tags="":
 
 ssh playbook host="" tags="":
     cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ SSH_INVENTORY }} {{ if host == "" { "" } else { "-i " + host + ", --limit " + quote(host) } }} playbooks/{{ playbook }}.yml -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
-
-dotfiles:
-    cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ LOCAL_INVENTORY }} playbooks/dotfiles.yml --limit {{ quote(HOSTNAME) }} -v --diff
