@@ -1,8 +1,8 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 ANSIBLE_DIR := "ansible"
-LOCAL_INVENTORY := "inventory/local.yml"
-SSH_INVENTORY := "inventory/ssh.yml"
+LOCAL_INVENTORY := "inventory/local.ini"
+SSH_INVENTORY := "inventory/ssh.ini"
 SETUP_PLAYBOOK := "playbooks/setup.yml"
 DOTFILES_PLAYBOOK := "playbooks/dotfiles.yml"
 HOSTNAME := `hostname -s`
