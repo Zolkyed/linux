@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "docker:pinDigests"],
+  "extends": ["config:recommended"],
   "ignorePaths": ["chezmoi/**"],
   "schedule": ["before 6am on monday"],
   "dependencyDashboard": true,
