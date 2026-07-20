@@ -14,5 +14,5 @@ ping host="":
 local playbook tags="":
     cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ LOCAL_INVENTORY }} playbooks/{{ playbook }}.yml --limit {{ quote(HOSTNAME) }} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
 
-ssh playbook host="" tags="":
-    cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ SSH_INVENTORY }} {{ if host == "" { "" } else { "-i " + host + ", --limit " + quote(host) } }} playbooks/{{ playbook }}.yml -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
+ssh host playbook tags="":
+    cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ SSH_INVENTORY }} {{ if host == "all" { "" } else { "-i " + host + ", --limit " + quote(host) } }} playbooks/{{ playbook }}.yml -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}

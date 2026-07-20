@@ -139,10 +139,10 @@ just ping 192.168.2.67         # ad-hoc IP
 just local setup               # this machine
 just local setup gaming        # with --tags
 
-just ssh setup                 # everyone
-just ssh setup laptop          # just laptop
-just ssh setup 192.168.2.67    # ad-hoc IP
-just ssh setup laptop gaming   # with --tags
+just ssh all setup             # everyone
+just ssh laptop setup          # just laptop
+just ssh 192.168.2.67 setup    # ad-hoc IP
+just ssh laptop setup gaming   # with --tags
 
 just dotfiles                  # this machine
 ```
