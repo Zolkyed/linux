@@ -8,14 +8,14 @@ HOSTNAME := `hostname -s`
 default:
     @just --list --unsorted
 
-ping host="all":
-    cd {{ ANSIBLE_DIR }} && ansible {{ quote(host) }} -i {{ SSH_INVENTORY }} {{ if host == "all" { "" } else { "-i " + host + "," } }} -m ansible.builtin.ping
+ping host="":
+    cd {{ ANSIBLE_DIR }} && ansible {{ if host == "" { "all" } else { quote(host) } }} -i {{ SSH_INVENTORY }} {{ if host == "" { "" } else { "-i " + host + "," } }} -m ansible.builtin.ping
 
 local playbook tags="":
     cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ LOCAL_INVENTORY }} playbooks/{{ playbook }}.yml --limit {{ quote(HOSTNAME) }} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
 
-ssh host playbook tags="":
-    cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ SSH_INVENTORY }} -i {{ host }}, playbooks/{{ playbook }}.yml --limit {{ quote(host) }} -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
+ssh playbook host="" tags="":
+    cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ SSH_INVENTORY }} {{ if host == "" { "" } else { "-i " + host + ", --limit " + quote(host) } }} playbooks/{{ playbook }}.yml -v {{ if tags == "" { "" } else { "--tags " + quote(tags) } }}
 
 dotfiles:
     cd {{ ANSIBLE_DIR }} && ansible-playbook -i {{ LOCAL_INVENTORY }} playbooks/dotfiles.yml --limit {{ quote(HOSTNAME) }} -v --diff

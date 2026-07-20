@@ -129,6 +129,26 @@ Additional wallpapers come from the [Orangci collection](https://github.com/oran
 
 ---
 
+## 🚀 Usage
+
+```shell
+just ping                    # everyone
+just ping laptop             # just laptop
+just ping 192.168.2.67       # ad-hoc IP
+
+just local setup             # this machine
+just local setup gaming      # with --tags
+
+just ssh setup                     # everyone
+just ssh setup laptop              # just laptop
+just ssh setup 192.168.2.67        # ad-hoc IP
+just ssh setup laptop gaming       # with --tags
+
+just dotfiles                # this machine
+```
+
+---
+
 ## 📚 Resources
 
 - [Pazl27's dotfiles](https://github.com/Pazl27/dotfiles/tree/master)
