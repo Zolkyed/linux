@@ -1,0 +1,17 @@
+---
+- name: XDG | Create extra user directories
+  ansible.builtin.file:
+    path: "{{ user_home }}/{{ item }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+  loop: "{{ xdg_extra_directories }}"
+
+- name: XDG | Deploy mimeapps.list
+  ansible.builtin.template:
+    src: mimeapps.list.j2
+    dest: "{{ user_home }}/.config/mimeapps.list"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

@@ -1,0 +1,42 @@
+---
+- name: Syncthing | Read API key
+  community.general.xml:
+    path: "{{ user_home }}/.local/state/syncthing/config.xml"
+    xpath: /configuration/gui/apikey
+    content: text
+  register: syncthing_config_file
+  no_log: true
+
+- name: Syncthing | Extract API key
+  ansible.builtin.set_fact:
+    syncthing_api_key: >-
+      {{ syncthing_config_file.matches[0].apikey }}
+  no_log: true
+
+- name: Syncthing | Wait for REST API
+  ansible.builtin.uri:
+    url: http://127.0.0.1:8384/rest/noauth/health
+  register: syncthing_api_health
+  until: syncthing_api_health.status == 200
+  retries: 15
+  delay: 2
+
+- name: Syncthing | Configure devices
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:8384/rest/config/devices/{{ item.id }}"
+    method: PUT
+    headers:
+      X-API-Key: "{{ syncthing_api_key }}"
+    body_format: json
+    body:
+      deviceID: "{{ item.id }}"
+      name: "{{ item.name }}"
+      addresses:
+        - dynamic
+      compression: metadata
+      introducer: false
+      autoAcceptFolders: false
+      paused: false
+  loop: "{{ syncthing_devices }}"
+  loop_control:
+    label: "{{ item.name }}"

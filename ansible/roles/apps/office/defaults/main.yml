@@ -1,0 +1,16 @@
+---
+office_pacman_packages:
+  # Writing
+  - hunspell-en_us
+  - libreoffice-fresh
+
+  # Notes
+  - obsidian
+
+  # Diagrams
+  - drawio-desktop
+  - xournalpp
+
+office_aur_packages:
+  # Notes
+  - notion-app-electron

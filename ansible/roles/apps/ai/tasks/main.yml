@@ -1,0 +1,7 @@
+---
+- name: AI | Install CLI tools
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: AI
+    install_npm_packages: "{{ ai_npm_packages }}"

@@ -1,0 +1,36 @@
+---
+# Retry
+vscode_retries: 3
+vscode_retry_delay: 5
+
+vscode_aur_packages:
+  - visual-studio-code-bin
+
+# Extensions
+vscode_extensions:
+  # Language support
+  - redhat.ansible
+  - ms-vscode.cpptools
+  - wholroyd.jinja
+  - ms-python.python
+  - ms-pyright.pyright
+  - charliermarsh.ruff
+  - hashicorp.hcl
+  - hashicorp.terraform
+  # Infrastructure and remote access
+  - ms-azuretools.vscode-docker
+  - ms-vscode-remote.remote-ssh
+  - shipitsmarter.sops-edit
+  # Git and GitHub
+  - eamodio.gitlens
+  - github.vscode-pull-request-github
+  - github.vscode-github-actions
+  # API development
+  - humao.rest-client
+  # Formatting and linting
+  - oderwat.indent-rainbow
+  - esbenp.prettier-vscode
+  - dbaeumer.vscode-eslint
+  # Appearance
+  - catppuccin.catppuccin-vsc
+  - pkief.material-icon-theme

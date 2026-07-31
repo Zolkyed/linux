@@ -1,0 +1,54 @@
+# Subvolume to snapshot
+SUBVOLUME="{{ item.path }}"
+
+# Filesystem type
+FSTYPE="btrfs"
+
+# Btrfs qgroup for space-aware cleanup algorithms
+QGROUP=""
+
+# Fraction or absolute size of filesystem space that snapshots may use
+SPACE_LIMIT="{{ snapper_space_limit }}"
+
+# Fraction or absolute size of filesystem space that should remain free
+FREE_LIMIT="{{ snapper_free_limit }}"
+
+# Users and groups allowed to use this configuration
+ALLOW_USERS=""
+ALLOW_GROUPS=""
+
+# Sync users and groups from ALLOW_USERS and ALLOW_GROUPS to the .snapshots
+# directory
+SYNC_ACL="{{ snapper_sync_acl }}"
+
+# Compare pre- and post-snapshots in the background after creating a
+# post-snapshot
+BACKGROUND_COMPARISON="{{ snapper_background_comparison }}"
+
+# Run daily number cleanup
+NUMBER_CLEANUP="{{ snapper_number_cleanup }}"
+
+# Limits for number cleanup
+NUMBER_MIN_AGE="{{ snapper_number_min_age }}"
+NUMBER_LIMIT="{{ snapper_number_limit }}"
+NUMBER_LIMIT_IMPORTANT="{{ snapper_number_limit_important }}"
+
+# Create hourly snapshots
+TIMELINE_CREATE="{{ snapper_timeline_create }}"
+
+# Clean up hourly snapshots after some time
+TIMELINE_CLEANUP="{{ snapper_timeline_cleanup }}"
+
+# Limits for timeline cleanup
+TIMELINE_MIN_AGE="{{ snapper_timeline_min_age }}"
+TIMELINE_LIMIT_HOURLY="{{ snapper_timeline_limit.hourly }}"
+TIMELINE_LIMIT_DAILY="{{ snapper_timeline_limit.daily }}"
+TIMELINE_LIMIT_WEEKLY="{{ snapper_timeline_limit.weekly }}"
+TIMELINE_LIMIT_MONTHLY="{{ snapper_timeline_limit.monthly }}"
+TIMELINE_LIMIT_YEARLY="{{ snapper_timeline_limit.yearly }}"
+
+# Clean up empty pre-post pairs
+EMPTY_PRE_POST_CLEANUP="{{ snapper_empty_pre_post_cleanup }}"
+
+# Limits for empty pre-post pair cleanup
+EMPTY_PRE_POST_MIN_AGE="{{ snapper_empty_pre_post_min_age }}"

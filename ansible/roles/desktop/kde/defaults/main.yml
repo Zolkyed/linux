@@ -1,0 +1,97 @@
+---
+kde_pacman_packages:
+  - ark
+  - kitty
+  - kvantum
+  - discover
+  - dolphin
+  - kio-extras
+  - kcalc
+  - kdeconnect
+  - ffmpegthumbs
+  - plasma-systemmonitor
+
+  # Icon theme
+  - papirus-icon-theme
+
+  # dependency: community.general.kdeconfig (provides kwriteconfig6)
+  - kconfig
+
+kde_aur_packages:
+  # Icon theme lavender
+  - papirus-folders-catppuccin-git
+  # Theme
+  - klassy
+  # Wallpaper
+  - plasma6-wallpapers-smart-video-wallpaper-reborn
+
+# Input
+kde_cursor_launch_feedback_enabled: false
+kde_shake_cursor_enabled: false
+kde_overview_screen_edge: 9
+kde_middle_click_paste_enabled: false
+kde_keyboard_layout: us_programmer
+kde_keyboard_display_name: us_programmer
+
+# Workspaces
+kde_workspace_count: 4
+
+# Session
+kde_login_session_mode: emptySession
+
+# Power
+kde_ac_auto_suspend_action: 0
+kde_ac_display_idle_timeout: 900
+
+# Notifications
+kde_status_osd_enabled: false
+kde_volume_step: 10
+kde_audio_feedback_enabled: false
+kde_system_sounds_enabled: false
+kde_system_bell_enabled: false
+
+# System tray
+kde_system_tray_hidden_items:
+  - org.kde.plasma.battery
+  - org.kde.plasma.brightness
+  - org.kde.plasma.bluetooth
+  - org.kde.plasma.cameraindicator
+  - org.kde.plasma.clipboard
+  - org.kde.discover.notifier
+  - org.kde.plasma.devicenotifier
+  - org.kde.plasma.keyboardindicator
+  - org.kde.plasma.keyboardlayout
+  - org.kde.plasma.manage-inputmethod
+  - org.kde.plasma.mediacontroller
+  - org.kde.plasma.weather
+
+# Applications
+kde_terminal_command: kitty
+kde_terminal_desktop: kitty.desktop
+
+# Spotify
+kde_spotify_manga_uri: spotify:playlist:6qhXWOPKB8o9xM1zRMLiJn
+kde_spotify_quality_uri: spotify:playlist:1QanwoLXN5nEDrXdvY1V1w
+kde_spotify_creepy_uri: spotify:playlist:5tWi1kvdZL4oNOasrYQdFe
+kde_spotify_extra_uri: spotify:playlist:1bFImNx4XN90RHyfdiedlU
+
+# Dolphin
+kde_dolphin_places_file: "{{ user_home }}/.local/share/user-places.xbel"
+kde_server_smb: "smb://192.168.2.36/"
+
+kde_dolphin_places:
+  - title: Applications
+    href: "file://{{ user_home }}/Applications"
+    icon: folder
+  - title: Games
+    href: "file://{{ user_home }}/Games"
+    icon: folder
+  - title: Projects
+    href: "file://{{ user_home }}/Projects"
+    icon: folder
+  - title: Transfers
+    href: "file://{{ user_home }}/Transfers"
+    icon: folder-downloads
+  - title: Server
+    href: "{{ kde_server_smb }}"
+    icon: network-server

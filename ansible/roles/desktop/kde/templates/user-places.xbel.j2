@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
+ <info>
+  <metadata owner="http://www.kde.org">
+   <kde_places_version>4</kde_places_version>
+   <GroupState-Places-IsHidden>false</GroupState-Places-IsHidden>
+   <GroupState-Remote-IsHidden>false</GroupState-Remote-IsHidden>
+   <GroupState-Devices-IsHidden>false</GroupState-Devices-IsHidden>
+   <GroupState-RemovableDevices-IsHidden>false</GroupState-RemovableDevices-IsHidden>
+   <GroupState-Tags-IsHidden>false</GroupState-Tags-IsHidden>
+   <withRecentlyUsed>true</withRecentlyUsed>
+   <GroupState-RecentlySaved-IsHidden>false</GroupState-RecentlySaved-IsHidden>
+   <withBaloo>true</withBaloo>
+   <GroupState-SearchFor-IsHidden>false</GroupState-SearchFor-IsHidden>
+  </metadata>
+ </info>
+{% set system_places = [
+  {'id': 0, 'title': 'Home', 'href': 'file://' ~ user_home, 'icon': 'user-home'},
+  {'id': 1, 'title': 'Desktop', 'href': 'file://' ~ user_home ~ '/Desktop', 'icon': 'user-desktop'},
+  {'id': 2, 'title': 'Documents', 'href': 'file://' ~ user_home ~ '/Documents', 'icon': 'folder-documents'},
+  {'id': 3, 'title': 'Downloads', 'href': 'file://' ~ user_home ~ '/Downloads', 'icon': 'folder-downloads'},
+  {'id': 6, 'title': 'Music', 'href': 'file://' ~ user_home ~ '/Music', 'icon': 'folder-music'},
+  {'id': 7, 'title': 'Pictures', 'href': 'file://' ~ user_home ~ '/Pictures', 'icon': 'folder-pictures'},
+  {'id': 8, 'title': 'Videos', 'href': 'file://' ~ user_home ~ '/Videos', 'icon': 'folder-videos'},
+  {'id': 4, 'title': 'Network', 'href': 'remote:/', 'icon': 'folder-network'},
+  {'id': 5, 'title': 'Trash', 'href': 'trash:/', 'icon': 'user-trash'},
+  {'id': 9, 'title': 'Recent Files', 'href': 'recentlyused:/files', 'icon': 'document-open-recent'},
+  {'id': 10, 'title': 'Recent Locations', 'href': 'recentlyused:/locations', 'icon': 'folder-open-recent'}
+] %}
+{% for place in system_places %}
+{% if place.href == 'trash:/' %}
+{% for custom_place in kde_dolphin_places %}
+ <bookmark href="{{ custom_place.href | e }}">
+  <title>{{ custom_place.title | e }}</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="{{ custom_place.icon | default('folder') | e }}"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1000000000/{{ 100 + loop.index0 }}</ID>
+   </metadata>
+  </info>
+ </bookmark>
+{% endfor %}
+{% endif %}
+ <bookmark href="{{ place.href | e }}">
+  <title>{{ place.title | e }}</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="{{ place.icon | e }}"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1000000000/{{ place.id }}</ID>
+    <isSystemItem>true</isSystemItem>
+   </metadata>
+  </info>
+ </bookmark>
+{% endfor %}
+</xbel>

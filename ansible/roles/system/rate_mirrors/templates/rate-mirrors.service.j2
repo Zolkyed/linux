@@ -1,0 +1,8 @@
+[Unit]
+Description=Refresh pacman mirrorlist with rate-mirrors
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rate-mirrors --allow-root --save={{ rate_mirrors_mirrorlist_path }} --entry-country={{ rate_mirrors_entry_country }} --protocol={{ rate_mirrors_protocol }} --max-mirrors-to-output={{ rate_mirrors_max_mirrors_to_output }} {{ rate_mirrors_distribution }} --max-delay={{ rate_mirrors_max_delay }} --sort-mirrors-by={{ rate_mirrors_sort_mirrors_by }}

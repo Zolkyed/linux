@@ -1,0 +1,33 @@
+---
+- name: Syncthing | Install and start service
+  ansible.builtin.include_tasks: install.yml
+
+- name: Syncthing | Configure API
+  ansible.builtin.include_tasks: api.yml
+
+- name: Syncthing | Create shared folder directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "{{ item.mode | default('0755') }}"
+  loop: "{{ syncthing_folders }}"
+  loop_control:
+    label: "{{ item.label | default(item.id) }}"
+
+- name: Syncthing | Build folder device list
+  ansible.builtin.set_fact:
+    syncthing_folder_devices: >-
+      {%- set result = [] -%}
+      {%- for device in syncthing_devices -%}
+      {%- set _ = result.append({'deviceID': device.id}) -%}
+      {%- endfor -%}
+      {{ result }}
+
+- name: Syncthing | Configure shared folders
+  ansible.builtin.include_tasks: folder.yml
+  loop: "{{ syncthing_folders }}"
+  loop_control:
+    loop_var: syncthing_folder
+    label: "{{ syncthing_folder.label | default(syncthing_folder.id) }}"

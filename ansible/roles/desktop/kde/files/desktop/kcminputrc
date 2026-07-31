@@ -1,0 +1,7 @@
+[ButtonRebinds][Mouse]
+ExtraButton1=Key,Left
+ExtraButton2=Key,Right
+
+[Libinput][6940][7084][Corsair CORSAIR KATAR PRO XT Gaming Mouse]
+PointerAcceleration=0.000
+PointerAccelerationProfile=1

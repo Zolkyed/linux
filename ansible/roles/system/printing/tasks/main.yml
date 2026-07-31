@@ -1,0 +1,13 @@
+---
+- name: Printing | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Printing
+    install_pacman_packages: "{{ printing_pacman_packages }}"
+
+- name: Printing | Enable and start CUPS service
+  ansible.builtin.systemd_service:
+    name: cups.service
+    enabled: true
+    state: started

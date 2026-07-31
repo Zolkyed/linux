@@ -1,0 +1,9 @@
+---
+printing_pacman_packages:
+  # Service
+  - cups
+  - cups-pdf
+  - cups-filters
+
+  # Administration
+  - system-config-printer

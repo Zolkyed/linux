@@ -1,0 +1,7 @@
+{
+  "name": "Toggle Favorite",
+  "description": "Toggle single-window favorites and cycle through grouped application windows.",
+  "uuid": "toggle-favorite@charl",
+  "shell-version": ["50"],
+  "version": 2
+}

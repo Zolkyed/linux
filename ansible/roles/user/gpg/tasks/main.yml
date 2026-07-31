@@ -1,0 +1,40 @@
+---
+- name: GPG | Install dependencies
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: GPG
+    install_pacman_packages: "{{ gpg_pacman_packages }}"
+
+- name: GPG | Fetch signing key
+  ansible.builtin.uri:
+    url: "{{ gpg_signing_key.url }}"
+    return_content: true
+  register: user_gpg_key_response
+
+- name: GPG | Derive fingerprint
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv: [gpg, --with-colons, --import-options, show-only, --import]
+    stdin: "{{ user_gpg_key_response.content }}"
+  register: user_gpg_key_info
+  changed_when: false
+
+- name: GPG | Import signing key
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv: [gpg, --import]
+    stdin: "{{ user_gpg_key_response.content }}"
+  register: user_gpg_import
+  changed_when: "'imported' in user_gpg_import.stderr"
+
+- name: GPG | Set ultimate trust
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv: [gpg, --import-ownertrust]
+    stdin: "{{ (user_gpg_key_info.stdout_lines | select('match', '^fpr') | list | first).split(':')[9] }}:6:"
+  register: user_gpg_trust
+  changed_when: "'trustdb' in user_gpg_trust.stderr"

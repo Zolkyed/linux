@@ -1,0 +1,13 @@
+---
+- name: Keyboard | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Keyboard
+    install_pacman_packages: "{{ keyboard_pacman_packages }}"
+
+- name: Keyboard | Configure keyd
+  ansible.builtin.include_tasks: keyd.yml
+
+- name: Keyboard | Configure XKB
+  ansible.builtin.include_tasks: xkb.yml

@@ -1,0 +1,13 @@
+[user]
+    name = Zolkyed
+    email = zolkyed@gmail.com
+    signingkey = B0C6BA49CE71C223256355659D2646275D473BE0
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgsign = true
+
+[gpg]
+    program = gpg

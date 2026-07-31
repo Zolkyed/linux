@@ -1,0 +1,71 @@
+---
+- name: SSHD | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: SSHD
+    install_pacman_packages: "{{ sshd_pacman_packages }}"
+
+- name: SSHD | Validate vaulted host private key
+  ansible.builtin.assert:
+    that:
+      - sshd_host_ed25519_private_key != ''
+    fail_msg: "SSHD requires the vaulted Ed25519 host private key."
+
+- name: SSHD | Deploy vaulted host private key
+  ansible.builtin.copy:
+    content: "{{ sshd_host_ed25519_private_key | trim }}\n"
+    dest: /etc/ssh/ssh_host_ed25519_key
+    owner: root
+    group: root
+    mode: "0600"
+    validate: ssh-keygen -y -f %s
+  no_log: true
+
+- name: SSHD | Derive host public key
+  ansible.builtin.command:
+    argv:
+      - ssh-keygen
+      - -y
+      - -f
+      - /etc/ssh/ssh_host_ed25519_key
+  register: sshd_host_ed25519_public_key
+  changed_when: false
+
+- name: SSHD | Deploy derived host public key
+  ansible.builtin.copy:
+    content: "{{ sshd_host_ed25519_public_key.stdout | trim }}\n"
+    dest: /etc/ssh/ssh_host_ed25519_key.pub
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: SSHD | Deploy banner
+  ansible.builtin.template:
+    src: banner.j2
+    dest: /etc/ssh/banner
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: SSHD | Deploy hardened configuration
+  ansible.builtin.template:
+    src: sshd-99-hardened.conf.j2
+    dest: /etc/ssh/sshd_config.d/99-hardened.conf
+    owner: root
+    group: root
+    mode: "0644"
+    validate: sshd -t -f %s -h /etc/ssh/ssh_host_ed25519_key
+
+- name: SSHD | Validate configuration
+  ansible.builtin.command:
+    argv:
+      - sshd
+      - -t
+  changed_when: false
+
+- name: SSHD | Enable and start daemon
+  ansible.builtin.systemd_service:
+    name: sshd.service
+    enabled: true
+    state: started

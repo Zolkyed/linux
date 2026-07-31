@@ -1,0 +1,7 @@
+---
+- name: Samba | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Samba
+    install_pacman_packages: "{{ samba_pacman_packages }}"

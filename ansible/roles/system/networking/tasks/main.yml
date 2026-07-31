@@ -1,0 +1,71 @@
+---
+- name: Networking | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Networking
+    install_pacman_packages: "{{ networking_pacman_packages }}"
+
+- name: Networking | Set hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Networking | Configure localhost IPv4 hosts entry
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1\s+'
+    line: "127.0.0.1 localhost"
+    state: present
+
+- name: Networking | Configure localhost IPv6 hosts entry
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^::1\s+'
+    line: "::1 localhost"
+    state: present
+
+- name: Networking | Configure hostname hosts entry
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1\s+'
+    line: "127.0.1.1 {{ inventory_hostname }}.localdomain {{ inventory_hostname }}"
+    state: present
+
+- name: Networking | Deploy systemd-resolved configuration
+  ansible.builtin.template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Networking | Enable and start systemd-resolved service
+  ansible.builtin.systemd_service:
+    name: systemd-resolved.service
+    enabled: true
+    state: started
+
+- name: Networking | Create NetworkManager configuration directory
+  ansible.builtin.file:
+    path: /etc/NetworkManager/conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Networking | Configure NetworkManager to use systemd-resolved
+  ansible.builtin.copy:
+    dest: /etc/NetworkManager/conf.d/dns.conf
+    content: |
+      [main]
+      dns=systemd-resolved
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Networking | Symlink resolv.conf to systemd-resolved stub
+  ansible.builtin.file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: true

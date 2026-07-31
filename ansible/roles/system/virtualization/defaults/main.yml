@@ -1,0 +1,19 @@
+---
+virtualization_pacman_packages:
+  # Hypervisor
+  - qemu-desktop
+  - libvirt
+
+  # Applications
+  - virt-manager
+
+  # Firmware
+  - edk2-ovmf
+  - swtpm
+
+  # Network
+  - dnsmasq
+
+  # Dependency
+  - python-lxml
+  - libvirt-python

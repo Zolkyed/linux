@@ -1,0 +1,53 @@
+---
+- name: KDE | Configure audio volume controls
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/plasmaparc"
+    values:
+      - group: General
+        key: VolumeStep
+        value: "{{ kde_volume_step | string }}"
+      - group: General
+        key: AudioFeedback
+        bool_value: "{{ kde_audio_feedback_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Configure system sounds
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/kdeglobals"
+    values:
+      - group: Sounds
+        key: Enable
+        bool_value: "{{ kde_system_sounds_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Configure system bell
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/kaccessrc"
+    values:
+      - group: Bell
+        key: SystemBell
+        bool_value: "{{ kde_system_bell_enabled }}"
+      - group: Bell
+        key: ArtsBell
+        bool_value: "{{ kde_system_bell_enabled }}"
+      - group: Bell
+        key: VisibleBell
+        bool_value: "{{ kde_system_bell_enabled }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: KDE | Disable authentication prompt sound
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/polkit-kde-authentication-agent-1.notifyrc"
+    values:
+      - group: Event/authenticate
+        key: Action
+        value: None
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

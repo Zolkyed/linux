@@ -1,0 +1,21 @@
+---
+gaming_pacman_packages:
+  # Launchers
+  - steam
+  # Minecraft
+  - prismlauncher
+
+  # Game streaming
+  - moonlight-qt
+  - sunshine
+
+  # Extra
+  - wine
+
+gaming_aur_packages:
+  # Launchers
+  - heroic-games-launcher-bin
+  - faugus-launcher
+
+  # Extra
+  - proton-ge-custom-bin

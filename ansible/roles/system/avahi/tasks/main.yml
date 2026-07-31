@@ -1,0 +1,27 @@
+---
+- name: Avahi | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Avahi
+    install_pacman_packages: "{{ avahi_pacman_packages }}"
+
+- name: Avahi | Enable mDNS in nsswitch
+  ansible.builtin.lineinfile:
+    path: /etc/nsswitch.conf
+    regexp: '^hosts:'
+    line: 'hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns'
+
+- name: Avahi | Deploy configuration
+  ansible.builtin.template:
+    src: avahi-daemon.conf.j2
+    dest: /etc/avahi/avahi-daemon.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Avahi | Enable and start daemon
+  ansible.builtin.systemd_service:
+    name: avahi-daemon.service
+    enabled: true
+    state: started

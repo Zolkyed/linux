@@ -1,0 +1,15 @@
+---
+- name: SSH | Create configuration directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.ssh"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+
+- name: SSH | Deploy authorized keys
+  ansible.posix.authorized_key:
+    user: "{{ user_name }}"
+    key: https://github.com/zolkyed.keys
+    state: present
+    exclusive: true

@@ -1,0 +1,4 @@
+---
+communication_pacman_packages:
+  - discord
+  - thunderbird

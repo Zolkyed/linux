@@ -1,0 +1,7 @@
+---
+- name: CachyOS performance | Install settings, kernel, and headers
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: CachyOS performance
+    install_pacman_packages: "{{ cachyos_performance_pacman_packages }}"

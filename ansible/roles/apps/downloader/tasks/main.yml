@@ -1,0 +1,38 @@
+---
+- name: Downloader | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Downloader
+    install_pacman_packages: "{{ downloader_pacman_packages }}"
+    install_aur_packages: "{{ downloader_aur_packages }}"
+    install_uv_tools: "{{ downloader_uv_tools }}"
+
+- name: Downloader | Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+  loop:
+    - "{{ downloader_gallerydl_directory }}"
+    - "{{ downloader_gallerydl_state_directory }}"
+    - "{{ downloader_ytdlp_directory }}"
+    - "{{ downloader_qbittorrent_complete_directory }}"
+    - "{{ downloader_qbittorrent_incomplete_directory }}"
+    - "{{ downloader_jdownloader_directory }}"
+    - "{{ downloader_hexchat_directory }}"
+    - "{{ downloader_hexchat_complete_directory }}"
+    - "{{ downloader_hexchat_incomplete_directory }}"
+    - "{{ downloader_jdownloader_config_path | dirname }}"
+    - "{{ downloader_qbittorrent_config_path | dirname }}"
+
+- name: Downloader | Configure JDownloader
+  ansible.builtin.include_tasks: jdownloader.yml
+
+- name: Downloader | Configure qBittorrent
+  ansible.builtin.include_tasks: qbittorrent.yml
+
+- name: Downloader | Configure HexChat
+  ansible.builtin.include_tasks: hexchat.yml

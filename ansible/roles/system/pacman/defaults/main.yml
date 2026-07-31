@@ -1,0 +1,15 @@
+---
+pacman_packages:
+  - pacman-contrib
+  - pkgfile
+  - rebuild-detector
+
+# Configuration
+pacman_options:
+  - Color
+  - ILoveCandy
+  - CheckSpace
+  - VerbosePkgLists
+  - DisableDownloadTimeout
+  - ParallelDownloads = 10
+  - DownloadUser = alpm

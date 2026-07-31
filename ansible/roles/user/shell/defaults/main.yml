@@ -1,0 +1,24 @@
+---
+# Shell
+shell_user_shell: /bin/zsh
+shell_root_shell: /bin/bash
+
+shell_pacman_packages:
+  # Shell
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - zsh-completions
+
+  # Prompt
+  - starship
+
+  # Navigation
+  - fzf
+  - zoxide
+  - atuin
+
+  # Completion
+  - bash-completion
+
+shell_aur_packages: []

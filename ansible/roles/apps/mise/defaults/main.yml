@@ -1,0 +1,9 @@
+---
+mise_pacman_packages:
+  - mise
+
+# Tools
+mise_tools:
+  - node@lts
+  - rust@stable
+  - go@latest

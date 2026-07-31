@@ -1,0 +1,36 @@
+---
+downloader_pacman_packages:
+  # BitTorrent client
+  - qbittorrent
+  # Media downloader
+  - yt-dlp
+
+downloader_aur_packages:
+  # Download manager
+  - jdownloader2
+  - hexchat
+
+downloader_uv_tools:
+  # Image gallery downloader
+  - gallery-dl
+
+# Directory
+downloader_directory: "{{ user_home }}/Transfers"
+downloader_gallerydl_directory: "{{ downloader_directory }}/gallery-dl"
+downloader_gallerydl_state_directory: "{{ user_home }}/.local/state/gallery-dl"
+downloader_ytdlp_directory: "{{ downloader_directory }}/yt-dlp"
+downloader_qbittorrent_complete_directory: "{{ downloader_directory }}/qBittorrent/Complete"
+downloader_qbittorrent_incomplete_directory: "{{ downloader_directory }}/qBittorrent/Incomplete"
+downloader_qbittorrent_max_seeding_minutes: 0
+downloader_jdownloader_directory: "{{ downloader_directory }}/JDownloader"
+downloader_hexchat_directory: "{{ downloader_directory }}/HexChat"
+downloader_hexchat_complete_directory: "{{ downloader_hexchat_directory }}/Complete"
+downloader_hexchat_incomplete_directory: "{{ downloader_hexchat_directory }}/Incomplete"
+
+# Config
+downloader_jdownloader_config_path: "{{ user_home }}/.jd/cfg/org.jdownloader.settings.GeneralSettings.json"
+downloader_qbittorrent_config_path: "{{ user_home }}/.config/qBittorrent/qBittorrent.conf"
+downloader_hexchat_config_dir: "{{ user_home }}/.config/hexchat"
+downloader_hexchat_conf_path: "{{ downloader_hexchat_config_dir }}/hexchat.conf"
+downloader_hexchat_colors_path: "{{ downloader_hexchat_config_dir }}/colors.conf"
+downloader_hexchat_servlist_path: "{{ downloader_hexchat_config_dir }}/servlist.conf"

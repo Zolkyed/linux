@@ -1,0 +1,27 @@
+---
+- name: Pacman | Install maintenance tools
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Pacman
+    install_pacman_packages: "{{ pacman_packages }}"
+
+- name: Pacman | Enable and start timers
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - paccache.timer
+    - pkgfile-update.timer
+
+- name: Pacman | Configure options
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: "^#?{{ item | regex_replace('\\s*=.*', '') }}(\\s*=.*)?$"
+    line: "{{ item }}"
+    insertafter: "^\\[options\\]$"
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "{{ pacman_options }}"

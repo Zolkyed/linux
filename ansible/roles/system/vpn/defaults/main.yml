@@ -1,0 +1,17 @@
+---
+vpn_pacman_packages:
+  - wireguard-tools
+
+# Interface
+vpn_interface: wg0
+vpn_name: Home
+vpn_address: 10.13.13.12/32
+vpn_dns: 1.1.1.1
+
+# Peer — self-hosted WireGuard server, see docker-ansible/ansible/roles/wireguard
+vpn_peer_public_key: u/n/cXB08g6XqmvvEmDXgZBlJgPdEPOifrfGdDb+2Hk=
+vpn_peer_endpoint: vpn.mihon.org:51821
+vpn_peer_allowed_ips:
+  - 192.168.2.36/32
+  - 10.13.13.0/24
+vpn_peer_persistent_keepalive: 25

@@ -1,0 +1,7 @@
+---
+- name: LocalSend | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: LocalSend
+    install_aur_packages: "{{ localsend_aur_packages }}"

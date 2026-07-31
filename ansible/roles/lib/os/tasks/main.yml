@@ -1,0 +1,15 @@
+---
+- name: OS | Read distribution information
+  ansible.builtin.slurp:
+    src: /etc/os-release
+  register: os_release_file
+
+- name: OS | Set distribution facts
+  ansible.builtin.set_fact:
+    os_release: "{{ os_release_file.content | b64decode }}"
+
+- name: OS | Set OS flags
+  ansible.builtin.set_fact:
+    os_is_arch: "{{ 'ID=arch' in os_release }}"
+    os_is_endeavouros: "{{ 'ID=endeavouros' in os_release }}"
+    os_is_cachyos: "{{ 'ID=cachyos' in os_release }}"

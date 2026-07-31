@@ -1,0 +1,11 @@
+---
+- name: KDE | Configure virtual desktop count
+  community.general.kdeconfig:
+    path: "{{ user_home }}/.config/kwinrc"
+    values:
+      - group: Desktops
+        key: Number
+        value: "{{ kde_workspace_count | string }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

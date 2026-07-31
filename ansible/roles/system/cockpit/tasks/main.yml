@@ -1,0 +1,13 @@
+---
+- name: Cockpit | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Cockpit
+    install_pacman_packages: "{{ cockpit_pacman_packages }}"
+
+- name: Cockpit | Enable and start socket
+  ansible.builtin.systemd_service:
+    name: cockpit.socket
+    enabled: true
+    state: started

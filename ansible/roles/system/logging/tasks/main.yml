@@ -1,0 +1,26 @@
+---
+- name: Logging | Create persistent journal directory
+  ansible.builtin.file:
+    path: /var/log/journal
+    state: directory
+    owner: root
+    group: systemd-journal
+    mode: "2755"
+
+- name: Logging | Create journald configuration directory
+  ansible.builtin.file:
+    path: /etc/systemd/journald.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Logging | Configure journald storage limit
+  ansible.builtin.copy:
+    dest: /etc/systemd/journald.conf.d/00-journal-size.conf
+    content: |
+      [Journal]
+      SystemMaxUse={{ logging_journald_system_max_use }}
+    owner: root
+    group: root
+    mode: "0644"

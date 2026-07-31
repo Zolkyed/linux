@@ -1,0 +1,7 @@
+---
+- name: CLI | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: CLI
+    install_pacman_packages: "{{ cli_pacman_packages }}"

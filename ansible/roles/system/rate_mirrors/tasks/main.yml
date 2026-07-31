@@ -1,0 +1,29 @@
+---
+- name: Rate mirrors | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Rate mirrors
+    install_pacman_packages: "{{ rate_mirrors_pacman_packages }}"
+
+- name: Rate mirrors | Deploy mirror refresh service
+  ansible.builtin.template:
+    src: rate-mirrors.service.j2
+    dest: /etc/systemd/system/rate-mirrors.service
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Rate mirrors | Deploy mirror refresh timer
+  ansible.builtin.template:
+    src: rate-mirrors.timer.j2
+    dest: /etc/systemd/system/rate-mirrors.timer
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Rate mirrors | Enable and start mirror refresh timer
+  ansible.builtin.systemd_service:
+    name: rate-mirrors.timer
+    enabled: true
+    state: started

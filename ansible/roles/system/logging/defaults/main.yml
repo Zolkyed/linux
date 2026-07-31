@@ -1,0 +1,2 @@
+---
+logging_journald_system_max_use: 50M

@@ -1,0 +1,7 @@
+---
+- name: Communication | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Communication
+    install_pacman_packages: "{{ communication_pacman_packages }}"

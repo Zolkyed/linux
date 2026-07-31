@@ -1,0 +1,16 @@
+---
+- name: VPN | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: VPN
+    install_pacman_packages: "{{ vpn_pacman_packages }}"
+
+- name: VPN | Deploy WireGuard NetworkManager connection
+  ansible.builtin.template:
+    src: wg.nmconnection.j2
+    dest: "/etc/NetworkManager/system-connections/{{ vpn_interface }}.nmconnection"
+    owner: root
+    group: root
+    mode: "0600"
+  no_log: true

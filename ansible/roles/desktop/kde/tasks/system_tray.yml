@@ -1,0 +1,88 @@
+---
+- name: KDE | Read Plasma applets config
+  ansible.builtin.slurp:
+    src: "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+  register: kde_plasma_applets_config
+  failed_when: false
+  no_log: true
+
+- name: KDE | Locate system tray applet IDs
+  ansible.builtin.set_fact:
+    kde_system_tray_ids: >-
+      {{
+        (
+          kde_plasma_applets_config.content
+          | default('')
+          | b64decode
+          | regex_findall('(?ms)^\[Containments\]\[(\d+)\]\[Applets\]\[(\d+)\]\n(?:(?!^\[).)*?^plugin=org\.kde\.plasma\.systemtray$')
+          | first
+          | default([])
+        )
+      }}
+
+- name: KDE | Read hidden system tray items
+  ansible.builtin.command:
+    argv:
+      - kreadconfig6
+      - --file
+      - "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+      - --group
+      - Containments
+      - --group
+      - "{{ kde_system_tray_ids[0] }}"
+      - --group
+      - Applets
+      - --group
+      - "{{ kde_system_tray_ids[1] }}"
+      - --group
+      - General
+      - --key
+      - hiddenItems
+  become: true
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+  register: kde_system_tray_current_hidden_items
+  changed_when: false
+  failed_when: false
+  when:
+    - kde_system_tray_hidden_items | length > 0
+    - kde_system_tray_ids | length == 2
+
+- name: KDE | Configure hidden system tray items
+  ansible.builtin.command:
+    argv:
+      - kwriteconfig6
+      - --file
+      - "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+      - --group
+      - Containments
+      - --group
+      - "{{ kde_system_tray_ids[0] }}"
+      - --group
+      - Applets
+      - --group
+      - "{{ kde_system_tray_ids[1] }}"
+      - --group
+      - General
+      - --key
+      - hiddenItems
+      - "{{ kde_system_tray_hidden_items | join(',') }}"
+  become: true
+  become_user: "{{ user_name }}"
+  environment:
+    HOME: "{{ user_home }}"
+  when:
+    - kde_system_tray_hidden_items | length > 0
+    - kde_system_tray_ids | length == 2
+    - kde_system_tray_current_hidden_items.stdout | default('') != kde_system_tray_hidden_items | join(',')
+
+- name: KDE | Ensure system tray config ownership
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+  when:
+    - kde_system_tray_hidden_items | length > 0
+    - kde_system_tray_ids | length == 2

@@ -1,0 +1,93 @@
+---
+- name: GNOME | Ensure local data directory exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/gtk-3.0"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
+- name: GNOME | Deploy Nautilus places
+  ansible.builtin.template:
+    src: bookmarks.j2
+    dest: "{{ user_home }}/.config/gtk-3.0/bookmarks"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: GNOME | Configure application defaults and shortcuts
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become: true
+  become_user: "{{ user_name }}"
+  loop:
+    - key: /org/gnome/desktop/default-applications/terminal/exec
+      value: "'{{ gnome_terminal_command }}'"
+    - key: /org/gnome/desktop/default-applications/terminal/exec-arg
+      value: "''"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+      value: >-
+        ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/',
+        '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/']
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/name
+      value: "'Browser'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/command
+      value: "'{{ gnome_browser_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/browser/binding
+      value: "'{{ gnome_browser_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/name
+      value: "'Visual Studio Code'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/command
+      value: "'{{ gnome_code_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/code/binding
+      value: "'{{ gnome_code_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/name
+      value: "'Terminal'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/command
+      value: "'{{ gnome_terminal_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/binding
+      value: "'{{ gnome_terminal_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/name
+      value: "'System Monitor'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/command
+      value: "'{{ gnome_system_monitor_command }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/system-monitor/binding
+      value: "'{{ gnome_system_monitor_keybinding }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/name
+      value: "'Spotify - Manga'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/command
+      value: "'gio open {{ gnome_spotify_manga_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-manga/binding
+      value: "'Launch5'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/name
+      value: "'Spotify - Quality'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/command
+      value: "'gio open {{ gnome_spotify_quality_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-quality/binding
+      value: "'Launch6'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/name
+      value: "'Spotify - Creepy'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/command
+      value: "'gio open {{ gnome_spotify_creepy_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-creepy/binding
+      value: "'Launch7'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/name
+      value: "'Spotify - Extra'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/command
+      value: "'gio open {{ gnome_spotify_extra_uri }}'"
+    - key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/spotify-extra/binding
+      value: "'Launch8'"
+    - key: /com/github/stunkymonkey/nautilus-open-any-terminal/terminal
+      value: "'{{ gnome_terminal_command }}'"
+  loop_control:
+    label: "{{ item.key }}"

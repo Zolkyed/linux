@@ -1,0 +1,11 @@
+---
+emulation_aur_packages:
+  # Nintendo
+  - azahar
+
+  # PlayStation
+  - duckstation-qt-bin
+  - pcsx2-git
+
+  # Jaks
+  - open-goal-launcher-bin

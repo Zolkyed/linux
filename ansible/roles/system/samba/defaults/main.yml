@@ -1,0 +1,4 @@
+---
+samba_pacman_packages:
+  - cifs-utils
+  - smbclient

@@ -1,0 +1,6 @@
+{
+  "extractor": {
+    "base-directory": "~/Transfers/gallery-dl",
+    "archive": "~/.local/state/gallery-dl/archive.sqlite3"
+  }
+}

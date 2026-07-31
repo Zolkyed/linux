@@ -1,0 +1,18 @@
+[server]
+use-ipv4={{ avahi_use_ipv4 | string | lower }}
+use-ipv6={{ avahi_use_ipv6 | string | lower }}
+{% if avahi_deny_interfaces %}
+deny-interfaces={{ avahi_deny_interfaces | join(', ') }}
+{% endif %}
+ratelimit-interval-usec=1000000
+ratelimit-burst=1000
+
+[wide-area]
+
+[publish]
+publish-hinfo={{ avahi_publish_hinfo | string | lower }}
+publish-workstation={{ avahi_publish_workstation | string | lower }}
+
+[reflector]
+
+[rlimits]

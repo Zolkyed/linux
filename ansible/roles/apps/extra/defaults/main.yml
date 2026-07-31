@@ -1,0 +1,32 @@
+---
+extra_pacman_packages:
+  # Network diagnostics
+  - nmap
+  - tcpdump
+  - traceroute
+  - mtr
+  - iperf3
+  - socat
+  - openbsd-netcat
+  - whois
+  - wireshark-qt
+  - speedtest-cli
+
+  # DNS
+  - bind
+  - doggo
+  - ldns
+
+  # Interfaces
+  - ethtool
+  - arp-scan
+
+  # Addressing
+  - ipcalc
+
+  # Remote access
+  - remmina
+
+extra_aur_packages:
+  # Boot media
+  - ventoy-bin

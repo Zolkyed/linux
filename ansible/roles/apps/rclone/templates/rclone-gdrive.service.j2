@@ -1,0 +1,19 @@
+[Unit]
+Description=Mount Google Drive with rclone
+Documentation=https://rclone.org/commands/rclone_mount/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+User={{ user_name }}
+Group={{ user_name }}
+ExecStartPre=/usr/bin/mkdir -p {{ rclone_mount_dir }}
+ExecStart=/usr/bin/rclone mount {{ rclone_remote }}: {{ rclone_mount_dir }} --config {{ rclone_conf_dest }} --cache-dir {{ rclone_cache_dir }} --vfs-cache-mode full --vfs-cache-max-size {{ rclone_vfs_cache_max_size }} --vfs-cache-max-age {{ rclone_vfs_cache_max_age }} --dir-cache-time 5m --poll-interval 1m --umask 077
+ExecStop=/usr/bin/fusermount3 -u {{ rclone_mount_dir }}
+Restart=on-failure
+RestartSec=10s
+TimeoutStopSec=30s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,23 @@
+---
+- name: Audio | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Audio
+    install_pacman_packages: "{{ audio_pacman_packages }}"
+
+- name: Audio | Create EasyEffects output preset directory
+  ansible.builtin.file:
+    path: "{{ audio_easyeffects_preset_dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0755"
+
+- name: Audio | Deploy EasyEffects output preset
+  ansible.builtin.copy:
+    src: easyeffects/output/Custom.json
+    dest: "{{ audio_easyeffects_preset_dir }}/Custom.json"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"

@@ -1,0 +1,30 @@
+---
+- name: Syncthing | Configure folder {{ syncthing_folder.id }}
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:8384/rest/config/folders/{{ syncthing_folder.id }}"
+    method: PUT
+    headers:
+      X-API-Key: "{{ syncthing_api_key }}"
+    body_format: json
+    body:
+      id: "{{ syncthing_folder.id }}"
+      label: "{{ syncthing_folder.label | default(syncthing_folder.id) }}"
+      path: "{{ syncthing_folder.path }}"
+      type: "{{ syncthing_folder.type | default('sendreceive') }}"
+      devices: "{{ syncthing_folder_devices }}"
+      rescanIntervalS: "{{ syncthing_folder.rescan_interval | default(3600) }}"
+      fsWatcherEnabled: "{{ syncthing_folder.watcher_enabled | default(true) }}"
+      fsWatcherDelayS: "{{ syncthing_folder.watcher_delay | default(10) }}"
+      ignorePerms: "{{ syncthing_folder.ignore_permissions | default(false) }}"
+      maxConflicts: "{{ syncthing_folder.max_conflicts | default(10) }}"
+      paused: "{{ syncthing_folder.paused | default(false) }}"
+      versioning: "{{ syncthing_folder.versioning | default({}) }}"
+
+- name: Syncthing | Configure ignore patterns for {{ syncthing_folder.id }}
+  ansible.builtin.copy:
+    content: "{{ syncthing_folder.ignores | join('\n') }}\n"
+    dest: "{{ syncthing_folder.path }}/.stignore"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+  when: syncthing_folder.ignores is defined

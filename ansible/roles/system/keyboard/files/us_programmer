@@ -1,0 +1,28 @@
+default partial alphanumeric_keys modifier_keys
+xkb_symbols "basic" {
+    include "us(basic)"
+
+    name[Group1] = "English (US, Programmer)";
+
+    key.type[Group1] = "FOUR_LEVEL";
+    key <TLDE> { [ grave, asciitilde, dead_grave, NoSymbol ] };
+    key <AE06> { [ 6, asciicircum, dead_circumflex, NoSymbol ] };
+
+    key.type[Group1] = "FOUR_LEVEL_ALPHABETIC";
+    key <AD03> { [ e, E, eacute, Eacute ] };
+
+    key.type[Group1] = "FOUR_LEVEL";
+    key <AD11> { [ bracketleft, braceleft, guillemotleft, NoSymbol ] };
+    key <AD12> { [ bracketright, braceright, guillemotright, NoSymbol ] };
+
+    key.type[Group1] = "FOUR_LEVEL";
+    key <AC10> { [ semicolon, colon, dead_diaeresis, NoSymbol ] };
+
+    key.type[Group1] = "FOUR_LEVEL_ALPHABETIC";
+    key <AB03> { [ c, C, ccedilla, Ccedilla ] };
+
+    key.type[Group1] = "FOUR_LEVEL";
+    key <LSGT> { [ backslash, bar, NoSymbol, NoSymbol ] };
+
+    include "level3(ralt_switch)"
+};

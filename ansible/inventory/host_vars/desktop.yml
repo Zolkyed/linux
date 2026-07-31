@@ -1,0 +1,10 @@
+---
+detect_enabled_features:
+  - emulation
+  - gaming
+  - labs
+  - mobile
+
+syncthing_devices:
+  - name: laptop
+    id: OKBTBPA-M5PXMY5-S2JGMXN-DRTFDPE-AEDYV63-DAMIHAD-BUH5TSW-JIFOIAE

@@ -1,0 +1,21 @@
+---
+- name: GNOME | Load keybindings
+  ansible.builtin.command:
+    argv:
+      - dconf
+      - load
+      - "{{ keybinding_paths[item | basename | regex_replace('\\.dconf$', '')] }}"
+    stdin: "{{ lookup('file', item) }}"
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ user_uid }}/bus"
+  become: true
+  become_user: "{{ user_name }}"
+  loop: "{{ query('fileglob', inventory_hostname ~ '/keybinds/*.dconf') }}"
+  loop_control:
+    label: "{{ item | basename }}"
+  changed_when: true
+  vars:
+    keybinding_paths:
+      media-keys: /org/gnome/settings-daemon/plugins/media-keys/
+      wm-keybindings: /org/gnome/desktop/wm/keybindings/
+      shell-keybindings: /org/gnome/shell/keybindings/
