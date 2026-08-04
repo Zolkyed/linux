@@ -146,7 +146,7 @@
   "terminal.integrated.cursorWidth": 2,
 
   // Editor
-  "editor.fontFamily": "Fira Code",
+  "editor.fontFamily": "FiraCode Nerd Font",
 
   // terminal
   "terminal.integrated.fontFamily": "FiraCode Nerd Font",
