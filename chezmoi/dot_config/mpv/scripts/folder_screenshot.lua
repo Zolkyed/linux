@@ -1,23 +1,20 @@
-template = mp.get_property("screenshot-template")
+local screenshot_template = mp.get_property("screenshot-template", "%F-%p-%n")
 
-function remove_text_in_brackets(str)
-    return string.gsub(str, "%[.-%]", "")  
+local function screenshot_folder(filename)
+    local name = filename:match("^([^-]+)") or filename
+    name = name:gsub("%[.-%]", "")
+    name = name:sub(1, 100):gsub("^%s+", ""):gsub("%s+$", "")
+
+    name = name:gsub("%c", "_"):gsub('[<>:"/\\|%?%*]', "_")
+    name = name:gsub("[%. ]+$", "")
+
+    return name ~= "" and name or "screenshots"
 end
 
-function get_filename_before_dash(str)
-    local dash_pos = string.find(str, "-") 
-    if dash_pos then
-        return string.sub(str, 1, dash_pos - 1)  
-    else
-        return str 
-    end
+local function update_screenshot_template()
+    local filename = mp.get_property("filename", "")
+    local template = screenshot_folder(filename) .. "/" .. screenshot_template
+    mp.set_property("screenshot-template", template)
 end
 
-function folder_screenshot()
-    local filename = mp.get_property("filename")
-    local folder_filename = string.gsub(string.sub(remove_text_in_brackets(get_filename_before_dash(filename)), 1, 100), "%s+$", "")
-    named_dir = folder_filename.."/"..template
-    mp.set_property("screenshot-template", named_dir)
-end
-
-mp.register_event("file-loaded", folder_screenshot)
+mp.register_event("file-loaded", update_screenshot_template)

@@ -1,6 +1,8 @@
 -- mpv Picture-in-Picture on Windows
 -- https://github.com/verygoodlee/mpv-pip
 
+if mp.get_property("platform") ~= "windows" then return end
+
 local ffi_ok, ffi = pcall(require, 'ffi')
 if not ffi_ok then return end -- mpv builds without luajit
 local bit = require('bit')
