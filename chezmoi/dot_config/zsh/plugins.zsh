@@ -1,13 +1,3 @@
-# fzf
-eval "$(fzf --zsh)"
-bindkey '^F' fzf-file-widget
-
-# zoxide
-eval "$(zoxide init zsh)"
-
-# atuin
-eval "$(atuin init zsh --disable-up-arrow)"
-
 # Source the first existing path — package layouts differ between distros
 # (Arch: /usr/share/zsh/plugins/<name>/, Fedora/Debian: /usr/share/<name>/).
 _source_first() {

@@ -13,11 +13,6 @@ shell_pacman_packages:
   # Prompt
   - starship
 
-  # Navigation
-  - fzf
-  - zoxide
-  - atuin
-
   # Completion
   - bash-completion
 
