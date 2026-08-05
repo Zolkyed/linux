@@ -8,7 +8,7 @@
         repo: "{{ dotfiles_repo }}"
         dest: "{{ dotfiles_repo_dir }}"
         version: "{{ dotfiles_repo_branch }}"
-        update: false
+        update: true
 
     - name: Dotfiles | Initialize chezmoi
       ansible.builtin.command:
