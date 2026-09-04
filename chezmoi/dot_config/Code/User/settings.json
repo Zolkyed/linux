@@ -89,6 +89,7 @@
       ],
     },
   },
+
   // background
   "workbench.colorCustomizations": {
     "[Default Dark Modern]": {
@@ -101,9 +102,9 @@
     // "editorOverviewRuler.addedForeground": "#0000",
     // "editorOverviewRuler.modifiedForeground": "#0000",
     // "editorOverviewRuler.deletedForeground": "#0000",
+    // "editorOverviewRuler.warningForeground": "#0000",
+    // "editorOverviewRuler.errorForeground": "#0000",
     "editorOverviewRuler.infoForeground": "#0000",
-    "editorOverviewRuler.warningForeground": "#0000",
-    "editorOverviewRuler.errorForeground": "#0000",
     "editorOverviewRuler.bracketMatchForeground": "#0000",
     "editorOverviewRuler.commentForeground": "#0000",
     "editorOverviewRuler.commentUnresolvedForeground": "#0000",
@@ -121,64 +122,86 @@
   "debug.showBreakpointsInOverviewRuler": true,
   "editor.minimap.enabled": false,
   "editor.scrollbar.verticalScrollbarSize": 13,
-  "editor.scrollbar.vertical": "visible",
-  "editor.scrollbar.horizontalScrollbarSize": 0,
-  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "auto",
+  "editor.scrollbar.horizontalScrollbarSize": 10,
+  "editor.scrollbar.horizontal": "auto",
 
   // zoom
-  "window.zoomLevel": 0.3,
+  "window.zoomLevel": -1,
   "editor.mouseWheelZoom": false,
   "editor.smoothScrolling": false,
 
   // icons
   "workbench.iconTheme": "material-icon-theme",
 
-  // color Brackets
+  // color brackets
   "editor.guides.bracketPairs": "active",
-  "editor.guides.bracketPairsHorizontal": false, // (____)
+  "editor.guides.bracketPairsHorizontal": true, // (____)
+  "editor.guides.highlightActiveBracketPair": true,
+  "editor.guides.highlightActiveIndentation": "always",
 
   // cursor
   "editor.cursorStyle": "line",
   "editor.cursorBlinking": "solid",
+  "editor.cursorWidth": 2,
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorBlinking": false,
   "terminal.integrated.cursorStyleInactive": "none",
   "terminal.integrated.cursorWidth": 2,
 
-  // Editor
-  "editor.fontFamily": "FiraCode Nerd Font",
+  // editor
+  "editor.fontFamily": "Fira Code",
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "none",
+  "editor.linkedEditing": true,
+  "editor.stickyScroll.enabled": false,
 
   // terminal
+  "workbench.panel.defaultLocation": "right",
   "terminal.integrated.fontFamily": "FiraCode Nerd Font",
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+    }
+  },
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.scrollback": 10000,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.hideCondition": "never",
   "terminal.integrated.tabs.location": "right",
-  "terminal.integrated.tabs.title": "${sequence}",
+  "terminal.integrated.tabs.title": "${process}",
+  "terminal.integrated.stickyScroll.enabled": false,
 
   // debug
   "debug.toolBarLocation": "docked",
+  "debug.inlineValues": "on",
 
-  // render
-  "editor.renderLineHighlight": "all",
-  "editor.renderWhitespace": "none",
-
-  // Workspace
+  // workspace
   "workbench.layoutControl.enabled": false,
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.editor.openOnFocus": false,
   "workbench.activityBar.location": "default",
+  "workbench.tips.enabled": false,
+  "window.commandCenter": false,
+  "window.title": " ",
+  "chat.commandCenter.enabled": false,
 
   // file tree
-  "workbench.tree.renderIndentGuides": "onHover",
+  "workbench.tree.renderIndentGuides": "always",
 
   // breadcrumbs
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "last",
+  "breadcrumbs.symbolPath": "on",
+
+  // suggestions
   "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.quickSuggestionsDelay": 0,
 
   // explorer
   "explorer.confirmDelete": false,
@@ -214,10 +237,12 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -244,6 +269,16 @@
     "editor.tabSize": 2,
     "prettier.tabWidth": 2,
   },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
@@ -251,33 +286,42 @@
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
+    "editor.tabSize": 2,
+    "shfmt.indent": 2,
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
   },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+  },
 
-  // [javascript] & [typescript]
-  "js/ts.inlayHints.enumMemberValues.enabled": true,
-  "js/ts.inlayHints.parameterNames.enabled": "literals",
-  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
-  "js/ts.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
-  "js/ts.autoClosingTags.enabled": true,
+  // javascript / typescript
+  "javascript.inlayHints.parameterNames.enabled": "literals",
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.inlayHints.parameterNames.enabled": "literals",
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsserver.maxTsServerMemory": 4096,
 
-  // [python]
+  // python
   "python.analysis.inlayHints.callArgumentNames": "partial",
   "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.variableTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.terminal.executeInFileDir": true,
   "jupyter.notebookFileRoot": "${workspaceFolder}/notebooks",
 
-  // [html]
-  "editor.linkedEditing": true,
+  // html
   "emmet.includeLanguages": {
-    "html": "html",
     "javascript": "javascriptreact",
   },
 
-  // [md]
+  // markdown
   "markdown.preview.scrollEditorWithPreview": true,
   "markdown.preview.scrollPreviewWithEditor": true,
 
@@ -299,6 +343,9 @@
     "**/logs/**": true,
     "**/.fdk/**": true,
     "**/__pycache__/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/.ruff_cache/**": true,
   },
   "files.exclude": {
     "**/.git/objects/**": true,
@@ -314,8 +361,12 @@
     "**/bower_components": true,
     "**/dist/**": true,
     "**/log/**": true,
+    "**/logs/**": true,
     "**/.fdk/**": true,
     "**/__pycache__/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/.ruff_cache/**": true,
   },
   "search.exclude": {
     "**/.git/objects/**": true,
@@ -331,7 +382,12 @@
     "**/bower_components": true,
     "**/dist/**": true,
     "**/log/**": true,
+    "**/logs/**": true,
+    "**/.fdk/**": true,
     "**/__pycache__/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/.ruff_cache/**": true,
   },
 
   // git
@@ -339,6 +395,7 @@
   "git.suggestSmartCommit": false,
   "git.confirmSync": false,
   "git.autofetch": true,
+  "git.pruneOnFetch": true,
   "git.showActionButton": {
     "commit": true,
     "publish": true,
@@ -347,32 +404,48 @@
   "git.mergeEditor": true,
   "diffEditor.codeLens": true,
 
-  // gitHub copilot + CLI
+  // files
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "files.saveConflictResolution": "askUser",
+
+  // github copilot
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
   },
-  "editor.quickSuggestionsDelay": 0,
-  "workbench.editor.closeEmptyGroups": false,
-  "terminal.integrated.commandsToSkipShell": [
-    "workbench.action.toggleSidebarVisibility",
-    "workbench.action.ZoomIn",
-    "workbench.action.ZoomOut",
-    "workbench.action.focusLeftGroup",
-    "workbench.action.focusRightGroup",
-    "workbench.action.openEditorAtIndex1",
-    "workbench.action.openEditorAtIndex2",
-    "workbench.action.openEditorAtIndex3",
-    "workbench.action.openEditorAtIndex4",
-    "workbench.action.openEditorAtIndex5",
-    "workbench.action.openEditorAtIndex6",
-    "workbench.action.terminal.rename",
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use Conventional Commits: <type>[optional scope][!]: <description>."
+    },
+    {
+      "text": "Use only: feat, fix, docs, perf, refactor, test, chore, ci, or build."
+    },
+    {
+      "text": "Write a concise lowercase imperative description without a trailing period."
+    },
+    {
+      "text": "Describe the purpose of the complete staged change, not individual files."
+    },
   ],
-
-  // misc
-  "editor.stickyScroll.enabled": false,
-  "terminal.integrated.stickyScroll.enabled": false,
-  "extensions.autoUpdate": "onlyEnabledExtensions",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [
+    {
+      "text": "Use a concise lowercase Conventional Commit title: <type>[optional scope][!]: <description>."
+    },
+    {
+      "text": "Use only: feat, fix, docs, perf, refactor, test, chore, ci, or build."
+    },
+    {
+      "text": "Structure the description with Summary, Closes #<issue>, Changes, Verification, and Risks sections."
+    },
+    {
+      "text": "Explain what changed, why it changed, validation performed, and any risks."
+    },
+  ],
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "text": "Prioritize correctness, security, regressions, edge cases, missing tests, convention violations, and unnecessary changes."
+    },
+  ],
 }
