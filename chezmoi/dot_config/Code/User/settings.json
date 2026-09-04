@@ -408,6 +408,9 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 500,
   "files.saveConflictResolution": "askUser",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
 
   // github copilot
   "github.copilot.enable": {
@@ -415,6 +418,9 @@
     "plaintext": false,
     "markdown": false,
   },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.useAgentsMdFile": true,
+  "chat.useCustomizationsInParentRepositories": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Use Conventional Commits: <type>[optional scope][!]: <description>."
