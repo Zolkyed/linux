@@ -396,6 +396,9 @@
   "git.confirmSync": false,
   "git.autofetch": true,
   "git.pruneOnFetch": true,
+  "git.autoRepositoryDetection": "subFolders",
+  "git.detectWorktrees": true,
+  "git.repositoryScanMaxDepth": 4,
   "git.showActionButton": {
     "commit": true,
     "publish": true,
